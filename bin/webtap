@@ -1,0 +1,241 @@
+#! /bin/bash
+# Webtap 1.1
+#
+# Matches keywords to their URL, transposes %s with keyword parameters, and
+# opens URL with a web browser command.
+# 
+# Last modified: 2008-01-25T04:45:09-05:00
+
+VERSION="1.1"
+WEBTAP_LAUNCHER="$BROWSER"
+WEBTAP_URLFILE="$HOME/.webtapurls"
+WEBTAP_CFGFILE="$HOME/.webtapcfg"
+
+# load parameters from user's file
+if [ -f "$WEBTAP_CFGFILE" ]; then
+	. "$WEBTAP_CFGFILE"
+fi
+: ${WEBTAP_LAUNCHER:="lynx"}
+: ${WEBTAP_RAWKEYWORD:="custom"}
+
+load_webtapfile(){
+webtap_file="$1"
+[ -f "$WEBTAP_URLFILE" ] &&
+	sed -e '/^$/d; /\#/d; / / s//%REM%/g' "$WEBTAP_URLFILE"
+}
+
+# sensible-browser-like utility (parses $WEBTAP_LAUNCHER, $BROWSER, and %s)
+webtap_launcher(){
+LAUNCHER_CMD="$WEBTAP_LAUNCHER"
+LAUNCHER_URL="$1"
+if [ ! -z "$LAUNCHER_CMD" ]; then
+	#LAUNCHER_LIST=`echo "$LAUNCHER_CMD" |sed -e '/[ ]/ s//%REM%/g; /\:/ s// /g'`
+	LAUNCHER_LIST=${LAUNCHER_CMD// /\%REM\%}
+	LAUNCHER_LIST=${LAUNCHER_LIST//[\:]/ }
+	for launcher in $LAUNCHER_LIST; do
+		launcherurl_sedvar="${LAUNCHER_URL//\//\\/}"
+		#launcher_cmd=`echo "$launcher" |sed -e "s/\%REM\%/ /g; s/\%\%/\%/g; s/\%s/$launcherurl_sedvar/g; s/\%s/\&/g"`
+		launcher_cmd=${launcher//[\%]REM[\%]/ }
+		launcher_cmd=${launcher_cmd//[\%][\%]/\%}
+		launcher_cmd=${launcher_cmd//[\%]s/${LAUNCHER_URL//\//\\/}}
+		launcher_cmd=${launcher_cmd//[\%]s/\&}
+		if [ "$WEBTAP_DRYRUN" = true ]; then
+			echo "not running: $launcher_cmd $LAUNCHER_URL"
+			break
+		else
+			echo "running: $launcher_cmd $LAUNCHER_URL ..."
+			$launcher_cmd "$LAUNCHER_URL" && break 
+			# on failure, continue to next in list
+		fi
+	done
+fi
+}
+
+add_webtapkeyword(){
+# skips filters when keyword = $WEBTAP_RAWKEYWORD
+if [ "$WEBTAP_URLNAME" != $WEBTAP_RAWKEYWORD ]; then
+	#sed_script='/\%s/ s//'$WEBTAPKEYWORD_PARMS'/g'
+	#WEBTAP_URL=`echo "$WEBTAP_URL" |sed -e "$sed_script"`
+	WEBTAP_URL=${WEBTAP_URL//[\%]s/$WEBTAPKEYWORD_PARMS}
+else
+	WEBTAP_URL="$WEBTAPKEYWORD_PARMS"
+fi
+[ "$WEBTAP_ADDURLKWORD" = "$WEBTAP_URLNAME" ] &&
+	WEBTAPKEYWORD_URL="$WEBTAP_URL"
+}
+
+list_webtapurls(){
+((id++))
+webtapkeyword_needskeyparm=${webtapkeyword_url//*\%s*/ \%s}
+webtapkeyword_needskeyparm=${webtapkeyword_needskeyparm%%|*}
+[ "${webtapkeyword_needskeyparm}" !=  " %s" ] &&
+	webtapkeyword_needskeyparm=
+[ ! -z "$webtapkeyword_desc" ] &&
+	kwdesc_field=" - $webtapkeyword_desc"
+echo "$id $webtapkeyword_name$webtapkeyword_needskeyparm$kwdesc_field"
+kwdesc_field=
+}
+
+validate_webtapkeywords(){
+WEBTAPURLS_LIST=(`load_webtapfile "$WEBTAP_URLFILE"`)
+WEBTAPURLS_TOTAL=${#WEBTAPURLS_LIST[*]}
+#WEBTAPKEYS_LIST=`echo "$USR_WEBTAPKEYWORD" |sed -e '/\,/ s// /g'`
+WEBTAPKEYS_LIST=${USR_WEBTAPKEYWORD//[\,]/ }
+for webtapvalidate_keyword in $WEBTAPKEYS_LIST; do
+	for webtap_urlline in ${WEBTAPURLS_LIST[*]}; do
+		KEYWORDSLIST_VAR=${webtapvalidate_keyword##$webtap_urlline[\%]REM[\%]\|*}
+		if [ -z "$KEYWORDSLIST_VAR" ] || [ "$KEYWORDSLIST_VAR" != $webtapvalidate_keyword ]; then
+			echo "must specify a valid keyword."
+			exit 1
+		fi
+	done
+done
+for webtapvalidate_keyword in $WEBTAPKEYS_LIST; do
+	val_id=0
+	while [ "$WEBTAPURLS_TOTAL" -ne "$val_id" ]; do
+		webtapkeyword_name=${WEBTAPURLS_LIST[$val_id]%%|*}
+		webtapkeyword_name=${webtapkeyword_name//[\%]REM[\%]/ }
+		webtapkeyword_match=${WEBTAPURLS_LIST[$val_id]##$webtapvalidate_keyword[\%]REM[\%]\|*}
+		if [ -z "$webtapkeyword_match" ]; then
+			KEYWORD_IDS="$val_id"
+			[ "$KEYWORD_IDS" != "$OLD_KEYWIDS" ] && KEYWORD_IDS="$OLD_KEYWIDS $val_id"
+			OLD_KEYWIDS="$KEYWORD_IDS"
+			WEBTAPKEYWORD_LIST="$webtapkeyword_name"
+			[ "$WEBTAPKEYWORD_LIST" != "$OLD_KWLIST" ] && WEBTAPKEYWORD_LIST="$OLD_KWLIST $webtapkeyword_url"
+			OLD_KWLIST="$WEBTAPKEYWORD_LIST"
+		fi
+		let val_id=${val_id}+1
+	done
+done
+}
+
+load_webtapurls(){
+load_func="$1"
+id=0
+WEBTAPURLS_LIST=(`load_webtapfile "$WEBTAP_URLFILE"`)
+for webtapkeyword in ${WEBTAPURLS_LIST[*]}; do
+	webtapkeyword_name=${WEBTAPURLS_LIST[$id]%%|*}
+	webtapkeyword_desc=${WEBTAPURLS_LIST[$id]##*\|*\|}
+	webtapkeyword_url=${WEBTAPURLS_LIST[$id]##$webtapkeyword_name\|}
+	webtapkeyword_url=${webtapkeyword_url%%\|*}
+	[ "$webtapkeyword_url" = "$webtapkeyword_desc" ] &&
+		webtapkeyword_desc=
+	webtapkeyword_name=${webtapkeyword_name//[\%]REM[\%]/}
+	webtapkeyword_url=${webtapkeyword_url//[\%]REM[\%]/}
+	webtapkeyword_desc=${webtapkeyword_desc//[\%]REM[\%]/ }
+	webtapkeyword_desc=${webtapkeyword_desc## }
+	$load_func
+done
+}
+
+check_webtapkeywordparms(){
+if [ ! -z "$USR_WEBTAPKEYPARMS" ]; then
+	WEBTAPKEYWORD_PARMS="$USR_WEBTAPKEYPARMS"
+	# skips filters when keyword = $WEBTAP_RAWKEYWORD
+	[ "$WEBTAP_URLNAME" != $WEBTAP_RAWKEYWORD ] &&
+		WEBTAPKEYWORD_PARMS=${USR_WEBTAPKEYPARMS// /\%20}
+else
+	WEBTAPKEYWORD_PARMSVAR=`echo "$WEBTAP_URL" |grep "\%s"`
+	if [ ! -z "$WEBTAPKEYWORD_PARMSVAR" ]; then
+		echo "keyword parameters required for $WEBTAP_URLNAME, see list."
+		exit 1
+	fi
+fi
+}
+
+open_webtapurl(){
+validate_webtapkeywords
+if [ -z "$WEBTAPKEYWORD_LIST" ]; then
+	echo "invalid keyword(s): $USR_WEBTAPKEYWORD"
+	exit 1
+fi
+OPENWEBTAPURLS_LIST=(`load_webtapfile "$WEBTAP_URLFILE"`)
+for openkeyword_id in ${KEYWORD_IDS[*]}; do
+	WEBTAP_URLNAME=${OPENWEBTAPURLS_LIST[$openkeyword_id]%%|*}
+	WEBTAP_URL=${OPENWEBTAPURLS_LIST[$openkeyword_id]##$WEBTAP_URLNAME\|}
+	WEBTAP_URL=${WEBTAP_URL%%\|*}
+	WEBTAP_URL=${WEBTAP_URL//[\%]REM[\%]/}
+	WEBTAP_URLNAME=${WEBTAP_URLNAME//[\%]REM[\%]/}
+	WEBTAP_ADDURLKWORD=$WEBTAP_URLNAME
+
+	check_webtapkeywordparms
+	load_webtapurls add_webtapkeyword
+	if [ -z "$WEBTAPKEYWORD_URL" ]; then
+		echo "URL is empty!"
+		exit 1
+	fi
+	webtap_launcher $WEBTAPKEYWORD_URL
+done
+}
+
+show_help(){
+cat <<-EOF
+	Webtap version $VERSION, Copyright (C) 2008 Kevin Wood <un1xt3r-at-fastmail-dot-fm>
+
+	Webtap comes with ABSOLUTELY NO WARRANTY; see version 2 of the GNU General
+	Public License for further details
+
+	usage:
+	 `basename $0` [options] <action> ...
+	
+	actions:
+	 open <keyword> <%s>		- specify keyword(s) and any additional parameters.
+	 list 				- list keywords.
+
+	options:
+	 -c, --command <command> 	specify command to handle URL request(s).
+	 --dry-run 			do nothing, only print commands.
+	 -h, --help			display this help message.
+	 -v, --version			display version information.
+
+	 <keyword> can be multiple keywords seperated by commas
+	 (e.g. keyword 'google-search, yahoo-search' '%s').
+EOF
+}
+
+argument=$@
+[ $# -lt 1 ] && show_help
+check_arg(){
+if [ -z "$1" ]; then
+	echo "$bad_argument option requires an argument!"
+	echo "Try '`basename $0` --help' for more information."
+	exit 1
+fi
+}
+sanity_check(){
+invalid_opt=`echo "$argument" |grep '^[--]$*'`
+[ ! -z "$invalid_opt" ] && argument=
+}
+while [ $# -gt 0 ]; do
+	[ $# -gt 1 ] && argument=$2
+	bad_argument=$1
+	case "$1" in
+		-c|--command)		check_arg "$2"; WEBTAP_LAUNCHER="$2"; shift;;
+		--dry-run) 		WEBTAP_DRYRUN=true;;
+		-h|--help|help)		show_help; exit 0;;
+		list) 			WEBTAP_KEYWORD="$2"; shift
+					echo "# Keyword - Short description";
+					load_webtapurls list_webtapurls; exit 0;;
+		open) 	 		check_arg "$2"; USR_WEBTAPKEYWORD="$2"; shift;
+					USR_WEBTAPKEYPARMS="$2"; shift;;
+		-v|--version)		echo "`basename $0` $VERSION"; exit 0;;
+		--)			shift; break;;
+		*)
+					sanity_check
+					echo "invalid option: $@"
+					echo "Try '`basename $0` --help' for more information."
+					exit 1
+					;;
+	esac
+	shift
+done
+
+if [ ! -z "$USR_WEBTAPKEYWORD" ]; then
+	open_webtapurl "$USR_WEBTAPKEYPARMS"
+fi
+
+exit 0
+
+#
+# End of Script
+#

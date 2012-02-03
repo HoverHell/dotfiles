@@ -1,0 +1,27 @@
+#!/bin/sh
+val="$1";
+form='/^(\-|\+)?([0-9]+)$/'
+if echo "$val"|awk "$form{exit 1;}"; then
+  echo "Error: value (provided \"$val\") must be in form '$form'"; 
+  echo "Usage: $0 [value]"
+  echo "  number in [value] is in percent"
+  exit 2
+fi
+
+d="$(echo "$val"|sed -r "s${form}\1/")"
+m="$(echo "$val"|sed -r "s${form}\2/")"
+
+inf="$(pacmd dump | grep "set-sink-volume .*Creative_Technology_SB_X-Fi")"
+cset="$(echo "$inf"|sed -r 's/ [^ ]+$//')"
+
+mact="$(echo "$m*655.36"|bc -l|sed 's/\..*//')"
+
+if [ ! -z "$d" ]; then
+  cvol="$(echo "$inf"|sed -r 's/.* //')"
+  nvol=$(($cvol $d $mact))
+else
+  nvol=$mact
+fi
+
+echo "pacmd \"$cset $nvol\""
+pacmd "$cset $nvol"

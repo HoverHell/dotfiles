@@ -1,0 +1,476 @@
+//
+// Custom keyboard layout, made by HoverHell
+// References: ruenhanced, xkcd mirrorboard.
+//
+
+xkb_keymap
+{
+
+    xkb_keycodes {
+        include "evdev"
+        include "aliases(qwerty)"
+    };
+
+    xkb_types {
+        include "complete"
+    };
+
+    xkb_compatibility {
+        include "complete"
+        include "ledscroll(group_lock)"
+        // include "ledcaps(group_lock)"
+    };
+
+    xkb_symbols {
+        //was "pc+us+ru:2+group(menu_toggle)"
+        // include "pc+us+ru"
+        //include "pc+us+ru:2+group(menu_toggle)"
+        //include "pc+us+ru:2+inet(evdev)+capslock(grouplock)+level3(ralt_switch)"
+        include "pc+us+ru:2+inet(evdev)"
+
+
+        name[Group1]="USA";
+        name[Group2]="Russia";
+        name[Group3]="Typography";
+
+        // key.type[Group2]="FOUR_LEVEL
+
+        key <CAPS> {
+		// [ISO_Last_Group, Caps_Lock],
+		[ISO_Level3_Shift, ISO_Last_Group],
+		[ISO_First_Group, ISO_Last_Group]
+	};
+        //key <MENU> { [ISO_Next_Group, Menu] };
+
+        // Group3 (typographic) modifier.
+        //key <RALT>
+        //{
+        //    [ISO_Last_Group_Lock, ISO_Last_Group_Lock],
+        //    [ISO_Group_Shift, ISO_Group_Shift]
+        //};
+
+        key <SPCE> {
+            [space, space, nobreakspace, nobreakspace],
+            [space, space]
+        };
+
+        key <TLDE> {
+            [grave, asciitilde, acute, approxeq],
+            [Cyrillic_io, Cyrillic_IO]
+        };
+
+
+
+
+        key <ESC> {
+            [Escape]
+        };
+
+        key <AE01> {
+            [1, exclam, onesuperior, onesuperior],
+            [1, exclam]
+        };
+        key <AE02> {
+            [2, at, twosuperior, U00BD],  // '1/2'
+            [2, quotedbl]
+        };
+        key <AE03> {
+            [3, numbersign, threesuperior, U2153],
+            [3, numerosign]
+        };
+        key <AE04> {
+            [4, dollar, section, section],
+            [4, semicolon]
+        };
+        key <AE05> {
+            [5, percent, 0x01002030, 0x01002030],
+            [5, percent]
+        };
+        key <AE06> {
+            [6, asciicircum],
+            [6, colon]
+        };
+        key <AE07> {
+            [7, ampersand], // , questiondown, question],
+            [7, question]
+        };
+        key <AE08> {
+            [8, asterisk]
+        };
+        key <AE09> {
+            [9, parenleft]
+        };
+        key <AE10> {
+            [0, parenright]
+        };
+        key <AE11> {
+            [minus, underscore, emdash, hyphen],
+            [minus, underscore]
+        };
+        key <AE12> {
+            [equal, plus, notequal, plusminus],
+            [equal, plus]
+        };
+        key <BKSL> {
+            [backslash, bar],
+            [backslash, slash]
+        };
+
+        key <BKSP> {
+            //type= "CTRL+ALT",
+            //[BackSpace, Terminate_Server]
+            [BackSpace]
+        };
+
+        key <AD01> {
+            [q, Q, ISO_First_Group, onequarter],
+            [Cyrillic_shorti, Cyrillic_SHORTI]
+        };
+        key <AD02> {
+            [w, W],
+            [Cyrillic_tse, Cyrillic_TSE]
+        };
+        key <AD03> {
+            [e, E, EuroSign, oneeighth],
+            [Cyrillic_u, Cyrillic_U]
+        };
+        key <AD04> {
+            [r, R, registered, R],
+            [Cyrillic_ka, Cyrillic_KA]
+        };
+        key <AD05> {
+            [t, T, trademark, onethird],
+            [Cyrillic_ie, Cyrillic_IE]
+        };
+        key <AD06> {
+            [y, Y],
+            [Cyrillic_en, Cyrillic_EN]
+        };
+        key <AD07> {
+            [u, U],
+            [Cyrillic_ghe, Cyrillic_GHE]
+        };
+        key <AD08> {
+            [i, I ],
+            [Cyrillic_sha, Cyrillic_SHA]
+        };
+        key <AD09> {
+            [o, O , masculine, O],
+            [Cyrillic_shcha, Cyrillic_SHCHA]
+        };
+        key <AD10> {
+            [p, P, acute, doubleacute],
+            [Cyrillic_ze, Cyrillic_ZE]
+        };
+        key <AD11> {
+            [bracketleft, braceleft],
+            [Cyrillic_ha, Cyrillic_HA]
+        };
+        key <AD12> {
+            [bracketright, braceright],
+            [Cyrillic_hardsign, Cyrillic_HARDSIGN]
+        };
+
+
+        key <RTRN> {
+            [Return]
+        };
+        key <LCTL> {
+            [Control_L]
+        };
+
+        key <AC01> {
+            // [a, A, ISO_Last_Group, A],
+            [a, A, U2200, U2203],
+            [Cyrillic_ef, Cyrillic_EF]
+        };
+        key <AC02> {
+            [s, S, section, S],
+            [Cyrillic_yeru, Cyrillic_YERU]
+        };
+        key <AC03> {
+            [d, D, degree, D],
+            [Cyrillic_ve, Cyrillic_VE]
+        };
+        key <AC04> {
+            [f, F, sterling, F],
+            [Cyrillic_a, Cyrillic_A]
+        };
+        key <AC05> {
+            [g, G],
+            [Cyrillic_pe, Cyrillic_PE]
+        };
+        key <AC06> {
+            [h, H, h, onehalf],
+            [Cyrillic_er, Cyrillic_ER]
+        };
+        key <AC07> {
+            [j, J, doublelowquotemark, J],
+            [Cyrillic_o, Cyrillic_O]
+        };
+        key <AC08> {
+            [k, K, leftdoublequotemark, leftsinglequotemark],
+            [Cyrillic_el, Cyrillic_EL]
+        };
+        key <AC09> {
+            [l, L, rightdoublequotemark, rightsinglequotemark],
+            [Cyrillic_de, Cyrillic_DE]
+        };
+        key <AC10> {
+            [semicolon, colon, leftsinglequotemark, seconds],
+            [Cyrillic_zhe, Cyrillic_ZHE]
+        };
+        key <AC11> {
+            [apostrophe, quotedbl, rightsinglequotemark, minutes],
+            [Cyrillic_e, Cyrillic_E]
+        };
+
+        key <AB01> {
+            [z, Z, 0x1000301, A],
+            [Cyrillic_ya, Cyrillic_YA]
+        };
+        key <AB02> {
+            [x, X, multiply, 0x010022C5],
+            [Cyrillic_che, Cyrillic_CHE]
+        };
+        key <AB03> {
+            [c, C, copyright, C],
+            [Cyrillic_es, Cyrillic_ES]
+        };
+        key <AB04> {
+            [v, V, U2257, U225D],
+            [Cyrillic_em, Cyrillic_EM]
+        };
+        key <AB05> {
+            [b, B, U2261, U22EF],
+            [Cyrillic_i, Cyrillic_I]
+        };
+        key <AB06> {
+            [n, N, U00AC, U2245],
+            [Cyrillic_te, Cyrillic_TE]
+        };
+        key <AB07> {
+            [m, M],
+            [Cyrillic_softsign, Cyrillic_SOFTSIGN]
+        };
+        key <AB08> {
+            [comma, less, guillemotleft, doublelowquotemark],
+            [Cyrillic_be, Cyrillic_BE]
+        };
+        key <AB09> {
+            [period, greater, guillemotright, rightdoublequotemark],
+            [Cyrillic_yu, Cyrillic_YU]
+        };
+        key <AB10> {
+            [slash, question, ellipsis, question],
+            [period, comma]
+        };
+
+        key <LEFT> {
+            [Left], //, Left, 0x1002190, 0x10021D0],
+            [Left]
+        };
+        key <UP> {
+            [Up], //, Up, 0x1002191, 0x10021D1],
+            [Up]
+        };
+        key <RGHT> {
+            [Right], //, Right, 0x1002192, 0x10021D2],
+            [Right]
+        };
+        key <DOWN> {
+            [Down], //, Down, 0x1002193, 0x10021D3],
+            [Down]
+        };
+
+        key <LFSH> {
+            [Shift_L]
+        };
+        key <RTSH> {
+            [Shift_R]
+        };
+        key <TAB> {
+            [Tab, ISO_Left_Tab]
+        };
+
+        key <KPMU> {
+            type= "CTRL+ALT",
+            [KP_Multiply, XF86_ClearGrab]
+        };
+        key <LALT> { [Alt_L, Meta_L] };
+        key <FK01> {
+            type= "CTRL+ALT",
+            [F1, XF86_Switch_VT_1]
+        };
+        key <FK02> {
+            type= "CTRL+ALT",
+            [F2, XF86_Switch_VT_2]
+        };
+        key <FK03> {
+            type= "CTRL+ALT",
+            [F3, XF86_Switch_VT_3]
+        };
+        key <FK04> {
+            type= "CTRL+ALT",
+            [F4, XF86_Switch_VT_4]
+        };
+        key <FK05> {
+            type= "CTRL+ALT",
+            [F5, XF86_Switch_VT_5]
+        };
+        key <FK06> {
+            type= "CTRL+ALT",
+            [F6, XF86_Switch_VT_6]
+        };
+        key <FK07> {
+            type= "CTRL+ALT",
+            [F7, XF86_Switch_VT_7]
+        };
+        key <FK08> {
+            type= "CTRL+ALT",
+            [F8, XF86_Switch_VT_8]
+        };
+        key <FK09> {
+            type= "CTRL+ALT",
+            [F9, XF86_Switch_VT_9]
+        };
+        key <FK10> {
+            type= "CTRL+ALT",
+            [F10, XF86_Switch_VT_10]
+        };
+        key <NMLK> { [Num_Lock, Pointer_EnableKeys] };
+        key <SCLK> { [Scroll_Lock] };
+        key <KP7> { [KP_Home, KP_7] };
+        key <KP8> { [KP_Up, KP_8] };
+        key <KP9> { [KP_Prior, KP_9] };
+        key <KPSU> {
+            type= "CTRL+ALT",
+            [KP_Subtract, XF86_Prev_VMode]
+        };
+        key <KP4> { [KP_Left, KP_4] };
+        key <KP5> { [KP_Begin, KP_5] };
+        key <KP6> { [KP_Right, KP_6] };
+        key <KPAD> {
+            type= "CTRL+ALT",
+            [KP_Add, XF86_Next_VMode]
+        };
+        key <KP1> { [KP_End, KP_1] };
+        key <KP2> { [KP_Down, KP_2] };
+        key <KP3> { [KP_Next, KP_3] };
+        key <KP0> { [KP_Insert, KP_0] };
+        key <KPDL> {
+            type= "KEYPAD",
+            [KP_Delete, KP_Decimal],
+            [KP_Delete, KP_Separator]
+        };
+        key <MDSW> { [Mode_switch] };
+
+        key <LSGT> {
+            type[group1]= "FOUR_LEVEL",
+            [less, greater, bar, brokenbar],
+            [slash, bar]
+        };
+
+        key <FK11> {
+            type= "CTRL+ALT",
+            [F11, XF86_Switch_VT_11]
+        };
+        key <FK12> {
+            type= "CTRL+ALT",
+            [F12, XF86_Switch_VT_12]
+        };
+        key <HOME> { [Home] };
+        key <PGUP> { [Prior] };
+
+        key <END> { [End] };
+        key <PGDN> { [Next] };
+        key <INS> { [Insert] };
+        key <DELE> { [Delete] };
+        key <KPEN> { [KP_Enter] };
+        key <RCTL> { [Control_R] };
+        key <PAUS> {
+            type= "PC_CONTROL_LEVEL2",
+            [Pause, Break]
+        };
+        key <PRSC> {
+            type= "PC_ALT_LEVEL2",
+            [Print, Sys_Req]
+        };
+        key <KPDV> {
+            type= "CTRL+ALT",
+            [KP_Divide, XF86_Ungrab]
+        };
+        key <LWIN> { [Super_L] };
+        key <RWIN> { [Super_R] };
+        key <LVL3> { [ISO_Level3_Shift] };
+        key <ALT> { [NoSymbol, Alt_L] };
+        key <KPEQ> { [KP_Equal] };
+        key <SUPR> { [NoSymbol, Super_L] };
+        key <HYPR> { [NoSymbol, Hyper_L] };
+        key <META> { [NoSymbol, Meta_L] };
+
+        /// ...
+        //key <OUTP> { [XF86Display] };
+        //key <KITG> { [XF86KbdLightOnOff] };
+        //key <KIDN> { [XF86KbdBrightnessDown] };
+        //key <KIUP> { [XF86KbdBrightnessUp] };
+        
+        key <AB11> { [] };
+        key <JPCM> { [] };
+        key <I120> { [] };
+        key <AE13> { [] };
+        key <I149> { [] };
+        key <I154> { [] };
+        key <I161> { [] };
+        key <I168> { [] };
+        key <I178> { [] };
+        key <I183> { [] };
+        key <I184> { [] };
+        key <FK13> { [] };
+        key <FK14> { [] };
+        key <FK15> { [] };
+        key <FK16> { [] };
+        key <FK17> { [] };
+        key <FK18> { [] };
+        key <FK19> { [] };
+        key <FK20> { [] };
+        key <FK21> { [] };
+        key <FK22> { [] };
+        key <FK23> { [] };
+        key <FK24> { [] };
+        key <I217> { [] };
+        key <I219> { [] };
+        key <I221> { [] };
+        key <I222> { [] };
+        key <I224> { [] };
+        key <I226> { [] };
+        key <I228> { [] };
+        key <I230> { [] };
+        key <I247> { [] };
+        key <I248> { [] };
+        key <I249> { [] };
+        key <I250> { [] };
+        key <I251> { [] };
+        key <I252> { [] };
+        key <I253> { [] };
+
+        modifier_map Control { <LCTL> };
+        modifier_map Shift { <LFSH> };
+        modifier_map Shift { <RTSH> };
+        modifier_map Mod1 { <LALT> };
+        // modifier_map Lock { <CAPS> };
+        modifier_map Mod2 { <NMLK> };
+        modifier_map Mod5 { <MDSW> };
+        modifier_map Control { <RCTL> };
+        // modifier_map Mod1 { <RALT> };
+        modifier_map Mod5 { <LVL3> };
+        modifier_map Mod4 { <SUPR> };
+        modifier_map Mod4 { <HYPR> };
+        modifier_map Mod1 { <META> };
+
+    };
+
+    // xkb_geometry { include "pc(pc104)" };
+
+};
+

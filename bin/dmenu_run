@@ -1,0 +1,16 @@
+#!/bin/sh
+command1="$(cat $HOME/.dmenu_hist|$HOME/bin/dmenu.bin)"
+if [ $? -eq 1 ]; then exit 1; fi
+
+#ao $command1 >> ~/launch.log 2>&1 &
+screen -S screenterm0 -d -X screen -t "$command1" /home/hell/bin/dmenu_scrunner $command1 
+histtmp="/tmp/.dmenu_hist-$USER"
+histtmp2="/tmp/.dmenu_hist-$USER-1"
+echo > $histtmp
+echo "$command1" >> $histtmp
+cat $HOME/.dmenu_hist >> $histtmp
+cp "$HOME/.dmenu_hist" "$HOME/.dmenu_hist.old"
+## why was that? some weird problem....
+#sleep 1
+cat $histtmp |luniq |grep -v "^ *$" > $histtmp2 \
+ && mv "$histtmp2" "$HOME/.dmenu_hist"

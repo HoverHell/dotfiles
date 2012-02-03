@@ -1,0 +1,4 @@
+startup_message off
+screen 7 xinit
+# screen 1
+lockscreen

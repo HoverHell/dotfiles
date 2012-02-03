@@ -1,0 +1,2 @@
+#!/bin/sh
+for a in "$@"; do curl -T "$a" "http://up.hell.orts.ru/" && echo "http://u.hell.orts.ru/$(basename "$a")"; done

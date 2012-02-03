@@ -1,0 +1,1 @@
+mplayer -softvol -softvol-max 800 -fs "$@"

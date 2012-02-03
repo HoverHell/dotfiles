@@ -1,0 +1,3 @@
+#!/bin/sh
+rsync -P --no-whole-file --append --stats -v "$@"
+## Not sure about --append / --inplace

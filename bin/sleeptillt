@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# get a date, usable for "date -d" and wait till specified time.
+datestr=`date -d "$1" 2>/dev/null`
+if [ ! $? -eq 0 ]; then
+  echo "sleeptillt: error: invalid date \"$1\". exiting."
+  exit 1
+fi
+let ssec=`date -d "$1" +"%s"`-`date +"%s"`
+if [ $ssec -le 0 ]; then 
+  # Try next day; Sort of hack, but I don't see any better way.
+  let ssec=$ssec+86400;
+  if [ $ssec -le 0 ]; then
+    echo "sleeptillt: error: date \"$1\" (\"$datestr\") is in the past. exiting."
+    exit 1
+  fi
+  echo "sleeptillt: W: trying next day";
+  echo "sleeptillt: Waiting till \"`date -d "$1 + 1 day" 2>/dev/null`\", for $ssec seconds (`echo "scale=3; $ssec/3600"|bc -l` hours)."
+else
+  echo "sleeptillt: Waiting till \"$datestr\", for $ssec seconds (`echo "scale=3; $ssec/3600"|bc -l` hours)."
+fi
+sleep $ssec
+echo "sleeptillt: Finished waiting."

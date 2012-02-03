@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ x"$1" = x"-t" ]; then
+    shift
+    title="$1"
+    shift
+else
+    title="$(echo "$@"|sed 's/ .*//')"
+fi
+screen -S mscreenterm -d -X screen -t "$title" "$@"

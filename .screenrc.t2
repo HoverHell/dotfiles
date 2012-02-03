@@ -1,0 +1,16 @@
+startup_message off
+shelltitle ''
+vbell off
+caption always "%{+b mk}%H %{Wk}:%{ck} %?%-Lw%?%{gk}%n*%f %t%?(%u)%?%{ck}%?%+Lw%?%=%{= kG} %l %{-}  %{= kG} %c %{d}"
+
+#bindkey "^[[1;5D" prev  # xterm ctrl+left/right.
+#bindkey "^[[1;5C" next
+#bindkey "^[Od" prev  # urxvt ctrl+left/right.
+#bindkey "^[Oc" next
+bindkey  "^[[1;3D" prev  # xterm alt+left/right
+bindkey  "^[[1;3C" next
+bindkey "^[^[OD" prev  # urxvt alt+left/right.
+bindkey "^[^[OC" next
+
+defscrollback 4096
+termcapinfo * 'ti@:te@'

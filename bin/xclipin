@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ x"$DISPLAY" = x"" ]; then echo "W: default display"; DISPLAY=":0.0"; export DISPLAY; fi
+
+#xclip -i -selection clipboard "$@"
+pee "xclip -i -selection primary" "xclip -i -selection secondary" "xclip -i -selection clipboard"

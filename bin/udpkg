@@ -1,0 +1,1 @@
+for pkg in "$@"; do name=`echo $pkg|sed -r s/.deb$//`; test -e $name && continue; dpkg-deb -x $pkg $name && cd $name && dpkg-deb -e ../$pkg && cd ..; done

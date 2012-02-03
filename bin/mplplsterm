@@ -1,0 +1,2 @@
+#!/bin/sh
+uxterm -e /bin/sh -c "mplayer -playlist $@" >/dev/null 2>&1

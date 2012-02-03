@@ -1,0 +1,5 @@
+#!/bin/sh
+title="$1"
+dir="$2"
+test -z "$dir" && dir="$(pwd)"
+screen -S mscreenterm -d -X screen -t "$title" sh -c "cd $dir && ~/bin/screentermy"

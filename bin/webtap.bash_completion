@@ -1,0 +1,53 @@
+#-*- mode: shell-script;-*-
+
+# webtap completion.
+#
+which webtap &>/dev/null &&
+_webtap()
+{
+    local cur prev dashoptions special i
+    
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+
+    dashoptions='--command --dry-run --help --version'
+
+    for (( i=0; i < ${#COMP_WORDS[@]}-1; i++ )); do
+	    if [[ ${COMP_WORDS[i]} == @(help|open|list) ]]; then
+		    special=${COMP_WORDS[i]}
+	    fi
+    done
+
+    if [[ -n "$special" ]]; then
+	    case $special in
+	    	open|*[\,])
+			if [ -r ~/.webtapurls ]; then
+				keywords="$(cut -d\| -f 1 ~/.webtapurls |sed -e '/ / s///g; /^$/d; /[\#\]/d')"
+				COMPREPLY=( $( compgen -S, -W "$keywords" -- $cur ) )
+				return 0
+			fi
+			;;
+	    esac
+    fi
+
+    case "$prev" in
+    	# don't complete anything once these options are found
+	@(help|list))
+			return 0
+			;;
+    	-c|--command)
+			_filedir
+			return 0
+			;;
+    esac
+
+    if [[ "$cur" == -* ]]; then
+    	COMPREPLY=( $( compgen -W '$dashoptions' -- $cur ) )
+    else
+    	COMPREPLY=( $( compgen -W 'open list' -- $cur ) )
+    fi
+
+    return 0
+} &&
+complete -F _webtap $default webtap

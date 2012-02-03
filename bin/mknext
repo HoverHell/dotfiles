@@ -1,0 +1,15 @@
+#!/bin/sh
+subname="$1"
+cdir="$(pwd)"
+stat="$HOME/files/tmp/nstat_$(echo "$cdir"|sed 's,/,_,g')"
+touch "$stat"
+num="$(cat "$stat")"
+if [ ! -n "$num" ]; then num=1; fi
+if [ -n "$subname" ]; then 
+ name="$num""_$(echo "$subname"|sed 's,/,_,g')"
+else
+ name="$num"
+fi
+mkdir -v "$name"
+nnum=$(( $num + 1 ))
+echo "$nnum" > "$stat"

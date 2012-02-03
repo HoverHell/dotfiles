@@ -1,0 +1,4 @@
+#!/bin/sh
+# Tries to get one-per-line numbers/expressions and print sum of them.
+
+tr '\n' '+'|sed -r 's/\+?$/\n/'|bc -l

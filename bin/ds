@@ -1,0 +1,4 @@
+#!/bin/sh
+## "datestamp", ISO-formatted (sort-friendly)
+## no-newline version.
+printf "$(date "+%Y%m%d %H%M%S")"

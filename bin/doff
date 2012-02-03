@@ -1,0 +1,11 @@
+#!/bin/sh
+#brn_control=/sys/class/backlight/eeepc/brightness
+#brightness=$(cat $brn_control)
+
+#/usr/bin/xset s activate
+
+sleep 1 ## lemme un-press the kotkey, eh
+
+for a in 0 1 3 5 7; do
+  sleep $a && echo "... $a elapsed" && /usr/bin/xset dpms force off &
+done

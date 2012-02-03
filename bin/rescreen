@@ -1,0 +1,4 @@
+#!/bin/bash
+#screen -x screenterm || screen -c ~/.screenrc.term -S screenterm
+echo "export DISPLAY=$DISPLAY" > ~/disp
+~/bin/mrescreen

@@ -1,0 +1,42 @@
+startup_message off
+deflogin off
+nonblock on
+shelltitle ''
+vbell off
+caption always "%{+b yk}%H %{Wk}:%{ck} %?%-Lw%?%{gk}%n*%f %t%?(%u)%?%{ck}%?%+Lw%?"
+#caption always "%{+b yk}%H %{Wk}:%{ck} %?%-Lw%?%{gk}%n*%f %t%?(%u)%?%{ck}%?%+Lw%? %{= kG}%-=%c:%s%{-}"
+##caption always "%{+b yk}%H %{Wk}:%{ck} %?%-Lw%?%{gk}%n*%f %t%?(%u)%?%{ck}%?%+Lw%?"
+#caption always "%{+b yk} %H %{+b gk}:: %t %=[ %w ] %c "
+#caption always '%{+b yk} %H %{= bK}%-Lw%{= bW}%50>%n%f* %t%{= wK}%+Lw%< %{= kG}%-=%c:%s%{-}'
+hardstatus message
+
+bindkey -d -a -k "f/" stuff /
+bindkey -d -a -k "f*" stuff *
+bindkey -d -a -k "f-" stuff -
+bindkey -d -a -k "f+" stuff +
+bindkey -d -a -k "fe" stuff ^M
+
+#bindkey "^[[1;5D" prev  # xterm ctrl+left/right.
+#bindkey "^[[1;5C" next
+#bindkey "^[Od" prev  # urxvt ctrl+left/right.
+#bindkey "^[Oc" next
+bindkey  "^[[1;3D" prev  # xterm alt+left/right
+bindkey  "^[[1;3C" next
+bindkey "^[^[OD" prev  # urxvt alt+left/right.
+bindkey "^[^[OC" next
+
+#defscrollback 16384
+defscrollback 8000
+termcapinfo * 'ti@:te@'
+
+shell /bin/bash
+
+screen 0
+#screen 1
+#screen 2
+#screen 3
+#screen 4
+#screen 5
+#screen 6
+#select 1
+#select 0

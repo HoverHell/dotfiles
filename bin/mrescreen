@@ -1,0 +1,2 @@
+#!/bin/bash
+screen -x mscreenterm || screen -d -RR -c ~/.screenrc.mterm -S mscreenterm

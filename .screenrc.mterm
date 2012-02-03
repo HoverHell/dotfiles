@@ -1,0 +1,51 @@
+startup_message off
+
+shelltitle ''
+nonblock on   # don't block the whole session waiting for window.
+vbell off   # I hate barking dogs
+msgminwait 5 # the first message is ignored.
+msgwait 2 # the last message is displayed for 10 seconds or until keypress.
+escape ^bb
+
+bindkey "^[[1;2D" prev  # xterm shift+left/right.
+bindkey "^[[1;2C" next
+bindkey "^[[d" prev  # urxvt shift+left/right.
+bindkey "^[[c" next
+
+#bindkey "^[[2D" prev
+#bindkey "^[[2C" next
+#bindkey "^[[d" prev
+#bindkey "^[[c" next
+#bindkey "^[[Z" prev
+#bindkey "^[O2D" prev
+#bindkey "^[O2C" next
+bindkey "^[[1;2D" prev
+bindkey "^[[1;2C" next
+
+
+#bindkey "^	" next
+bindkey -d -a -k "f/" stuff /
+bindkey -d -a -k "f*" stuff *
+bindkey -d -a -k "f-" stuff -
+bindkey -d -a -k "f+" stuff +
+bindkey -d -a -k "fe" stuff ^M
+#bindkey -d 
+# caption always "%{ck}%?%-Lw%?%{gk}%n*%f %t%?(%u)%?%{ck}%?%+Lw%?"
+# caption always "%{+b yk} %H %{+b gk}:: %t %=[ %w ] %c "
+caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%<'
+#caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%< %{= kG}%-=%c:%s%{-}'
+#caption always '%{+b gk}%H %{= wK} %-Lw%{= bW}%50>%n%f* %t%{= wK}%+Lw%< %{= kG}%-=%c:%s%{-}'
+hardstatus message
+
+defscrollback 200
+
+termcapinfo xterm*|rxvt*|gnome* 'ti@:te@'
+hardstatus message "Termain: %n$* %t"
+
+shell /home/hell/bin/screentermy
+
+screen -t pr 0 screen -S screenterm0 -c $HOME/.screenrc.mtermy
+screen -t w 1 screen -S screenterm1 -c $HOME/.screenrc.mtermy
+
+#select 1
+#select 0

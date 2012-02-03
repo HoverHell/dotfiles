@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# . $HOME/bin/colors
+
+nc="$(printf "\033[00m")"
+red="$(printf "\033[01;31m")"
+green="$(printf "\033[01;32m")"
+
+wdiff -n -w "$red" -x "$nc" -y "$green" -z "$nc" "$@"

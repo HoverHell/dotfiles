@@ -1,0 +1,6 @@
+#!/bin/sh
+exec 1>>$HOME/linkdump.log
+echo "------- "
+echo "------- ($*)"
+echo -n "------- "; date
+cat /dev/null "$@"

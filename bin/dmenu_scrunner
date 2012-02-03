@@ -1,0 +1,6 @@
+#!/bin/sh
+/home/hell/bin/ao "$@"
+n=$?
+test $n -eq 0 && exit 0
+echo " ------- exit $n"
+read a

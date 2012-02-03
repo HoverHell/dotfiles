@@ -1,0 +1,1 @@
+grep "$@" $HOME/.bash_eternal_history | tail -n 20

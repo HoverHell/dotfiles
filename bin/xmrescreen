@@ -1,0 +1,4 @@
+#!/bin/sh
+lxterm \
+  -font '-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1' \
+  -geom 88x26 -e $HOME/bin/mrescreen
