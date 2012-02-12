@@ -1,2 +1,8 @@
 #!/bin/bash
+## screen-in-screen-in-term all-256color!
+## (see also ~/bin/colortest)
+if [ x"$TERM" = x"rxvt-256color" ]; then
+  export TERM="xterm-256color"
+  export TERM_ACTUAL="rxvt-256color"
+fi
 screen -x mscreenterm || screen -d -RR -c ~/.screenrc.mterm -S mscreenterm

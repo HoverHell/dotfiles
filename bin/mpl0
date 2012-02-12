@@ -1,0 +1,9 @@
+#!/bin/sh
+## Base mplayer (instead-of-config for easier overridability)
+## Link to it or any other mpl* from ~/bin/mpl
+## For example, mplc -> mpl -> mplv -> mpl0
+/usr/bin/mplayer \
+ -af scaletempo \
+ -ass \
+ -softvol -softvol-max 800 -fs \
+ "$@"

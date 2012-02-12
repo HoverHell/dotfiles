@@ -1,5 +1,5 @@
 //set the proxy server for this session only
-proxy_server_default = "10.3.3.9";
+proxy_server_default = "10.3.3.212";
 proxy_port_default = 8118;
 
 function set_proxy_session (window, server, port) {

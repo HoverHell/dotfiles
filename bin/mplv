@@ -1,0 +1,6 @@
+#!/bin/sh
+## mplayer + try-vdpau
+## (safe to use as default nearly anywhere)
+mpl0 -vo vdpau,xv, \
+ -vc ffh264vdpau,ffvc1vdpau,ffwmv3vdpau,ffmpeg12vdpau,ffdivxvdpau, \
+ "$@"

@@ -1,1 +1,2 @@
-xkbcomp $HOME/.xkb_config $DISPLAY
+#!/bin/sh
+xkbcomp "$HOME/.xkb_config" "$DISPLAY"

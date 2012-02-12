@@ -1,2 +1,3 @@
 #!/bin/sh
+## run playlist-in-mplayer-in-terminal (e.g. for browser on .pls)
 uxterm -e /bin/sh -c "mplayer -playlist $@" >/dev/null 2>&1

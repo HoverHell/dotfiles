@@ -9,6 +9,10 @@ clicks_in_new_buffer_button = 2;
 define_key(content_buffer_normal_keymap, "a", "follow-new-buffer");
 define_key(content_buffer_normal_keymap, "q", "follow-new-buffer-background");
 define_key(content_buffer_normal_keymap, "C-w", "kill-current-buffer");
+// ...
+//define_key(content_buffer_normal_keymap, "A-r", "reload");
+//define_key(content_buffer_normal_keymap, "r", null);
+
 
 // for default download dir.
 cwd = make_file('/home/hell/down');
