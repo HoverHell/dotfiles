@@ -1,0 +1,2 @@
+#!/bin/sh
+screen -S screenterm0 -d -X screen -t "$1" /home/hell/bin/dmenu_scrunner "$@"
