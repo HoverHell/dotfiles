@@ -1,0 +1,43 @@
+#!/bin/sh
+## A helper for easy file renaming.
+## If you know a better way - do tell.
+tmp1="$(mktemp)"
+tmp2="$(mktemp)"
+
+## Supposedly, files are already there, empty and with correct permissions
+#touch "$tmp1" "$tmp2"
+#chmod 600 "$tmp1" "$tmp2"
+
+if [ $# -ne 0 ]; then
+  for arg in "$@"; do
+    echo "$arg" >> "$tmp1"
+  done
+else
+  ## Else we expect a filelist on stdin.
+  cat > "$tmp1"
+fi
+
+cat "$tmp1" > "$tmp2"
+sensible-editor "$tmp2"
+
+#exec 7<"$tmp1"  # read from directly.
+exec 8<"$tmp2"
+
+cat "$tmp1" | \
+while read frm; do
+   read tof <&8
+   ## Note: `-z "$frm"`?  Will it be okay in all cases?
+   [ -z "$frm" ] && {
+     echo "W: empty filename in input." 1>&2
+     continue
+   }
+   if [ -z "$tof" ]; then
+       rm -v "$frm"
+   else
+       [ x"$frm" != x"$tof" ] && \
+         mv -v "$frm" "$tof"
+   fi
+done
+
+## Cleanup
+rm "$tmp1" "$tmp2"

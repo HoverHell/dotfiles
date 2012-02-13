@@ -1,0 +1,4 @@
+#!/bin/sh
+## A mistype-shortcut
+joe "$@"
+echo "beware, mistyper" 1>&2
