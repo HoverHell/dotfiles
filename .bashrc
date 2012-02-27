@@ -126,5 +126,7 @@ export HISTTIMEFORMAT="%s "
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
                "$(history 1)" >> ~/.bash_eternal_history'
 
-shopt -s histappend
+# shopt -s histappend
+export HISTFILE="/dev/null"
+
 set +o histexpand # fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
