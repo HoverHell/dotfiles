@@ -10,7 +10,7 @@
 CFG_ps_time="."  # timestamp in PS. empty to disable
 CFG_ps_ret="."  # '$?' in PS. empty to disable
 CFG_ps_u="1;33m"  # PS user color
-CFG_ps_u="0;33m"  # PS host color
+CFG_ps_h="0;33m"  # PS host color
 [ -f ~/.bashrc_local ] && . ~/.bashrc_local
 
 # don't put duplicate lines in the history. See bash(1) for more options
