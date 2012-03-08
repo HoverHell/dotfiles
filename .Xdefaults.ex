@@ -1,3 +1,4 @@
+## Use `#include ".Xdefaults.ex"` and customize whatever.
 
 URxvt*scrollBar:false
 URxvt*scrollBar_right:true
@@ -27,6 +28,7 @@ URxvt*background:Black
 ## xft fonts - anti-aliased xft font setup is nice, but can be choppy
 ##URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=13
 URxvt*font: xft:Monospace-12
+## NOTE: or '...-8'.
 
 ## traditional fonts - a more traditional font setup in lieu of xft
 ##URxvt*font:-*-courier-medium-r-normal-*-*-140-*-*-*-*-iso8859-1
