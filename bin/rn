@@ -19,6 +19,12 @@ fi
 
 cat "$tmp1" > "$tmp2"
 sensible-editor "$tmp2"
+res=$?
+[ $res -ne 0 ] && {
+    echo "Non-zero editor exit status. Doing nothing."
+    exit $res
+}
+
 
 #exec 7<"$tmp1"  # read from directly.
 exec 8<"$tmp2"
