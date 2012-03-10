@@ -5,6 +5,7 @@ URxvt*scrollBar_right:true
 URxvt*scrollTtyOutput:false
 URxvt*scrollTtyKeypress:true
 URxvt*transparent:true
+# URxvt*shading: 28
 
 ## tint with any color; i.e., blue, red, tomato4, olivedrab2, etc.
 ##   some nice listings are at:

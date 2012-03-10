@@ -8,6 +8,9 @@
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\ )
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\b )
 
+;; don't open the scratch buffer (I need a editor, not a console
+;; environment).
+(kill-buffer "*scratch*")
 
 ;; Directory with various extra files.
 (add-to-list 'load-path "~/.emacs.d/lib/")
