@@ -1,0 +1,4 @@
+
+## === Python ===
+bzr branch lp:python-mode
+http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/
