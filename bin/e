@@ -1,0 +1,3 @@
+#!/bin/sh
+## A short-hand for "edit", let's say.
+emacs "$@"
