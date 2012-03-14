@@ -3,6 +3,25 @@
 ;; NOTE: see 'XXX' marks (and the NOTE marks, ofc).
 
 ;; XXX: cycle between buffers with opened files instead of all buffers?
+;; XXX: Bind 'C-u M-|' to 'M-?'?  ; shell-command-on-region
+;; XXX: Open same file in several buffers? (on binds)
+;; XXX: rainbow-delimiters full region background color?
+
+;(defun mytst()
+;  (interactive (let (string) (unless (mark) (error "The mark is not set now, so there is no region")) (setq string (read-shell-command "Shell command on region: ")) (list (region-beginning) (region-end) string current-prefix-arg current-prefix-arg shell-command-default-error-buffer t)))
+
+;(define-ibuffer-op
+;  "Replace the contents of marked buffers with output of pipe to COMMAND."
+;  (:interactive "sPipe to shell command (replace): "
+;   :opstring "Buffer contents replaced in"
+;   :active-opstring "replace buffer contents in"
+;   :dangerous t
+;   :modifier-p t) 
+;  (with-current-buffer buf
+;    (shell-command-on-region (point-min) (point-max)
+;                             command nil t)))
+
+
 
 ;; NOTE: Remove line-wrap character:
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\ )
@@ -40,6 +59,9 @@
 (require 'saveplace)                          ;; get the package
 
 
+;; Don't show menu bar
+(menu-bar-mode 0)
+
 ;; Aux.
 (defun yank-and-indent ()
   "Yank and then indent the newly formed region according to mode."
@@ -73,6 +95,7 @@
 (setq version-control t)
 ;; Save all backup file in this directory.
 (setq backup-directory-alist (quote ((".*" . "~/.tmp/emacs_backups/"))))
+(setq delete-old-versions t)
 
 
 ;; ========== Enable Line and Column Numbering ==========
@@ -144,3 +167,61 @@
 ;; XXX: do not start python shell on it?
 ;(autoload 'python-mode "python-mode" "Python Mode." t) 
 ; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+
+
+;; Highlight parentheses
+(require 'highlight-parentheses)
+(require 'rainbow-delimiters)
+(global-rainbow-delimiters-mode)
+;(add-hook 'highlight-parentheses-mode-hook
+;          '(lambda ()
+;             (setq autopair-handle-action-fns
+;                   (append
+;                    (if autopair-handle-action-fns
+;                        autopair-handle-action-fns
+;                        '(autopair-default-handle-action))
+;                    '((lambda (action pair pos-before)
+;                        (hl-paren-color-update)))))))
+;(define-globalized-minor-mode global-highlight-parentheses-mode
+;  highlight-parentheses-mode
+;  (lambda ()
+;    (highlight-parentheses-mode t)))
+;(global-highlight-parentheses-mode t)
+(setq hl-paren-colors
+      '(;"#8f8f8f" ; this comes from Zenburn
+                   ; and I guess I'll try to make the far-outer parens look like this
+        "orange1" "yellow1" "greenyellow" "green1"
+        "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
+
+;; Theming, etc.
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ffbb30" :weight bold))))
+ '(font-lock-comment-face ((t (:foreground "green"))))
+ '(font-lock-function-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#99ff99" :weight bold))))
+ '(font-lock-keyword-face ((((class color) (min-colors 88) (background dark)) (:foreground "white" :weight bold))))
+ '(font-lock-string-face ((((class color) (min-colors 88) (background dark)) (:foreground "cyan"))))
+ '(rainbow-delimiters-depth-1-face ((((background dark)) (:background "#262626"))))
+ '(rainbow-delimiters-depth-2-face ((((background dark)) (:background "#444444"))))
+ '(rainbow-delimiters-depth-3-face ((((background dark)) (:background "#626262"))))
+ '(rainbow-delimiters-depth-4-face ((((background dark)) (:background "#808080"))))
+ '(rainbow-delimiters-depth-5-face ((((background dark)) (:background "#87005f"))))
+ '(rainbow-delimiters-depth-6-face ((((background dark)) (:background "#875f5f"))))
+ '(rainbow-delimiters-depth-7-face ((((background dark)) (:background "#8700d7"))))
+ '(rainbow-delimiters-depth-8-face ((((background dark)) (:background "#875fff"))))
+ '(rainbow-delimiters-unmatched-face ((((background dark)) (:foreground "#ee1122" :weight bold)))))
+
+;; Somehow, the setting above (or even in a custom theme defined here) does not work.
+(set-face-foreground 'font-lock-comment-face "#11dd11")
+
+
+; (a(b(c(d(e(f(g(h(i(j(k(l(m((((()))))m)l)k)j)i)h)g)f)e)d)c)b)a)

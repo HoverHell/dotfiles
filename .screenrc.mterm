@@ -35,11 +35,15 @@ bindkey -d -a -k "fe" stuff ^M
 caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%<'
 #caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%< %{= kG}%-=%c:%s%{-}'
 #caption always '%{+b gk}%H %{= wK} %-Lw%{= bW}%50>%n%f* %t%{= wK}%+Lw%< %{= kG}%-=%c:%s%{-}'
-hardstatus message
+#hardstatus message
+#hardstatus message "Termain: %n$* %t"
+hardstatus message "Termain"
+
 
 defscrollback 200
 
- term screen-256color
+#term screen-256color  # working #1
+term xterm-256color
 
 termcapinfo xterm*|rxvt*|gnome* 'ti@:te@'
 
@@ -47,13 +51,13 @@ termcapinfo xterm*|rxvt*|gnome* 'ti@:te@'
  terminfo xterm hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
  termcapinfo  xterm Z0=\E[?3h:Z1=\E[?3l:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l
  termcapinfo xterm* OL=10000
- termcapinfo rxvt-256-color 'VR=\E[?5h:VN=\E[?5l'
- termcapinfo rxvt-256-color 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
- termcapinfo rxvt-256-color 'kh=\EOH:kI=\E[2~:kD=\E[3~:kH=\EOF:kP=\E[5~:kN=\E[6~'
- termcapinfo rxvt-256-color 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
- termcapinfo rxvt-256-color 'vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l'
- termcapinfo rxvt-256-color 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
- termcapinfo rxvt-256-color be
+ termcapinfo xterm-256color 'VR=\E[?5h:VN=\E[?5l'
+ termcapinfo xterm-256color 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
+ termcapinfo xterm-256color 'kh=\EOH:kI=\E[2~:kD=\E[3~:kH=\EOF:kP=\E[5~:kN=\E[6~'
+ termcapinfo xterm-256color 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+ termcapinfo xterm-256color 'vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l'
+ termcapinfo xterm-256color 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
+ termcapinfo xterm-256color be
  termcapinfo xterm|xterms|xs ti@:te=\E[2J
  termcapinfo wy75-42 xo:hs@
  termcapinfo wy* CS=\E[?1h:CE=\E[?1l:vi=\E[?25l:ve=\E[?25h:VR=\E[?5h:VN=\E[?5l:cb=\E[1K:CD=\E[1J
@@ -63,13 +67,11 @@ termcapinfo xterm*|rxvt*|gnome* 'ti@:te@'
  termcapinfo linux C8
 # for 256 color
  attrcolor b ".I"
- termcapinfo rxvt-256-color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+ termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
  termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 # attrcolor u "-u b"
 # attrcolor b "R"
 
-
-hardstatus message "Termain: %n$* %t"
 
 # 040126 To be able to select windows with n > 9 ->
 # press "C-a - #" instead of just "C-a #"
