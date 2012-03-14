@@ -1,12 +1,21 @@
 #!/bin/sh
 ## A helper for easy file renaming.
 ## If you know a better way - do tell.
+## Supports `-n` switch (must be first on commandline though).
+
+
 tmp1="$(mktemp)"
 tmp2="$(mktemp)"
 
 ## Supposedly, files are already there, empty and with correct permissions
 #touch "$tmp1" "$tmp2"
 #chmod 600 "$tmp1" "$tmp2"
+
+noaction=
+if [ x"$1" = x"-n" ]; then
+    noaction=1
+    shift 1
+fi
 
 if [ $# -ne 0 ]; then
   for arg in "$@"; do
@@ -24,7 +33,7 @@ res=$?
     echo "Non-zero editor exit status. Doing nothing."
     exit $res
 }
-
+    
 
 #exec 7<"$tmp1"  # read from directly.
 exec 8<"$tmp2"
@@ -38,10 +47,19 @@ while read frm; do
      continue
    }
    if [ -z "$tof" ]; then
-       rm -v "$frm"
+       if [ $noaction ]; then
+           echo rm -v "$frm"
+       else
+           rm -v "$frm"
+       fi
    else
-       [ x"$frm" != x"$tof" ] && \
-         mv -v "$frm" "$tof"
+       if [ x"$frm" != x"$tof" ]; then
+           if [ $noaction ]; then
+               echo mv -v "$frm" "$tof"
+           else
+               mv -v "$frm" "$tof"
+           fi
+       fi
    fi
 done
 
