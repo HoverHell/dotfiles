@@ -1,0 +1,7 @@
+#!/bin/sh
+tf="$(mktemp)" && {
+ # Note: `-X` did not go well with a broken symlink.
+ git ls-tree -r --name-only HEAD > "$tf" && \
+   rsync -v -HAax --files-from="$tf" ./ ~/
+ rm -v "$tf"
+}
