@@ -36,8 +36,10 @@
 
 
 ;; Various personal keybindings.
-(global-set-key "\M-[1;5A" 'previous-buffer); Ctrl+right => previous buffer
+(global-set-key "\M-[1;5A" 'previous-buffer); Ctrl+up => previous buffer
 (global-set-key "\M-[1;5B" 'next-buffer)    ; Ctrl+down  => next buffer
+(global-set-key [(control up)] 'previous-buffer); Ctrl+up => previous buffer
+(global-set-key [(control down)] 'next-buffer)    ; Ctrl+down e => next buffer
 (global-set-key "\M-[1;5C" 'forward-word)   ; Ctrl+right => forward word
 (global-set-key "\M-[1;5D" 'backward-word)  ; Ctrl+left  => backward word
 ; (global-set-key (kbd "C-x TAB") 'indent-rigidly)  ;; default
@@ -45,7 +47,8 @@
 ; 'fix' for xterm-like home/end in rxvt with TERM=xterm-256color
 (global-set-key "\M-[H" 'move-beginning-of-line)
 (global-set-key "\M-[F" 'move-end-of-line)
-; C-z?
+; 'suspend-frame' is usually useless anyway.
+(global-set-key (kbd "C-z") 'other-window)
 
 
 ;; Auto-indent possibilities:
