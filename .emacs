@@ -166,14 +166,16 @@
 (define-key global-map [S-tab] 'my-unindent)
 (define-key global-map [backtab] 'my-unindent)
 
- 
-;; python-mode
+;;;; Format-specific stuff. 
+;;; python-mode
 (add-to-list 'load-path "~/.emacs.d/lib/python-mode")
 (setq py-shell-name "ipython")
 ;; XXX: do not start python shell on it?
 ;(autoload 'python-mode "python-mode" "Python Mode." t) 
 ; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-
+;;; Octave/matlab
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
 ;; Highlight parentheses
 (require 'highlight-parentheses)
