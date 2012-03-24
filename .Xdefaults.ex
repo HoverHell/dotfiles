@@ -1,5 +1,20 @@
 ## Use `#include ".Xdefaults.ex"` and customize whatever.
 
+#### URxvt 256colortermhacks.
+URxvt*termName: xterm-256color
+### Probably a fix for home/end:
+## #1 
+## https://wiki.archlinux.org/index.php/Home_and_End_keys_not_working#URxvt.2FRxvt
+#URxvt*keysym.Home: \033[1~
+#URxvt*keysym.End: \033[4~
+## xterm-like... probably.
+URxvt*keysym.Home: \033[H
+URxvt*keysym.End: \033[F
+## Note: emacs somehow distinguishes rxvt from xterm despite TERM, and
+##  does not interpret these as <home>/<end>. Have to be fixed in
+##  .emacs, thus.
+
+#### Other URxvt config stuff.
 URxvt*scrollBar:false
 URxvt*scrollBar_right:true
 URxvt*scrollTtyOutput:false
@@ -22,7 +37,6 @@ URxvt*shading:40
 
 ## font color (default is black)
 URxvt*foreground:White
-
 ## background color (prior to tinting) (default is white)
 URxvt*background:Black
 
@@ -43,7 +57,7 @@ URxvt*font: xft:Monospace-12
 URxvt*color4:RoyalBlue
 URxvt*color12:RoyalBlue
 
-
+#### xterm minimal stuff.
 xterm*eightBitInput: false
 xterm*background: black
 xterm*foreground: white

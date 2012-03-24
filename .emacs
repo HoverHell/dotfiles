@@ -41,7 +41,10 @@
 (global-set-key "\M-[1;5C" 'forward-word)   ; Ctrl+right => forward word
 (global-set-key "\M-[1;5D" 'backward-word)  ; Ctrl+left  => backward word
 ; (global-set-key (kbd "C-x TAB") 'indent-rigidly)  ;; default
-(global-set-key (kbd "C-x TAB") 'other-window)  ;; default
+(global-set-key (kbd "C-x TAB") 'other-window)
+; 'fix' for xterm-like home/end in rxvt with TERM=xterm-256color
+(global-set-key "\M-[H" 'move-beginning-of-line)
+(global-set-key "\M-[F" 'move-end-of-line)
 ; C-z?
 
 
