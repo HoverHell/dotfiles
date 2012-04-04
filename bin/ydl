@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# A shortcut for usefulness of youtube-dl
+youtube-dl -t --write-info-json "$@"
+
+# `-l` instead of `-t`?
+# `-f`? Supposedly will download highest format anyway?
