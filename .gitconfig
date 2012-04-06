@@ -1,0 +1,21 @@
+[user]
+name = HoverHell
+email = hoverhell@gmail.com
+
+[alias]
+## Mostly replaced by shellscripts 'gi*', but w/e
+st = status
+ci = commit
+br = branch
+co = checkout
+df = diff
+lg = log -p
+### http://stackoverflow.com/questions/948354/git-push-current-branch
+## Push only current branch.
+pub = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
+## Untested:
+#pub = push
+#push = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
+## Also can do:
+##  git config --global push.default current
+##  git config --global push.default upstream
