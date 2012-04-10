@@ -64,7 +64,6 @@ fi
 
 # Comment in the above and uncomment this below for a color prompt
 #PS1="${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033[00;37m\]@\[\033[00;32m\]\h\[\033[01;37m\]:\[\033[01;36m\]\w\[\033[01;37m\]\$ "
-test -f ~/.bashrc_local 
 
 ## Scary scary prompt prompt
 [ $CFG_ps_time ] && PS_time='\[\033[40m\033[0m\033[01;37m\]| \D{%H%M%S} '
@@ -91,7 +90,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-## The since-long meaningless stuff. Use C.UTF-8 already!
+
+### The since-long meaningless stuff. Use C.UTF-8 already!
 #PAGER="most"
 #LANG="C"
 #export LC_CTYPE="ru_RU.CP1251"
@@ -113,20 +113,62 @@ fi
 #export COLUMNS=132
 #DEFAULTCHARSET="CP1251"
 
+
+## cdargs (`cv`, `ca`, ...).
 [ -f /usr/share/doc/cdargs/examples/cdargs-bash.sh ] && \
   source /usr/share/doc/cdargs/examples/cdargs-bash.sh
 
+
+### History-keeping `cd`:
+## http://unix.stackexchange.com/questions/4290/
+pushd()
+{
+  if [ $# -eq 0 ]; then
+    DIR="${HOME}"
+  else
+    DIR="$1"
+  fi
+
+  builtin pushd "${DIR}" > /dev/null
+  echo -n "DIRSTACK: "
+  dirs
+}
+pushd_builtin()
+{
+  builtin pushd > /dev/null
+  echo -n "DIRSTACK: "
+  dirs
+}
+popd()
+{
+  builtin popd > /dev/null
+  echo -n "DIRSTACK: "
+  dirs
+}
+alias cd='pushd'
+#alias back='popd'
+alias flip='pushd_builtin'
+
+
+### ...
 export BROWSER="/usr/bin/x-www-browser"
-# Extra completions
+
+
+### Extra completions
 complete -o filenames -F _command s-  # mscreenterm run cmd
 [ -f ~/bin/webtap.bash_completion ] && \
   source ~/bin/webtap.bash_completion
 
-export HISTTIMEFORMAT="%s "
+
+### Bash-eternal-history
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
                "$(history 1)" >> ~/.bash_eternal_history'
 
+### No default .bash_history
 # shopt -s histappend
+export HISTTIMEFORMAT="%s "  # ?...
 export HISTFILE="/dev/null"
 
-set +o histexpand # fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
+
+### fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
+set +o histexpand
