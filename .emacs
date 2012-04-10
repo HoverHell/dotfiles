@@ -23,7 +23,7 @@
 
 
 
-;; NOTE: Remove line-wrap character:
+;; NOTE: Remove line-wrap (newline) character:
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\ )
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\b )
 
@@ -148,7 +148,7 @@
 ;; Set emacs background colour
 ;(set-background-color "black")
 ;; Set comment color
-(set-face-foreground 'font-lock-comment-face "red")
+;(set-face-foreground 'font-lock-comment-face "red")
 
 
 ;; nuke-line
@@ -200,6 +200,8 @@
                    ; and I guess I'll try to make the far-outer parens look like this
         "orange1" "yellow1" "greenyellow" "green1"
         "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
+(show-paren-mode t)
+(setq show-paren-style 'expression)
 
 ;; Theming, etc.
 (custom-set-variables
