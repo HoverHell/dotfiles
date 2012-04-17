@@ -1,4 +1,10 @@
 #!/bin/bash
 #screen -x screenterm || screen -c ~/.screenrc.term -S screenterm
 echo "export DISPLAY=$DISPLAY" > ~/disp
-~/bin/mrescreen
+if [ -x ~/bin/rescreen.local ]; then
+  exec ~/bin/rescreen.local "$@"
+  exit $?
+else
+  exec ~/bin/mrescreen
+  exit $?
+fi

@@ -172,10 +172,15 @@
 (setq py-shell-name "ipython")
 ;; XXX: do not start python shell on it?
 ;(autoload 'python-mode "python-mode" "Python Mode." t) 
-; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 ;;; Octave/matlab
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
+;;; coffee
+(autoload 'coffee-mode "coffee-mode" "Coffee Mode." t)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
 
 ;; Highlight parentheses
 (require 'highlight-parentheses)
