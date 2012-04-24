@@ -2,6 +2,9 @@
 name = HoverHell
 email = hoverhell@gmail.com
 
+[core]
+excludesfile = ~/.gitignore
+
 [alias]
 ## Mostly replaced by shellscripts 'gi*', but w/e
 st = status
@@ -19,20 +22,3 @@ pub = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
 ## Also can do:
 ##  git config --global push.default current
 ##  git config --global push.default upstream
-
-### Colorful
-[color]
-  ui = auto
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-[color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
