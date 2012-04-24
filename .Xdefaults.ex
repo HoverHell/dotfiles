@@ -5,11 +5,11 @@ URxvt*termName: xterm-256color
 ### Probably a fix for home/end:
 ## #1 
 ## https://wiki.archlinux.org/index.php/Home_and_End_keys_not_working#URxvt.2FRxvt
-#URxvt*keysym.Home: \033[1~
-#URxvt*keysym.End: \033[4~
+URxvt*keysym.Home: \033[1~
+URxvt*keysym.End: \033[4~
 ## xterm-like... probably.
-URxvt*keysym.Home: \033[H
-URxvt*keysym.End: \033[F
+#URxvt*keysym.Home: \033[H
+#URxvt*keysym.End: \033[F
 ## Note: emacs somehow distinguishes rxvt from xterm despite TERM, and
 ##  does not interpret these as <home>/<end>. Have to be fixed in
 ##  .emacs, thus.

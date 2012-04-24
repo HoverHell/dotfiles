@@ -47,6 +47,9 @@
 ; 'fix' for xterm-like home/end in rxvt with TERM=xterm-256color
 (global-set-key "\M-[H" 'move-beginning-of-line)
 (global-set-key "\M-[F" 'move-end-of-line)
+(global-set-key "\M-[1~" 'move-beginning-of-line)
+(global-set-key "\M-[4~" 'move-end-of-line)
+(global-set-key [select] 'move-end-of-line)  ;; dunno wtf.
 ; 'suspend-frame' is usually useless anyway.
 (global-set-key (kbd "C-z") 'other-window)
 
@@ -180,6 +183,11 @@
 (autoload 'coffee-mode "coffee-mode" "Coffee Mode." t)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
+;;;; NOTE: disable vc (Version Control) autodetect
+; (require 'vc)
+; (remove-hook 'find-file-hooks 'vc-find-file-hook)
+(eval-after-load "vc" '(remove-hook 'find-file-hooks 'vc-find-file-hook))
 
 
 ;; Highlight parentheses
