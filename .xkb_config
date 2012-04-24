@@ -131,7 +131,7 @@ xkb_keymap
             [Cyrillic_tse, Cyrillic_TSE]
         };
         key <AD03> {
-            [e, E, EuroSign, oneeighth],
+            [e, E, U2208, oneeighth],  // Element Of
             [Cyrillic_u, Cyrillic_U]
         };
         key <AD04> {
