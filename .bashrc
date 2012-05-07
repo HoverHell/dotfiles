@@ -5,6 +5,16 @@
 # If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
 
+## http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1:$PATH"
+    fi
+}
+
+## The home-executables.
+pathadd "~/bin"
+
 
 ## CFG and local overrides
 CFG_ps_time="."  # timestamp in PS. empty to disable
