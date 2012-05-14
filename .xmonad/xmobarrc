@@ -1,0 +1,19 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 90
+       , lowerOnStart = True
+       , commands = [Run Date "%a %Y%m%d %H:%M" "date" 600
+                    , Run Cpu ["<cpu0>/<cpu1>","-L","3","-H","50","--normal","#d9d9d9","--high","white"] 10
+                    , Run CpuFreq ["-t","<cpu0>/<cpu1> GHz","-L","0","-H","2","-l","black","-n","#d9d9d9","-h","white"] 20
+                    , Run Memory ["-t","Mem: <usedratio>%","-l","gray","--normal","#d9d9d9","--high","white"] 10
+                    , Run Swap [] 50
+                    , Run Network "wlan0" ["-L","0","-H","32","--normal","#d9d9d9","--high","white"] 10
+                    , Run Battery ["-L","50","-H","75","--high","gray","--normal","yellow","--low","red"] 100
+                    , Run StdinReader
+                    , Run CommandReader "/home/hell/bin/ledmon" "LED"
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ <fc=#ffff00>%LED%</fc> %cpu% @%cpufreq%<fc=#0033bb> / </fc>%memory% *%swap%<fc=#0033bb> / </fc>%wlan0%<fc=#0033bb> / </fc>%battery%<fc=#0033bb> / </fc> <fc=#dddddd>%date%</fc>  "
+       }
