@@ -1,0 +1,7 @@
+#!/bin/sh
+while true; do
+  #ssh "$host" "$@" -X -t "bin/rescreen || screen -D -R -S happs"
+  ssh "$@" -X -t "bin/rescreen || screen -D -R -S happs"
+  echo "... ssh ended ($?)."
+  read a
+done
