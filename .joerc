@@ -1,0 +1,4 @@
+
+-backpath ~/.tmp/joebk/
+
+:include /etc/joe/joerc
