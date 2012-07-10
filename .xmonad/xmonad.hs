@@ -34,8 +34,8 @@ myTheme = defaultTheme {
 
 
 myManageHook = composeAll
-    [ className =? "Gimp"      --> doFloat
-    , className =? "Vncviewer" --> doFloat
+    [ className =? "Vncviewer" --> doFloat
+    -- className =? "Gimp"      --> doFloat  -- actually, gimp tiles quite nicely.
     ]
   -- use with:
   -- manageHook = manageDocks <+> myManageHook

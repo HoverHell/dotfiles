@@ -1,7 +1,18 @@
 #!/bin/sh
+if [ x"$1" = x"-x" ]; then
+    screenx=1
+    shift 1
+fi
+
+if [ $screenx ]; then
+    sargs="-x"
+else
+    sargs="-D -R"
+fi
+
 while true; do
   #ssh "$host" "$@" -X -t "bin/rescreen || screen -D -R -S happs"
-  ssh "$@" -X -t "bin/rescreen || screen -D -R -S happs"
+  ssh "$@" -X -t "bin/rescreen || screen $sargs -S happs"
   echo "... ssh ended ($?)."
   read a
 done
