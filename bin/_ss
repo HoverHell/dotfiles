@@ -12,7 +12,7 @@ fi
 
 while true; do
   #ssh "$host" "$@" -X -t "bin/rescreen || screen -D -R -S happs"
-  ssh "$@" -X -t "bin/rescreen || screen $sargs -S happs"
+  ssh "$@" -t "bin/rescreen || screen $sargs -S happs"  # `-X` is not completely safe
   echo "... ssh ended ($?)."
   read a
 done
