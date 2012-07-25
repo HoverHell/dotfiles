@@ -13,7 +13,7 @@ pathadd() {
 }
 
 ## The home-executables.
-pathadd "~/bin"
+pathadd "$HOME/bin"
 
 
 ## CFG and local overrides
