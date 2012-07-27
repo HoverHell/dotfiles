@@ -82,7 +82,7 @@ PS1="${debian_chroot:+($debian_chroot)}"\
 "${PS_time}\[\033[0${CFG_ps_u}m\]\u\[\033[00;37m\]"\
 "@\[\033[0${CFG_ps_h}m\]\h"\
 "\[\033[00;37m\]:\[\033[01;36m\]\w"\
-"${PS_ret}\033[00m\]\$ "
+"${PS_ret}\033[00m\]\\$ "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
