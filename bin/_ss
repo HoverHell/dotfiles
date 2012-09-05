@@ -1,4 +1,5 @@
 #!/bin/sh
+## Repetitive ssh-rescreen
 if [ x"$1" = x"-x" ]; then
     screenx=1
     shift 1
@@ -10,9 +11,4 @@ else
     sargs="-D -R"
 fi
 
-while true; do
-  #ssh "$host" "$@" -X -t "bin/rescreen || screen -D -R -S happs"
-  ssh "$@" -t "bin/rescreen || screen $sargs -S happs"  # `-X` is not completely safe
-  echo "... ssh ended ($?)."
-  read a
-done
+exec _s "$@"  -t "bin/rescreen || screen $sargs -S happs"  # `-X` is not completely safe

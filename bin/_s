@@ -1,0 +1,7 @@
+#!/bin/sh
+## Simple repetitive ssh
+while true; do
+  ssh "$@"
+  echo "... ssh ended ($?)."
+  read a
+done
