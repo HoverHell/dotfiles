@@ -1,3 +1,0 @@
-#!/bin/sh
-lxterm -geom 100x40 $HOME/bin/rescreen
-#/usr/bin/gnome-terminal --geometry=114x50 -x /home/hell/bin/rescreen
