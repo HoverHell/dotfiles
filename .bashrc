@@ -14,7 +14,7 @@ pathadd() {
 
 ## The home-executables.
 pathadd "$HOME/bin"
-
+[ -f ~/ENV/bin/activate ] && . ~/ENV/bin/activate
 
 ## CFG and local overrides
 CFG_ps_time="."  # timestamp in PS. empty to disable
@@ -125,8 +125,17 @@ fi
 
 
 ## cdargs (`cv`, `ca`, ...).
-[ -f /usr/share/doc/cdargs/examples/cdargs-bash.sh ] && \
-  source /usr/share/doc/cdargs/examples/cdargs-bash.sh
+[ -f /usr/share/doc/cdargs/examples/cdargs-bash.sh ] && {
+  source /usr/share/doc/cdargs/examples/cdargs-bash.sh; }
+[ -f /usr/share/cdargs/cdargs-bash-completion.sh ] && {
+  # cygwin
+  . /usr/share/cdargs/cdargs-lib.sh
+  . /usr/share/cdargs/cdargs-alias.sh
+  CDARGS_BASH_ALIASES="cv cdb"
+  alias cv="cdb"
+  . /usr/share/cdargs/cdargs-bash-completion.sh
+}
+
 
 
 ### History-keeping `cd`:
@@ -162,7 +171,7 @@ alias flip='pushd_builtin'
 
 ### ...
 export BROWSER="/usr/bin/x-www-browser"
-
+export EDITOR="joe"
 
 ### Extra completions
 complete -o filenames -F _command s-  # mscreenterm run cmd
@@ -178,7 +187,6 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
 # shopt -s histappend
 export HISTTIMEFORMAT="%s "  # ?...
 export HISTFILE="/dev/null"
-
 
 ### fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
 set +o histexpand
