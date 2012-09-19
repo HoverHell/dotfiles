@@ -176,6 +176,11 @@
 ;; XXX: do not start python shell on it?
 ;(autoload 'python-mode "python-mode" "Python Mode." t) 
 ;(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;;; cython-mode
+(autoload 'cython-mode "cython-mode" "Mode for editing Cython source files")
+(add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
+(add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
+(add-to-list 'auto-mode-alist '("\\.pxi\\'" . cython-mode))
 ;;; Octave/matlab
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
