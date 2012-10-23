@@ -14,6 +14,7 @@ URxvt*keysym.End: \033[4~
 ##  does not interpret these as <home>/<end>. Have to be fixed in
 ##  .emacs, thus.
 
+
 #### Other URxvt config stuff.
 URxvt*scrollBar:false
 URxvt*scrollBar_right:true
@@ -21,6 +22,8 @@ URxvt*scrollTtyOutput:false
 URxvt*scrollTtyKeypress:true
 URxvt*transparent:true
 # URxvt*shading: 28
+URxvt*iso14755_52: false
+
 
 ## tint with any color; i.e., blue, red, tomato4, olivedrab2, etc.
 ##   some nice listings are at:

@@ -19,7 +19,7 @@ pathadd "$HOME/bin"
 ## CFG and local overrides
 CFG_ps_time="."  # timestamp in PS. empty to disable
 CFG_ps_ret="."  # '$?' in PS. empty to disable
-CFG_ps_u="1;33"  # PS user color
+CFG_ps_u="1;32"  # PS user color
 CFG_ps_h="0;33"  # PS host color
 [ -f ~/.bashrc_local ] && . ~/.bashrc_local
 
