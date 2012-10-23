@@ -175,8 +175,8 @@ export EDITOR="joe"
 
 ### Extra completions
 complete -o filenames -F _command s-  # mscreenterm run cmd
-[ -f ~/bin/webtap.bash_completion ] && \
-  source ~/bin/webtap.bash_completion
+#[ -f ~/bin/webtap.bash_completion ] && \
+#  source ~/bin/webtap.bash_completion
 
 
 ### Bash-eternal-history
