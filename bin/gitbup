@@ -1,0 +1,4 @@
+#!/bin/sh
+## 'branch-update': update local branch against reomte master
+git remote update
+git rebase origin/master

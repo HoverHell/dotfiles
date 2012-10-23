@@ -22,6 +22,7 @@ URxvt*scrollTtyOutput:false
 URxvt*scrollTtyKeypress:true
 URxvt*transparent:true
 # URxvt*shading: 28
+URxvt*iso14755: false
 URxvt*iso14755_52: false
 
 
