@@ -1,0 +1,7 @@
+
+# Like git : 
+plain=off
+newtext=green
+oldtext=red
+diffstuff=cyan
+cvsstuff=blue
