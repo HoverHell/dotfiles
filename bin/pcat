@@ -1,0 +1,2 @@
+#!/bin/sh
+exec pygmentize -f terminal256 -O style=native -g "$@"
