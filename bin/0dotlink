@@ -1,0 +1,39 @@
+#!/bin/sh
+####
+## Create relative symbolic links from the files in the repository in
+## the current directory to home directory.
+##
+## NOTE: repository outside of home directory is possible but not
+## supported (because not needed).
+####
+
+unpath(){
+  ## cd "$1/$(unpath "$1")" -> same directory
+  fn="$1"
+  #fn="$(dirname "$1")"
+  echo "$fn" |sed -r 's,/?$,/,' |sed -r 's,[^/]+/,../,g'
+}
+
+## The repository is supposed to be in the current dir
+repodir="$(pwd)/"
+home="$HOME/"
+reporel="$(echo "$repodir" | sed -rn "s!^$home/*!! p" )" 
+[ -z "$reporel" ] && {
+  echo "repodir '$repodir' is not under home '$home'. Aborting."
+  exit 1
+}
+
+
+tf="$(mktemp)" && {
+  git ls-tree -r --name-only HEAD > "$tf" && \
+  cd "$home" && (
+    cat "$tf" | while read fn; do
+      ## fn is repo-relative, curdir is home
+      fd="$(dirname "$fn")"
+      mkdir -pv "$fd"
+      ## NOTE: all (directory) paths are supposed to end in slash
+      ln -v -s "$(unpath "$fd")$reporel$fn" "$fn"
+    done
+  )
+  rm -v "$tf"
+}
