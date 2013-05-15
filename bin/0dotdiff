@@ -1,1 +1,1 @@
-git ls-tree -r --name-only HEAD|while read a; do diff -dur ~/"$a" "$a"; done
+git ls-tree -r --name-only HEAD|while read a; do colordiff -dur ~/"$a" "$a"; done

@@ -36,3 +36,7 @@ interactive("ytv",
   var s = I.buffer.current_uri.spec;
   I.window.minibuffer.message(s);
 });
+
+
+// NoScript?
+require("noscript");
