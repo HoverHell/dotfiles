@@ -1,3 +1,4 @@
 #!/bin/sh
 ## A short-hand for "edit", let's say.
-emacs "$@"
+if which emacs; then ename="emacs"; else ename="jmacs"; fi
+$ename "$@"
