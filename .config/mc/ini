@@ -68,7 +68,6 @@ editor_syntax_highlighting=1
 editor_visible_tabs=1
 editor_visible_spaces=1
 nice_rotating_dash=1
-horizontal_split=0
 mcview_remember_file_position=0
 editor_backup_extension=~
 
@@ -100,8 +99,6 @@ mcview_eof=
 ignore_ftp_chattr_errors=true
 
 [Layout]
-equal_split=1
-first_panel_size=44
 message_visible=0
 keybar_visible=0
 xterm_title=1
@@ -113,6 +110,12 @@ permission_mode=0
 filetype_mode=1
 
 free_space=1
+
+horizontal_split=0
+vertical_equal=1
+left_panel_size=44
+horizontal_equal=1
+top_panel_size=44
 
 [Dirs]
 other_dir=/home/hell
