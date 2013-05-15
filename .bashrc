@@ -170,8 +170,10 @@ alias flip='pushd_builtin'
 
 
 ### ...
-export BROWSER="/usr/bin/x-www-browser"
-export EDITOR="joe"
+#export BROWSER="/usr/bin/x-www-browser"
+export EDITOR="jmacs"
+#alias e="jmacs"
+
 
 ### Extra completions
 complete -o filenames -F _command s-  # mscreenterm run cmd
