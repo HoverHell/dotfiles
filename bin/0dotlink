@@ -7,11 +7,22 @@
 ## supported (because not needed).
 ####
 
+
+ovw=""
+[ x"$1" = x"-f" ] && {
+  echo "Force-pre-remove."
+  ovw="."
+}
+
+
 unpath(){
   ## cd "$1/$(unpath "$1")" -> same directory
   fn="$1"
   #fn="$(dirname "$1")"
-  echo "$fn" |sed -r 's,/?$,/,' |sed -r 's,[^/]+/,../,g'
+  echo "$fn" \
+    | sed -r 's,/?$,/,' \
+    | sed -r 's,^\./,,' \
+    | sed -r 's,[^/]+/,../,g'
 }
 
 ## The repository is supposed to be in the current dir
@@ -31,6 +42,10 @@ tf="$(mktemp)" && {
       ## fn is repo-relative, curdir is home
       fd="$(dirname "$fn")"
       mkdir -pv "$fd"
+      [ $ovw ] && {
+        rm -v "$fn"
+        # 2>&1 | grep -v "No such file or directory$"
+      }
       ## NOTE: all (directory) paths are supposed to end in slash
       ln -v -s "$(unpath "$fd")$reporel$fn" "$fn"
     done
