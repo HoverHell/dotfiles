@@ -71,7 +71,7 @@ xkb_keymap
             [1, exclam]
         };
         key <AE02> {
-            [2, at, twosuperior, U00BD],  // '1/2'
+            [2, at, twosuperior, U200E],  // LTRsign // '1/2'
             [2, quotedbl]
         };
         key <AE03> {
@@ -104,7 +104,7 @@ xkb_keymap
             [0, parenright]
         };
         key <AE11> {
-            [minus, underscore, emdash, hyphen],
+            [minus, underscore, endash, emdash],  // , hyphen],
             [minus, underscore]
         };
         key <AE12> {
@@ -300,27 +300,33 @@ xkb_keymap
         key <LALT> { [Alt_L, Meta_L] };
         key <FK01> {
             type= "CTRL+ALT",
-            [F1, XF86_Switch_VT_1]
+            [F1]
+            //[F1, XF86_Switch_VT_1]
         };
         key <FK02> {
             type= "CTRL+ALT",
-            [F2, XF86_Switch_VT_2]
+            [F2]
+            //[F2, XF86_Switch_VT_2]
         };
         key <FK03> {
             type= "CTRL+ALT",
-            [F3, XF86_Switch_VT_3]
+            //[F3, XF86_Switch_VT_3]
+            [F3]
         };
         key <FK04> {
             type= "CTRL+ALT",
-            [F4, XF86_Switch_VT_4]
+            // [F4, XF86_Switch_VT_4]
+            [F4]
         };
         key <FK05> {
             type= "CTRL+ALT",
-            [F5, XF86_Switch_VT_5]
+            // [F5, XF86_Switch_VT_5]
+            [F5]
         };
         key <FK06> {
             type= "CTRL+ALT",
-            [F6, XF86_Switch_VT_6]
+            //[F6, XF86_Switch_VT_6]
+            [F6]
         };
         key <FK07> {
             type= "CTRL+ALT",
