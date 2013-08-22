@@ -1,1 +1,1 @@
-x0vnc4server --PasswordFile=/home/hell/.vnc/passwd "$@"
+x0vnc4server --PasswordFile="$HOME"/.vnc/passwd "$@"

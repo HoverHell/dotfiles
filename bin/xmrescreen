@@ -12,7 +12,7 @@
 #  -font '-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1' \
 #  -geom 88x26 -e $HOME/bin/mrescreen
 
-#/usr/bin/gnome-terminal --geometry=114x50 -x /home/hell/bin/rescreen
+#/usr/bin/gnome-terminal --geometry=114x50 -x "$HOME"/bin/rescreen
 
 ## ~/.Xdefaults, rxvt-unicode
 rxvt -e "$HOME/bin/mrescreen"
