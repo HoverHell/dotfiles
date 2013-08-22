@@ -192,3 +192,8 @@ export HISTFILE="/dev/null"
 
 ### fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
 set +o histexpand
+
+pwd | grep -q '^(unreachable)' && {
+  echo "pwd: '$(pwd)'; \`cd\`..."
+  cd "$HOME"
+}
