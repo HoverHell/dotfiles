@@ -1,2 +1,12 @@
 *~
 *.pyc
+
+
+_run*.sh
+*.tmp*
+
+
+.*
+_test*
+_tst*
+tmpf*

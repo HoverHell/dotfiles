@@ -126,7 +126,7 @@
 
 
 ;; ========== Set the fill column ==========
-(setq-default fill-column 72)
+(setq-default fill-column 78)
 
 
 ;; ===== Turn on Auto Fill mode automatically in all modes =====
@@ -188,10 +188,13 @@
 (autoload 'coffee-mode "coffee-mode" "Coffee Mode." t)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
-
+;;; yaml
+(autoload 'yaml-mode "yaml-mode" "YAML Mode." t)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 ;;;; NOTE: disable vc (Version Control) autodetect
-; (require 'vc)
-; (remove-hook 'find-file-hooks 'vc-find-file-hook)
+(require 'vc)
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
 (eval-after-load "vc" '(remove-hook 'find-file-hooks 'vc-find-file-hook))
 
 

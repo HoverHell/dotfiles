@@ -1,7 +1,8 @@
 #!/bin/sh
 ## A helper for easy file renaming.
 ## If you know a better way - do tell.
-## Supports `-n` switch (must be first on commandline though).
+## 3 modes of operation: print, wait, do (default); do (`-f`); print (`-n`)
+## TODO: allow disabling `-v` on all commands.
 
 
 tmp1="$(mktemp)"
@@ -16,6 +17,12 @@ if [ x"$1" = x"-n" ]; then
     noaction=1
     shift 1
 fi
+noask=
+if [ x"$1" = x"-f" ]; then
+    noask=1
+    shift 1
+fi
+
 
 if [ $# -ne 0 ]; then
   for arg in "$@"; do
@@ -33,12 +40,24 @@ res=$?
     echo "Non-zero editor exit status. Doing nothing."
     exit $res
 }
-    
+
+
+shescape0(){ printf "'"; sed "s,','\\\\'',g"; printf "'"; }
+shescape(){ for i in "$@"; do printf "'"; printf "%s" "$i" | sed "s,','\\\\'',g"; printf "' "; done; printf "\n"; }
+
+
+steps="1 2"; dowait=1;
+[ $noaction ] && { steps="1"; dowait=; }
+[ $noask ] && steps="2"
+for step in $steps; do
+#ar=""; [ $step -eq 1 ] && ar="-n"
+[ $step -eq 1 ] && noaction=1
+[ $step -eq 2 ] && noaction=
+anything=
 
 #exec 7<"$tmp1"  # read from directly.
 exec 8<"$tmp2"
 
-cat "$tmp1" | \
 while read frm; do
    read tof <&8
    ## Note: `-z "$frm"`?  Will it be okay in all cases?
@@ -46,22 +65,32 @@ while read frm; do
      echo "W: empty filename in input." 1>&2
      continue
    }
+   #echo "D: step $step; from $frm; to $tof; noact $noaction;"
    if [ -z "$tof" ]; then
+       anything=1
        if [ $noaction ]; then
-           echo rm -v "$frm"
+           echo rm -v "$(shescape "$frm")"
        else
            rm -v "$frm"
        fi
    else
        if [ x"$frm" != x"$tof" ]; then
+           anything=1
            if [ $noaction ]; then
-               echo mv -v "$frm" "$tof"
+               echo mv -v "$(shescape "$frm")" "$(shescape "$tof")"
            else
                mv -v "$frm" "$tof"
            fi
        fi
    fi
-done
+#echo "D: anything0: $anything"
+done < "$tmp1"
 
+#echo "D: anything: $anything" 1>&2
+[ ! $anything ] && { echo "I: Nothing changed" 1>&2; break; }
+
+[ $dowait ] && [ $step -eq 1 ] && { printf "%s" ""; read xxx; }
+
+done
 ## Cleanup
 rm "$tmp1" "$tmp2"

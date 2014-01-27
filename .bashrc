@@ -171,7 +171,7 @@ alias flip='pushd_builtin'
 
 ### ...
 #export BROWSER="/usr/bin/x-www-browser"
-export EDITOR="jmacs"
+#export EDITOR="jmacs"
 #alias e="jmacs"
 
 
