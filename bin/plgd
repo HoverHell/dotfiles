@@ -1,0 +1,4 @@
+#!/bin/sh
+# git status --porcelain |grep -v '^\?\? ' | sed s/^...//
+[ -z "$LINT" ] && LINT="pylint3"
+git diff --name-only |grep '\.py$' | pee 'cat >&2' 'cat' | xargs "$LINT" "$@"
