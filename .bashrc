@@ -197,3 +197,5 @@ pwd | grep -q '^(unreachable)' && {
   echo "pwd: '$(pwd)'; \`cd\`..."
   cd "$HOME"
 }
+
+true

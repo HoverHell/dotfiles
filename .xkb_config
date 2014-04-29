@@ -101,7 +101,7 @@ xkb_keymap
             [9, parenleft]
         };
         key <AE10> {
-            [0, parenright]
+            [0, parenright, U2022, U2043]
         };
         key <AE11> {
             [minus, underscore, endash, emdash],  // , hyphen],
