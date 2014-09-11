@@ -1,0 +1,2 @@
+#!/bin/sh
+GREP_COLORS="mt=01;36" exec grep --color=yes "$@"
