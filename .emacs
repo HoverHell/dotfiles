@@ -7,6 +7,9 @@
 ;; XXX: Open same file in several buffers? (on binds)
 ;; XXX: rainbow-delimiters full region background color?
 
+;; Might be needed, might be not needed:
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/flymake"))
+
 ;(defun mytst()
 ;  (interactive (let (string) (unless (mark) (error "The mark is not set now, so there is no region")) (setq string (read-shell-command "Shell command on region: ")) (list (region-beginning) (region-end) string current-prefix-arg current-prefix-arg shell-command-default-error-buffer t)))
 
@@ -36,6 +39,48 @@
 
 
 ;; Various personal keybindings.
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+;; ...
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t " my-keys" 'my-keys-minor-mode-map)
+;; +enable
+(my-keys-minor-mode 1)
+;; -minibuffer
+(defun my-minibuffer-setup-hook ()
+  (my-keys-minor-mode 0))
+(add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+;; +priority
+(defadvice load (after give-my-keybindings-priority)
+  "Try to ensure that my keybindings always have priority."
+  (if (not (eq (car (car minor-mode-map-alist)) 'my-keys-minor-mode))
+      (let ((mykeys (assq 'my-keys-minor-mode minor-mode-map-alist)))
+        (assq-delete-all 'my-keys-minor-mode minor-mode-map-alist)
+        (add-to-list 'minor-mode-map-alist mykeys))))
+(ad-activate 'load)
+
+
+;; indentations
+;(autoload 'my-unindent "indent")
+;(autoload 'my-indent "indent")
+;; (define-key global-map "\t" 'my-indent)
+;(define-key global-map [S-tab] 'python-indent-shift-left)
+;(define-key global-map [backtab] 'python-indent-shift-left)
+(define-key my-keys-minor-mode-map [S-tab] 'python-indent-shift-left)
+(define-key my-keys-minor-mode-map [backtab] 'python-indent-shift-left)
+(define-key my-keys-minor-mode-map (kbd "M-]") 'python-indent-shift-right)
+;(define-key my-keys-minor-mode-map "\t" 'python-indent-shift-right)
+
+;; completions
+(define-key my-keys-minor-mode-map [M-tab] 'jedi:complete)
+(define-key my-keys-minor-mode-map (kbd "C-M-i") 'jedi:complete)
+
+;; commenting
+; Does not work, really:
+;(define-key my-keys-minor-mode-map (kbd "C-/") 'comment-or-uncomment-region)
+; "M-;" does pretty much that
+
+
 (global-set-key "\M-[1;5A" 'previous-buffer); Ctrl+up => previous buffer
 (global-set-key "\M-[1;5B" 'next-buffer)    ; Ctrl+down  => next buffer
 (global-set-key [(control up)] 'previous-buffer); Ctrl+up => previous buffer
@@ -138,6 +183,10 @@
 (setq auto-fill-mode 1)
 
 
+;; Show trailing whitespace
+(setq show-trailing-whitespace 1)
+
+
 ;; ===== Make Text mode the default mode for new buffers =====
 ; (setq default-major-mode 'text-mode)
 
@@ -162,16 +211,8 @@
 (global-set-key [f8] 'nuke-line)
 
 
-;; indentations
-(autoload 'my-unindent "indent")
-(autoload 'my-indent "indent")
-(define-key global-map "\t" 'my-indent)
-(define-key global-map [S-tab] 'my-unindent)
-(define-key global-map [backtab] 'my-unindent)
-
 ;;;; Format-specific stuff. 
 ;;; python-mode
-(add-to-list 'load-path "~/.emacs.d/lib/python-mode")
 (setq py-shell-name "ipython")
 ;; XXX: do not start python shell on it?
 ;(autoload 'python-mode "python-mode" "Python Mode." t) 
@@ -261,3 +302,9 @@
 
 ;; enhancements for displaying flymake errors
 (require 'flymake-cursor)
+
+;;(setq flymake-log-level 3)
+(setq-default flymake-no-changes-timeout '1)  ;; '3)
+;; (setq-default flymake-info-line-regexp "^([Ii]nfo|refactor)")
+;; (setq flymake-warn-line-regexp "^not [wW]arning")
+
