@@ -97,7 +97,8 @@
 (global-set-key [select] 'move-end-of-line)  ;; dunno wtf.
 ; 'suspend-frame' is usually useless anyway.
 (global-set-key (kbd "C-z") 'other-window)
-
+;; hs-minor-mode  hide/show block
+(define-key my-keys-minor-mode-map "\M-\r" 'hs-toggle-hiding)
 
 ;; Auto-indent possibilities:
 ;(define-key global-map (kbd "RET") 'newline-and-indent)
@@ -185,6 +186,11 @@
 
 ;; Show trailing whitespace
 (setq show-trailing-whitespace 1)
+
+
+;; ...
+;; TODO: check if this is even needed
+(hs-minor-mode 1)
 
 
 ;; ===== Make Text mode the default mode for new buffers =====
@@ -307,4 +313,3 @@
 (setq-default flymake-no-changes-timeout '1)  ;; '3)
 ;; (setq-default flymake-info-line-regexp "^([Ii]nfo|refactor)")
 ;; (setq flymake-warn-line-regexp "^not [wW]arning")
-
