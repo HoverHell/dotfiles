@@ -1,2 +1,5 @@
 #!/bin/sh
-for a in "$@"; do curl -T "$a" "http://up.hell.orts.ru/" && echo "http://u.hell.orts.ru/$(basename "$a")"; done
+for a in "$@"; do
+    curl -v -k -T "$a" "https://hoverhell.bot.nu/up/" \
+    && echo "http://hoverhell.bot.nu/u/$(basename "$a")"
+done
