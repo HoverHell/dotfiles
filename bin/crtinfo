@@ -1,0 +1,17 @@
+#!/bin/sh
+#######
+## Get the certificate info of the file / host
+##
+## To discern files and hosts, the hosts should start with tcp:
+#######
+TARGET="$1"
+shift 1
+TARGET_TCP="$(echo "$TARGET" | sed -nr 's/^tcp:// p')"
+if [ ! -z "$TARGET_TCP" ]; then
+    if echo "$TARGET_TCP" | grep -vF ':'; then
+        TARGET_TCP="$TARGET_TCP:443"
+    fi
+    echo "" | openssl s_client -connect "$TARGET_TCP" "$@"
+else
+    exec openssl x509 -noout -text -in "$TARGET" "$@"
+fi
