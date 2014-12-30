@@ -1,5 +1,5 @@
 #!/bin/sh
-command1="$(cat $HOME/.dmenu_hist|$HOME/bin/dmenu.bin)"
+command1="$(cat $HOME/.dmenu_hist|dmenu)"
 if [ $? -eq 1 ]; then exit 1; fi
 
 #ao $command1 >> ~/launch.log 2>&1 &
