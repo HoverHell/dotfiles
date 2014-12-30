@@ -4,6 +4,9 @@
 ## For example, mplc -> mpl -> mplv -> mpl0
 /usr/bin/mplayer \
  -af scaletempo \
+ -vf screenshot \
  -ass \
+ -subcp enca:utf8:cp1251 \
+ -subfont-text-scale 4 \
  -softvol -softvol-max 800 -fs \
  "$@"
