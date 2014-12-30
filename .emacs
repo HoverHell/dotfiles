@@ -228,6 +228,9 @@
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
 (add-to-list 'auto-mode-alist '("\\.pxi\\'" . cython-mode))
+;;; lua-mode
+(autoload 'lua-mode "lua-mode" "Mode for editing LUA source files")
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 ;;; Octave/matlab
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
