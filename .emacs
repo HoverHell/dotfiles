@@ -98,6 +98,7 @@
 ; 'suspend-frame' is usually useless anyway.
 (global-set-key (kbd "C-z") 'other-window)
 ;; hs-minor-mode  hide/show block
+;; NOTE: see also: M-x helm-imenu
 (define-key my-keys-minor-mode-map "\M-\r" 'hs-toggle-hiding)
 
 ;; Auto-indent possibilities:
