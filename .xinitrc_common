@@ -1,0 +1,14 @@
+
+## The Hardcore Keyboard Layout.
+#xkbcomp $HOME/.xkb_config $DISPLAY 2> /dev/null
+mapxkb
+
+## Configs
+xrdb -merge "$HOME/.Xdefaults"
+#synclient RTCornerButton=0 RBCornerButton=0 LTCornerButton=0 LBCornerButton=0 TapButton1=0 TapButton2=0 TapButton3=2
+synclient RTCornerButton=0 RBCornerButton=0 LTCornerButton=0 LBCornerButton=0 TapButton1=0 TapButton2=0 TapButton3=2
+_touchscrollspeed.sh
+_run_xbindkeys
+
+## The Terminal
+#~/bin/xmrescreen &
