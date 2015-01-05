@@ -1,0 +1,24 @@
+#!/bin/sh
+exec 6>&2
+pidfile="$HOME/.tmp/.xbindkeys.pid"
+
+[ -f "$pidfile" ] && {
+  pid="$(cat "$pidfile")"
+  ps aux | grep "$pid" | grep -q "xbindkeys" && {
+    echo "D: kill $pid" >&6
+    kill "$pid"
+  }
+}
+
+## XX: Should perhaps remove later?
+echo "D: killall xbindkeys" >&6
+killall xbindkeys
+
+## NOTE: `-n` is needed so we can get its pid by backgrounding manually.
+xbindkeys -n &
+pid=$!
+
+## XXXXXX: Doesn't really work; xbindkeys seems to spawn child
+## process(es) with itself and exit, leaving the returned pid unused.
+echo "D: new pid: $pid" >&6
+echo "$pid" > "$pidfile"
