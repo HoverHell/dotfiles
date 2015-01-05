@@ -43,11 +43,22 @@ tf="$(mktemp)" && {
       fd="$(dirname "$fn")"
       mkdir -pv "$fd"
       [ $ovw ] && {
-        rm -v "$fn"
+        [ -e "$fn" ] && {
+          mv "$fn" "${fn}._0dotlink.bk"
+          rm -v "$fn"
+        }
         # 2>&1 | grep -v "No such file or directory$"
       }
+      target="$(unpath "$fd")${reporel}${fn}"
       ## NOTE: all (directory) paths are supposed to end in slash
-      ln -v -s "$(unpath "$fd")$reporel$fn" "$fn"
+      [ -L "$fn" ] && {
+        current_target="$(readlink "$fn")"
+        [ x"$current_target" = x"$target" ] && {
+          ## Already linked where it should be
+          continue
+        }
+      }
+      ln -v -s "$target" "$fn"
     done
   )
   rm -v "$tf"
