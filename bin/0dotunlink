@@ -29,6 +29,9 @@ dry_run=1
 find "$HOME" -mount -type l \
  | while read fln; do  ## Wrong but it shall be your problem if it doesn't work.
     lnk="$(readlink -em "$fln")"
+    ## Skip the links that lie within this repository
+    case "$fln" in "$repodir"*) continue;; esac
+    ## Skip the links that don't point inside this repository
     case "$lnk" in "$repodir"*) ;; *) continue;; esac
     if [ "$dry_run" ]; then
         echo "Would remove $fln"
