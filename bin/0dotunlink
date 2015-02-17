@@ -1,0 +1,38 @@
+#!/bin/sh
+#######
+## The opposite of 0dotlink:
+## Searches the home directory (excluding other filesystems) for symlinks
+## that point to the current repository and removes those symlinks.
+## It does not use the repo's files because it should be able to remove the
+## files that no longer exist in it.
+## NOTE: does not clean up empty directories.
+#######
+
+## The repository is supposed to be in the current dir
+repodir="$(dirname "$(dirname "$(readlink -e "$0")")")"  ## One folder above
+cd "$repodir/"
+echo "Assuming the repo is in $(pwd)"
+home="$HOME/"
+reporel="$(echo "$repodir" | sed -rn "s!^$home/*!! p" )" 
+[ -z "$reporel" ] && {
+  echo "repodir '$repodir' is not under home '$home'. Aborting."
+  exit 1
+}
+
+git status >/dev/null 2>&1 || { echo "The git status returned an error $?"; exit 1; }
+
+dry_run=1
+[ x"$1" = x"-f" ] && {
+  dry_run=""
+}
+
+find "$HOME" -mount -type l \
+ | while read fln; do  ## Wrong but it shall be your problem if it doesn't work.
+    lnk="$(readlink -em "$fln")"
+    case "$lnk" in "$repodir"*) ;; *) continue;; esac
+    if [ "$dry_run" ]; then
+        echo "Would remove $fln"
+    else
+        rm -v "$fln"
+    fi
+done
