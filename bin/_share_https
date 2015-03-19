@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+
+from BaseHTTPServer import HTTPServer
+from SimpleHTTPServer import SimpleHTTPRequestHandler
+import ssl
+import os
+import socket
+
+
+KEYFILE = os.environ.get('SHARE_KEYFILE') or "~/.tmp/shareit.pem"
+KEYFILE = os.path.expanduser(KEYFILE)
+KEYSIZE = 2048
+
+
+def gen_cert_data(keysize=KEYSIZE, hostname=None):
+    # http://www.linux.org/threads/creating-a-self-signed-certificate-with-python.4591/
+    from OpenSSL import crypto
+    key = crypto.PKey()
+    key.generate_key(crypto.TYPE_RSA, keysize)
+    cert = crypto.X509()
+    if hostname is None:
+        hostname = socket.getfqdn()
+    cert.get_subject().C = "UN"
+    # cert.get_subject().ST = ""
+    # cert.get_subject().L = ""
+    # cert.get_subject().O = ""
+    # cert.get_subject().OU = ""
+    cert.get_subject().CN = hostname
+    cert.set_serial_number(1000)
+    # cert.gmtime_adj_notBefore(0)
+    # cert.gmtime_adj_notAfter(315360000)
+    cert.set_issuer(cert.get_subject())
+    cert.set_pubkey(key)
+    cert.sign(key, 'sha1')
+    crt_data = crypto.dump_certificate(crypto.FILETYPE_PEM, cert)
+    key_data = crypto.dump_privatekey(crypto.FILETYPE_PEM, key)
+    return key_data, crt_data, key, cert
+
+
+def gen_cert_file(keyfile=KEYFILE, **kwa):
+    key_data, crt_data, key, cert = gen_cert_data(**kwa)
+    pem_data = crt_data + key_data
+    with open(keyfile, 'w') as f:
+        f.write(pem_data)
+
+    # openssl rsa -in $keyfile -pubout -out pubkey.key
+
+    return key, cert
+
+
+def run_server(
+        keyfile=KEYFILE, address='0.0.0.0',
+        port=4443):
+    httpd = HTTPServer(
+        (address, port),
+        SimpleHTTPRequestHandler)
+    httpd.socket = ssl.wrap_socket(
+        httpd.socket,
+        keyfile=keyfile,
+        certfile=keyfile,
+        ssl_version=ssl.PROTOCOL_TLSv1,
+        server_side=True)
+    return httpd.serve_forever() 
+
+
+def main(keyfile=KEYFILE, **kwa):
+    import logging
+    logging.basicConfig(level=1)
+    if not os.path.exists(keyfile):
+        print "generating cert"
+        gen_cert_file(**kwa)
+    try:
+        print "starting"
+        return run_server(**kwa)
+    except KeyboardInterrupt:
+        print "stopping"
+        return
+
+
+if __name__ == '__main__':
+    main()
