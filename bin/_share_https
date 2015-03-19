@@ -63,17 +63,41 @@ def run_server(
     return httpd.serve_forever() 
 
 
+def run_sh(*full_command):
+    import subprocess
+    process = subprocess.Popen(
+        full_command,
+        stdin=subprocess.PIPE,
+        shell=False, stdout=subprocess.PIPE)
+    stdout, _ = process.communicate()
+    return stdout
+
+
+def get_fingerprint(keyfile=KEYFILE):
+    import re
+    resp = run_sh(
+        'openssl', 'x509', '-fingerprint', '-in', keyfile)
+    matches = re.findall(r'^SHA1 Fingerprint=(.*)$',
+                         resp, flags=re.MULTILINE)
+    return matches[0]
+
+
 def main(keyfile=KEYFILE, **kwa):
     import logging
     logging.basicConfig(level=1)
     if not os.path.exists(keyfile):
-        print "generating cert"
+        print "Generating a self-signed cert"
         gen_cert_file(**kwa)
     try:
-        print "starting"
+        fingerprint = get_fingerprint()
+        print "Fingerprint (SHA1):", fingerprint
+    except Exception as exc:
+        print "Error getting fingerprint: %r" % (exc,)
+    try:
+        print "Running"
         return run_server(**kwa)
     except KeyboardInterrupt:
-        print "stopping"
+        print "Stopping"
         return
 
 
