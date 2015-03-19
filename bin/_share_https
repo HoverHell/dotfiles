@@ -9,7 +9,7 @@ import socket
 
 KEYFILE = os.environ.get('SHARE_KEYFILE') or "~/.tmp/shareit.pem"
 KEYFILE = os.path.expanduser(KEYFILE)
-KEYSIZE = 2048
+KEYSIZE = 4096
 
 
 def gen_cert_data(keysize=KEYSIZE, hostname=None):
@@ -21,14 +21,14 @@ def gen_cert_data(keysize=KEYSIZE, hostname=None):
     if hostname is None:
         hostname = socket.getfqdn()
     cert.get_subject().C = "UN"
-    # cert.get_subject().ST = ""
-    # cert.get_subject().L = ""
-    # cert.get_subject().O = ""
-    # cert.get_subject().OU = ""
+    cert.get_subject().ST = "Unknown"
+    cert.get_subject().L = "Unknown"
+    cert.get_subject().O = "Unknown"
+    cert.get_subject().OU = "Unknown"
     cert.get_subject().CN = hostname
     cert.set_serial_number(1000)
-    # cert.gmtime_adj_notBefore(0)
-    # cert.gmtime_adj_notAfter(315360000)
+    cert.gmtime_adj_notBefore(0)
+    cert.gmtime_adj_notAfter(10 * 365 * 24 * 60 * 60)
     cert.set_issuer(cert.get_subject())
     cert.set_pubkey(key)
     cert.sign(key, 'sha1')
