@@ -1,0 +1,42 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "geometry": {
+       "height": 764,
+       "width": 272,
+       "x": 232,
+       "y": 2
+    },
+    "name": "Psi+",
+    "percent": 0.2,
+    "swallows": [
+       {
+       "class": "^Psi\\-plus\\-webkit$",
+       "instance": "^main$"
+       // "title": "^Psi\\+$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "geometry": {
+       "height": 764,
+       "width": 1090,
+       "x": 274,
+       "y": 2
+    },
+    "name": "statadmin-hotline",
+    "percent": 0.8,
+    "swallows": [
+       {
+       "class": "^Psi\\-plus\\-webkit$",
+       "instance": "^tabs$"
+       }
+    ],
+    "type": "con"
+}
+

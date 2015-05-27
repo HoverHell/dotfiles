@@ -11,10 +11,25 @@
 
 set $mod Mod4
 
+
+## Multiple-monitors stuff:
+#set disp0 "LVDS1"
+#set disp1 "HDMI3"
+#bindsym $mod+Shift+Z move workspace to output $disp0
+#bindsym $mod+Shift+X move workspace to output $disp1
+bindsym $mod+Shift+Z move workspace to output LVDS1
+bindsym $mod+Shift+X move workspace to output HDMI3
+bindsym $mod+Shift+B move workspace to output VGA1
+
+
+new_window 1pixel
+#hide_edge_borders vertical
+
+
 # font for window titles. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#font -*-fixed-medium-r-normal-*-15-*-*-*-*-*-iso10646-*
-font -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
+#font -misc-fixed-medium-r-normal--12-*-75-75-C-70-iso10646-1
+font -*-fixed-medium-r-normal-*-15-*-*-*-*-*-iso10646-*
+#font -misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -27,16 +42,22 @@ bindsym $mod+F1 exec rxvt-unicode
 # kill focused window
 #bindsym $mod+Shift+Q kill
 bindsym $mod+Escape kill
+bindsym Mod1+Escape kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+grave exec dmenu_run
+#bindsym $mod+grave exec dmenu_run
 
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
+
+# ... familiar zx
+bindsym $mod+z focus left
+bindsym $mod+x focus right
+
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -144,13 +165,6 @@ bindsym $mod+Shift+C move container to workspace 9
 bindsym $mod+Shift+V move container to workspace 10
 
 
-## Multiple-monitors stuff:
-set $disp0 "LVDS1"
-set $disp1 "HDMI3"
-bindsym $mod+Shift+Z move workspace to output $disp0
-bindsym $mod+Shift+X move workspace to output $disp1
-
-
 # reload the configuration file
 #bindsym $mod+Shift+C reload
 bindsym $mod+Shift+bracketleft reload
@@ -193,6 +207,11 @@ bindsym $mod+5 mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+#bar {
+#        status_command i3status
+#        #status_command lxpanel --profile Lubuntu
+#}
+
+exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/hhell/.config/i3/workspace-9.json'"
+exec --no-startup-id "i3-msg 'workspace 10; append_layout /home/hhell/.config/i3/workspace-10.json'"
+exec --no-startup-id "i3-msg 'workspace 6'"

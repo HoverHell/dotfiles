@@ -1,0 +1,45 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "floating": "user_off",
+    "geometry": {
+       "height": 764,
+       "width": 681,
+       "x": 915,
+       "y": 1080
+    },
+    "name": "GNU Image Manipulation Program",
+    "percent": 0.8,
+    "swallows": [
+       {
+       // "class": "^Gimp$",
+       // "instance": "^gimp$",
+       // "title": "^GNU\\ Image\\ Manipulation\\ Program$",
+       "window_role": "^gimp\\-image\\-window$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "floating": "user_off",
+    "geometry": {
+       "height": 745,
+       "width": 305,
+       "x": 760,
+       "y": 1080
+    },
+    "name": "Layers - Brushes",
+    "percent": 0.2,
+    "swallows": [
+       {
+       // "class": "^Gimp$",
+       // "instance": "^gimp$",
+       // "title": "^Layers\\ \\-\\ Brushes$",
+       "window_role": "^gimp\\-dock$"
+       }
+    ],
+    "type": "con"
+}
+
