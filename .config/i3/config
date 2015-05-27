@@ -50,6 +50,13 @@ bindsym $mod+Shift+K move down
 bindsym $mod+Shift+L move up
 bindsym $mod+Shift+colon move right
 
+## Resize with mod+control
+bindsym $mod+Control+j resize shrink width 10 px or 10 ppt 
+bindsym $mod+Control+k resize shrink height 10 px or 10 ppt
+bindsym $mod+Control+l resize grow height 10 px or 10 ppt
+bindsym $mod+Control+semicolon resize grow width 10 px or 10 ppt
+
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
@@ -68,6 +75,7 @@ bindsym $mod+6 split v
 # enter fullscreen mode for the focused container
 #bindsym $mod+f fullscreen
 bindsym $mod+Return fullscreen
+bindsym $mod+F11 fullscreen
 
 # change container layout (stacked, tabbed, default)
 #bindsym $mod+s layout stacking
