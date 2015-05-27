@@ -21,7 +21,8 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec rxvt-unicode
+#bindsym $mod+Return exec rxvt-unicode
+bindsym $mod+F1 exec rxvt-unicode
 
 # kill focused window
 #bindsym $mod+Shift+Q kill
@@ -57,13 +58,16 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
+bindsym $mod+7 split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
+bindsym $mod+y split v
+bindsym $mod+6 split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-#bindsym $mod+Return fullscreen
+#bindsym $mod+f fullscreen
+bindsym $mod+Return fullscreen
 
 # change container layout (stacked, tabbed, default)
 #bindsym $mod+s layout stacking
@@ -131,10 +135,22 @@ bindsym $mod+Shift+F move container to workspace 8
 bindsym $mod+Shift+C move container to workspace 9
 bindsym $mod+Shift+V move container to workspace 10
 
+
+## Multiple-monitors stuff:
+set $disp0 "LVDS1"
+set $disp1 "HDMI3"
+bindsym $mod+Shift+Z move workspace to output $disp0
+bindsym $mod+Shift+X move workspace to output $disp1
+
+
 # reload the configuration file
-bindsym $mod+Shift+C reload
+#bindsym $mod+Shift+C reload
+bindsym $mod+Shift+bracketleft reload
+bindsym $mod+Shift+8 reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+R restart
+#bindsym $mod+Shift+R restart
+bindsym $mod+Shift+bracketright restart
+bindsym $mod+Shift+9 restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+E exit
 bindsym $mod+Shift+BackSpace exit
