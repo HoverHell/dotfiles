@@ -1,0 +1,4 @@
+#!/bin/sh
+# Mplayer audio-only (e.g. for playing that music that includes covers
+# which mplayer attempts to display as video).
+exec mpl -vo null -vc dummy "$@"
