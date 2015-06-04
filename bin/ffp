@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+    exec firefox --no-remote -ProfileManager "$@"
+else
+    exec firefox --no-remote -P "$@"
+fi
