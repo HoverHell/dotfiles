@@ -21,15 +21,29 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
+[ -z "$DATEFMT" ] && DATEFMT="%H:%M:%S"
+
+DATEFMT="+$DATEFMT"
+
 addtime ()
 {
 	while read line; do
-		echo "`date +%H:%M:%S` ($2) $1: $line" #add program name
+		echo "$(date "$DATEFMT") ($2) $1: $line"  # add program name
 	done
 }
 
-# programname="$1"
-programname="$*"
+[ -z "$programname" ] && {
+    # programname="$1"
+    # programname="$*"
+
+    # # Basically, first, second and last arguments
+    case "$#" in
+        0) programname="??? $@" ;;
+        1|2|3|4) programname="$*" ;;
+        # *) programname="$1 … ${@: -1}"
+        *) programname="$1 $2 … ${@: -1}"
+    esac
+}
 
 OUT=`mktemp /tmp/annotate.XXXXXX` || exit 1
 ERR=`mktemp /tmp/annotate.XXXXXX` || exit 1
@@ -40,11 +54,11 @@ mkfifo $OUT $ERR || exit 1
 addtime O "$programname" < $OUT &
 addtime E "$programname" < $ERR &
 
-echo "`date +%H:%M:%S` ($programname) I: Started $@"
+echo "$(date "$DATEFMT") ($programname) I: Started $@"
 "$@" > $OUT 2> $ERR ; EXIT=$?
 rm -f $OUT $ERR
 wait
 
-echo "`date +%H:%M:%S` ($programname) I: Finished with exitcode $EXIT"
+echo "$(date "$DATEFMT") ($programname) I: Finished with exitcode $EXIT"
 
 exit $EXIT
