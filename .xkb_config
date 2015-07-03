@@ -262,7 +262,7 @@ xkb_keymap
             [Cyrillic_yu, Cyrillic_YU]
         };
         key <AB10> {
-            [slash, question, ellipsis, question],
+            [slash, question, ellipsis, U2044],
             [period, comma]
         };
 
