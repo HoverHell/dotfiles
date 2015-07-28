@@ -32,12 +32,12 @@ bindkey -d -a -k "fe" stuff ^M
 #bindkey -d 
 # caption always "%{ck}%?%-Lw%?%{gk}%n*%f %t%?(%u)%?%{ck}%?%+Lw%?"
 # caption always "%{+b yk} %H %{+b gk}:: %t %=[ %w ] %c "
-caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%<'
-#caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%< %{= kG}%-=%c:%s%{-}'
-#caption always '%{+b gk}%H %{= wK} %-Lw%{= bW}%50>%n%f* %t%{= wK}%+Lw%< %{= kG}%-=%c:%s%{-}'
-#hardstatus message
-#hardstatus message "Termain: %n$* %t"
-hardstatus message "Termain"
+# caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%<'
+caption always '%{+b gk}%H %{= wk} %-Lw%{= kW}%50>%n%f* %t%{= wk}%+Lw%< %{= kG}%-=%c:%s%{-}'
+# caption always '%{+b gk}%H %{= wK} %-Lw%{= bW}%50>%n%f* %t%{= wK}%+Lw%< %{= kG}%-=%c:%s%{-}'
+# hardstatus message
+# hardstatus message "Termain: %n$* %t"
+hardstatus message "Termain %H: %n$* %t: %h"
 
 
 defscrollback 200
