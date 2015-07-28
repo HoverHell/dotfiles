@@ -190,9 +190,9 @@
 
 
 ;; ...
-(define-globalized-minor-mode global-hs-minor-mode
-  hs-minor-mode hs-minor-mode)
-(global-hs-minor-mode 1)
+; (define-globalized-minor-mode global-hs-minor-mode
+;  hs-minor-mode hs-minor-mode)
+; (global-hs-minor-mode 1)
 
 
 ;; ===== Make Text mode the default mode for new buffers =====
