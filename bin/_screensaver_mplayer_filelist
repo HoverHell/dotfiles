@@ -1,0 +1,8 @@
+#!/bin/sh
+# #######
+# Screensaver by mplayer from shuffled files in the directory.
+# Usage: $0 file_with_listing
+# #######
+exec mplayer -shuffle -nosound -really-quiet -nolirc \
+    -nostop-xscreensaver -wid $XSCREENSAVER_WINDOW -fs -loop 0 \
+    --playlist="$1"

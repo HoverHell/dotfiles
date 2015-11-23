@@ -1,11 +1,11 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.15 for hell on Wed Sep 11 12:41:39 2013.
+# Written by xscreensaver-demo 5.15 for hell on Mon Nov 23 16:05:34 2015.
 # http://www.jwz.org/xscreensaver/
 
-timeout:	0:10:00
-cycle:		0:10:00
+timeout:	0:15:00
+cycle:		0:30:00
 lock:		True
-lockTimeout:	0:00:00
+lockTimeout:	0:02:00
 passwdTimeout:	0:00:30
 visualID:	default
 installColormap:    True
@@ -34,8 +34,8 @@ grabVideoFrames:    False
 chooseRandomImages: False
 imageDirectory:	
 
-mode:		blank
-selected:	-1
+mode:		one
+selected:	0
 
 textMode:	date
 textLiteral:	XScreenSaver
@@ -44,14 +44,9 @@ textProgram:	fortune
 textURL:	http://fridge.ubuntu.com/node/feed
 
 programs:								      \
-"Aerial" find /home/hell/src/ss/data -type f | xargs -d '\n' \
-mplayer -shuffle -nosound -really-quiet \
--nolirc -nostop-xscreensaver -wid \
-$XSCREENSAVER_WINDOW -fs -loop 0 \n\
-"Aerial (fallback)" mplayer -shuffle -nosound -really-quiet \
--nolirc -nostop-xscreensaver -wid \
-$XSCREENSAVER_WINDOW -fs -loop 0 \
-$(find /home/hell/src/ss/data -type f) \n\
+		      "Aerial"						      \
+				  $HOME/bin/_screensaver_mplayer_filelist   \
+				  $HOME/src/ss/.tmp.files.lst	    \n\
 				maze -root				    \n\
 - GL: 				superquadrics -root			    \n\
 				attraction -root			    \n\

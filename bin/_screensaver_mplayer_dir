@@ -1,0 +1,12 @@
+#!/bin/sh
+# #######
+# Screensaver by mplayer from shuffled files in the directory.
+# Usage: $0 directory
+# *** WARNING ***: not recommended because mplayer might be left alive
+# *** after this script is killed. Try to use
+# *** _screensaver_mplayer_filelist instead.
+# #######
+find "$1" -type f | \
+    xargs -d '\n' \
+    mplayer -shuffle -nosound -really-quiet -nolirc \
+    -nostop-xscreensaver -wid $XSCREENSAVER_WINDOW -fs -loop 0
