@@ -133,10 +133,13 @@ bindsym $mod+4 focus parent
 # bindsym $mod+0 workspace 10
 bindsym $mod+q workspace 1
 bindsym $mod+w workspace 2
+# # A thingie for my habit-
+bindsym $mod+Control+w workspace 2
 bindsym $mod+e workspace 3
 bindsym $mod+r workspace 4
 bindsym $mod+a workspace 5
 bindsym $mod+s workspace 6
+bindsym $mod+Control+s workspace 6
 bindsym $mod+d workspace 7
 bindsym $mod+f workspace 8
 bindsym $mod+c workspace 9
