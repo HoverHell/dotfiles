@@ -1,0 +1,2 @@
+Shellscript-based implementation of
+https://github.com/JohnCoates/Aerial

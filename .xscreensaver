@@ -46,7 +46,7 @@ textURL:	http://fridge.ubuntu.com/node/feed
 programs:								      \
 		      "Aerial"						      \
 				  $HOME/bin/_screensaver_mplayer_filelist   \
-				  $HOME/src/ss/.tmp.files.lst	    \n\
+				  $HOME/.aerial_screensaver/.tmp.files.lst  \n\
 				maze -root				    \n\
 - GL: 				superquadrics -root			    \n\
 				attraction -root			    \n\
