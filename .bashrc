@@ -14,7 +14,7 @@ pathadd() {
 
 ## The home-executables.
 pathadd "$HOME/bin"
-[ -f ~/ENV/bin/activate ] && . ~/ENV/bin/activate
+[ -f ~/.virtualenv/bin/activate ] && . ~/.virtualenv/bin/activate
 
 ## CFG and local overrides
 CFG_ps_time="."  # timestamp in PS. empty to disable
