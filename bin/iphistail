@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ -z "$TAIL" ] && TAIL=20
+
+# NOTE: first two can be replaced with `ipython -c "%history -g"`
+echo 'select session || ":" || line || ": " || source_raw from history;' \
+  | sqlite3 ~/.ipython/profile_default/history.sqlite \
+  | grep "$@" \
+  | tail -n "$TAIL"
