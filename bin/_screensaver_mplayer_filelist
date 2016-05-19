@@ -5,7 +5,7 @@
 # #######
 # Hopefully fix the same-shuffle-order problem when starting mplayers
 # for different screens. If not, will need more of the urandom.
-sleep "0.0$RANDOM"
+sleep "0.0$(od -vAn -N2 -tu4 < /dev/urandom)"
 exec mplayer -shuffle -nosound -really-quiet -nolirc \
     -nostop-xscreensaver -wid $XSCREENSAVER_WINDOW -fs -loop 0 \
     --playlist="$1" -speed 2
