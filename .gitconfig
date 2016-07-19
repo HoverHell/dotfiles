@@ -15,7 +15,7 @@ df = diff
 lg = log -p
 ### http://stackoverflow.com/questions/948354/git-push-current-branch
 ## Push only current branch.
-pub = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
+# pub = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
 ## Untested:
 #pub = push
 #push = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
