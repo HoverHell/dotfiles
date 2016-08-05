@@ -1,2 +1,3 @@
 #!/bin/sh
-git branch -avv "$@"
+# git branch -avv "$@" | sed '25 { s/.*/.../; q; }'
+git branch -avv --color=always "$@" | tac

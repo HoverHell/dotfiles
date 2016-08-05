@@ -1,0 +1,11 @@
+#!/bin/sh
+# ###
+# 'rn' for git
+# ###
+
+export RN_CMD="git mv"
+export RN_RM_CMD="git rm"
+if [ x"$1" = x"-f" ]; then
+    export RN_RM_CMD="git rm -f"
+fi
+exec rn "$@"
