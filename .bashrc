@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# # For debugging this file:
+# set -x
+
 # If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
 
@@ -193,9 +196,10 @@ export HISTFILE="/dev/null"
 ### fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
 set +o histexpand
 
-pwd | grep -q '^(unreachable)' && {
+# Fix for encfs/alike homedir problems.
+if pwd | grep -q '^(unreachable)'; then
   echo "pwd: '$(pwd)'; \`cd\`..."
   cd "$HOME"
-}
+fi
 
 true
