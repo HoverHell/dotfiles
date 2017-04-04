@@ -5,11 +5,15 @@ stat="$HOME/files/tmp/nstat_$(echo "$cdir"|sed 's,/,_,g')"
 touch "$stat"
 num="$(cat "$stat")"
 if [ ! -n "$num" ]; then num=1; fi
+
+num_s="$(printf "%03d" "$num")"
+
 if [ -n "$subname" ]; then 
- name="$num""_$(echo "$subname"|sed 's,/,_,g')"
+  name="$num_s""_$(echo "$subname"|sed 's,/,_,g')"
 else
- name="$num"
+  name="$num_s"
 fi
+
 mkdir -v "$name"
-nnum=$(( $num + 1 ))
-echo "$nnum" > "$stat"
+next_num=$(( $num + 1 ))
+echo "$next_num" > "$stat"
