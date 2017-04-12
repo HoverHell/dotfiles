@@ -73,17 +73,17 @@ while read frm; do
    if [ -z "$tof" ]; then
        anything=1
        if [ $noaction ]; then
-           echo $RN_RM_CMD "$(shescape "$frm")"
+           echo $RN_RM_CMD -- "$(shescape "$frm")"
        else
-           $RN_RM_CMD "$frm"
+           $RN_RM_CMD -- "$(shescape "$frm")"
        fi
    else
        if [ x"$frm" != x"$tof" ]; then
            anything=1
            if [ $noaction ]; then
-               echo $RN_CMD "$(shescape "$frm")" "$(shescape "$tof")"
+               echo $RN_CMD -- "$(shescape "$frm")" "$(shescape "$tof")"
            else
-               $RN_CMD "$frm" "$tof"
+               $RN_CMD -- "$frm" "$tof"
            fi
        fi
    fi
