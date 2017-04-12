@@ -11,5 +11,5 @@ echo "$prop_id"
 prop_xy=`xinput --list-props $id | grep -P ".*[^C][^i][^r][^c][^u][^l][^a][^r]\sScrolling Distance" | grep -Po '\s+[-+]{0,1}[0-9]+\,\s*[-+]{0,1}[0-9]+' | tr -d '-'`
 echo "$prop_xy"
 # xinput --list-props $id | grep -P ".*[^C][^i][^r][^c][^u][^l][^a][^r]\sScrolling Distance" | grep -Po '\s+[-+]?[0-9]+[,]?' | tr -d '-' | tr -d ',' | tr ' \t' '-' | xargs echo xinput --set-prop $id $prop_id
-echo xinput --set-prop "$id" "$prop_id" 15 15
-xinput --set-prop "$id" "$prop_id" 15 15
+echo xinput --set-prop "$id" "$prop_id" -15 -15
+xinput --set-prop "$id" "$prop_id" -15 -15
