@@ -4,4 +4,4 @@ dirname="$(echo "$host"|sed -r 's/(.*)@(.*)/\2_\1/')"  # if applicable
 cd "$HOME"/mnt/ssh && \
 mkdir -p "$dirname" && \
 sshfs "$host":/ "$dirname" "$@" \
- -o workaround=rename,reconnect,transform_symlinks
+ -o workaround=rename,reconnect,transform_symlinks,allow_root

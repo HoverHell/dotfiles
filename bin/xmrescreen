@@ -15,4 +15,4 @@
 #/usr/bin/gnome-terminal --geometry=114x50 -x "$HOME"/bin/rescreen
 
 ## ~/.Xdefaults, rxvt-unicode
-rxvt -e "$HOME/bin/mrescreen"
+urxvt -e "$HOME/bin/mrescreen"
