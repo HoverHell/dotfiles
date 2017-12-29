@@ -1,0 +1,13 @@
+#!/bin/sh -x
+
+set -e
+
+filename="$HOME/files/scr/scrshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+echo "$filename"
+
+# pkill shutter
+timeout 300 \
+  shutter -s -e -n -c -o "$filename" \
+  || { echo "Shutter exited with $?"; exit 1; }
+
+echo "$filename" | xclipin
