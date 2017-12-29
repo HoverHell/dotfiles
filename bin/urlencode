@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+
+from __future__ import print_function
 import sys
-import urllib
-print urllib.quote(sys.stdin.read().rstrip('\n'))
+from six.moves.urllib.parse import quote
+print(quote(sys.stdin.read().rstrip('\n')))
