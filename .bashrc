@@ -15,8 +15,9 @@ pathadd() {
     fi
 }
 
-## The home-executables.
+# The home-executables.
 pathadd "$HOME/bin"
+pathadd "$HOME/.local/bin"
 [ -f ~/.virtualenv/bin/activate ] && . ~/.virtualenv/bin/activate
 
 ## CFG and local overrides
