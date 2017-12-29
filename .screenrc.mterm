@@ -102,7 +102,7 @@ termcapinfo xterm*|rxvt*|gnome* 'ti@:te@'
 
 shell /home/hell/bin/screentermy
 
-screen -t pr 0 screen -S screenterm0 -c $HOME/.screenrc.mtermy
+screen -t pr 0 screen -S screenterm0 -c $HOME/.screenrc.mtermy.0
 screen -t w 1 screen -S screenterm1 -c $HOME/.screenrc.mtermy
 
 #select 1
