@@ -1,0 +1,49 @@
+.tab.unread .label {
+  font-weight: bold !important;
+}
+
+/* tab height */
+:root {
+  --tab-height: 30px !important;
+}
+.tab {
+  height: var(--tab-height) !important;
+  font-size: 19px;
+}
+
+/* Always show the "new tab" button at the bottom edge of the tab bar #1376 */
+#tabbar:not(.overflow) .after-tabs {
+  display: none;
+}
+#tabbar:not(.overflow) ~ .after-tabs {
+  display: block;
+}
+
+/* Hide tab close button always #1524 */
+.tab .closebox {
+  display: none;
+}
+
+/* Show scrollbar in the tab bar rightside #1362 */
+:root.left #tabbar {
+  direction: ltr;
+  overflow-x: hidden;
+}
+
+
+/* TODO: userChrome.css */
+/* 
+Hide horizontal tabs at the top of the window #1349
+https://github.com/piroor/treestyletab/issues/1349
+*/
+#TabsToolbar {
+    visibility: collapse !important;
+}
+/* 
+Hide the "Tree Style Tab" header at the top of the sidebar
+For only Tree Style Tab sidebar #1397 
+https://github.com/piroor/treestyletab/issues/1397
+*/
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  display: none;
+}
