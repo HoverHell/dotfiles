@@ -1,0 +1,10 @@
+#!/bin/sh -x
+# https://github.com/moby/moby/issues/9299#issuecomment-244223555
+# https://github.com/grosser/dotfiles/commit/eca07c9c69deccdc19a5bcaf7b46b72f14577711
+# https://github.com/grosser/dotfiles/blob/master/bin/kubash
+
+set -e
+
+name="$1"
+docker exec "$@" -i -t "$name" /bin/bash -c \
+  "stty rows \"$(tput lines)\" cols \"$(tput cols)\" && export TERM=\"$TERM\" && exec /bin/bash"
