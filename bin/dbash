@@ -6,5 +6,6 @@
 set -e
 
 name="$1"
-docker exec "$@" -i -t "$name" /bin/bash -c \
+shift 1
+docker exec "$@" -it "$name" /bin/bash -c \
   "stty rows \"$(tput lines)\" cols \"$(tput cols)\" && export TERM=\"$TERM\" && exec /bin/bash"
