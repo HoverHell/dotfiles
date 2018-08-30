@@ -1,0 +1,9 @@
+#!/bin/sh -x
+
+export DISPLAY="${DISPLAY:-:0.0}"
+if ! pgrep '^xscreensaver$'; then
+   xscreensaver -no-splash &
+   sleep 2
+fi
+# light-locker-command -l || true
+exec xscreensaver-command -lock

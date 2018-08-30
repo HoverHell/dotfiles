@@ -25,5 +25,11 @@ _pathadd() {
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-    pathadd "$HOME/bin"
+    _pathadd "$HOME/bin"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    _pathadd "$HOME/.local/bin"
+fi
+if [ -d "$HOME/.local/usr/bin" ] ; then
+    _pathadd "$HOME/.local/usr/bin"
 fi

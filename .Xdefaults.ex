@@ -21,7 +21,7 @@ URxvt*scrollBar_right:true
 URxvt*scrollTtyOutput:false
 URxvt*scrollTtyKeypress:true
 URxvt*transparent:true
-!URxvt*shading: 28
+!# URxvt*shading: 28
 URxvt*iso14755: false
 URxvt*iso14755_52: false
 
@@ -33,8 +33,9 @@ URxvt*iso14755_52: false
 ! URxvt*tintColor:blue
 
 !# shading - 0 to 99 darkens, 101 to 200 lightens.
-## !#   Do not use with tintColor; use a darker or lighter color instead.
-URxvt*shading:40
+!# Do not use with tintColor; use a darker or lighter color instead.
+URxvt*shading:28
+!# URxvt*shading:55
 
 !# scrollback buffer lines - 65535 is max (64 is default)
 !#URxvt*saveLines:12000

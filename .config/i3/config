@@ -15,11 +15,14 @@ set $mod Mod4
 ## Multiple-monitors stuff:
 #set disp0 "LVDS1"
 #set disp1 "HDMI3"
-#bindsym $mod+Shift+Z move workspace to output $disp0
-#bindsym $mod+Shift+X move workspace to output $disp1
-bindsym $mod+Shift+Z move workspace to output LVDS1
-bindsym $mod+Shift+X move workspace to output HDMI3
-bindsym $mod+Shift+B move workspace to output VGA1
+#bindsym $mod+Control+Z move workspace to output $disp0
+#bindsym $mod+Control+X move workspace to output $disp1
+bindsym $mod+Control+Z move workspace to output eDP-1
+bindsym $mod+Control+X move workspace to output DP-2-2
+bindsym $mod+Control+C move workspace to output DP-1-2
+bindsym $mod+Control+V move workspace to output LVDS1
+bindsym $mod+Control+B move workspace to output HDMI3
+bindsym $mod+Control+N move workspace to output VGA1
 
 
 new_window 1pixel
@@ -51,7 +54,7 @@ bindsym Mod1+Escape kill
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+# bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
 # ... familiar zx
@@ -215,6 +218,6 @@ bindsym $mod+5 mode "resize"
 #        #status_command lxpanel --profile Lubuntu
 #}
 
-exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/hhell/.config/i3/workspace-9.json'"
-exec --no-startup-id "i3-msg 'workspace 10; append_layout /home/hhell/.config/i3/workspace-10.json'"
-exec --no-startup-id "i3-msg 'workspace 6'"
+# exec --no-startup-id "i3-msg 'workspace 9; append_layout /home/hhell/.config/i3/workspace-9.json'"
+# exec --no-startup-id "i3-msg 'workspace 10; append_layout /home/hhell/.config/i3/workspace-10.json'"
+# exec --no-startup-id "i3-msg 'workspace 6'"

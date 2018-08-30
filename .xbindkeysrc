@@ -3,10 +3,13 @@
 "dmenu_run"
   Mod4+grave
 
-"xscreensaver-command -lock"
+"_lock_screen"
   control+alt+l
 
-#"xbindkeys_show" 
+"_lock_screen"
+  Mod4+l
+
+#"xbindkeys_show"
 #  control+shift + q
 
 # set directly keycode (here control + f with my keyboard)

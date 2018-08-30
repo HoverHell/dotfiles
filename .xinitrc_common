@@ -1,3 +1,4 @@
+#!/bin/sh
 
 ## The Hardcore Keyboard Layout.
 #xkbcomp $HOME/.xkb_config $DISPLAY 2> /dev/null
@@ -5,9 +6,10 @@ mapxkb
 
 ## Configs
 xrdb -merge "$HOME/.Xdefaults"
-# synclient RTCornerButton=0 RBCornerButton=0 LTCornerButton=0 LBCornerButton=0 TapButton1=0 TapButton2=0 TapButton3=2
-killall syndaemon >/dev/null 2>&1 || true
-# syndaemon -ktd
+
+# # synclient RTCornerButton=0 RBCornerButton=0 LTCornerButton=0 LBCornerButton=0 TapButton1=0 TapButton2=0 TapButton3=2
+# killall syndaemon >/dev/null 2>&1 || true
+# # syndaemon -ktd
 synclient VertEdgeScroll=1 HorizEdgeScroll=1 CornerCoasting=1 RTCornerButton=0 \
   RBCornerButton=0 LTCornerButton=0 LBCornerButton=0 TapButton1=0 TapButton2=0 \
   TapButton3=2 ClickFinger1=8 ClickFinger2=9 ClickFinger3=10 CircularScrolling=1 \
@@ -15,6 +17,7 @@ synclient VertEdgeScroll=1 HorizEdgeScroll=1 CornerCoasting=1 RTCornerButton=0 \
   HorizTwoFingerScroll=1 "$@"
 
 _touchscrollspeed.sh
+
 _run_xbindkeys
 
 ## The Terminal
