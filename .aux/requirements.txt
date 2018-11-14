@@ -1,4 +1,4 @@
-# apt install build-essential libcap-dev libcurl4-nss-dev
+# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev python3.7 python3.7-venv python3.7-dev
 # pip install -i https://pypi.yandex-team.ru/simple/ -r requirements.txt
 
 # selfupdate
@@ -26,10 +26,10 @@ Cython
 click
 click-plugins
 click-repl
-# python-prctl
+python-prctl
 Jinja2
 smhasher
-
+psycopg2-binary
 
 # possibly useful libraries
 
@@ -77,13 +77,16 @@ requests
 ndg-httpsclient
 pyasn1
 pyOpenSSL
-# not for `requests` though.
+
+# Other way
 pycurl
 
 
 # dataworks
 jupyter
-jupyter-themes
+# jupyter-themes
+jupyterthemes
+# git+https://github.com/dunovank/jupyter-themes.git@2d16b22933b327c3a1c9a8b3e79c1227d76377ab#egg=jupyter-themes
 
 # run: jupyter nbextension enable --py --sys-prefix widgetsnbextension
 # run: jt -t chesterish -f roboto -fs 12 -cellw '100%'
