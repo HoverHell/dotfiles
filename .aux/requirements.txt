@@ -1,0 +1,120 @@
+# apt install build-essential libcap-dev libcurl4-nss-dev
+# pip install -i https://pypi.yandex-team.ru/simple/ -r requirements.txt
+
+# selfupdate
+wheel
+pip
+setuptools
+virtualenv
+
+
+# highly used libraries
+six
+atomicfile
+PyYAML
+msgpack-python
+simplejson
+ujson
+sh
+pytz
+python-dateutil
+
+
+# occasionally used libraries
+redis
+Cython
+click
+click-plugins
+click-repl
+python-prctl
+Jinja2
+smhasher
+
+
+# possibly useful libraries
+
+# !!
+wrapt
+decorator
+
+html5lib
+MarkupSafe
+cached-property
+
+ruamel.yaml
+
+shortuuid
+
+aquests
+
+# devworks
+pylint
+pycodestyle
+yapf
+astroid
+pytest
+tox
+mccabe
+
+# devworks, advanced
+Fabric
+cookiecutter
+docker-compose
+
+
+# greatest convenience
+ipython[all]
+ipdb
+prompt-toolkit
+Pygments
+-e git+https://github.com/HoverHell/parallel-ssh#egg=pssh
+-e git+https://github.com/HoverHell/pyaux.git#egg=pyaux
+git+https://github.com/apenwarr/sshuttle#egg=sshuttle
+
+
+# requests
+requests
+ndg-httpsclient
+pyasn1
+pyOpenSSL
+# not for `requests` though.
+pycurl
+
+
+# dataworks
+jupyter
+jupyter-themes
+
+# run: jupyter nbextension enable --py --sys-prefix widgetsnbextension
+# run: jt -t chesterish -f roboto -fs 12 -cellw '100%'
+
+numpy
+pandas
+matplotlib
+scipy
+plydata
+# statsmodels
+# plotnine
+altair
+# vega_datasets
+notebook
+vega
+
+
+# eventloopsuff
+
+# gevent
+# greenlet
+
+tornado
+tornalet
+trequests
+
+Twisted
+Django
+djangorestframework
+
+# # v8
+# py-mini-racer
+
+Quart
