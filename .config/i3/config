@@ -23,6 +23,7 @@ bindsym $mod+Control+C move workspace to output DP-1-2
 bindsym $mod+Control+V move workspace to output LVDS1
 bindsym $mod+Control+B move workspace to output HDMI3
 bindsym $mod+Control+N move workspace to output VGA1
+bindsym $mod+Control+M move workspace to output HDMI-1
 
 
 new_window 1pixel

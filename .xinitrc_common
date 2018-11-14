@@ -22,3 +22,4 @@ _run_xbindkeys
 
 ## The Terminal
 #~/bin/xmrescreen &
+xkbset nullify lock
