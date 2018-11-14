@@ -26,7 +26,7 @@ Cython
 click
 click-plugins
 click-repl
-python-prctl
+# python-prctl
 Jinja2
 smhasher
 
