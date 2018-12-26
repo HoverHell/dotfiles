@@ -1,9 +1,14 @@
 #!/bin/sh
 
 # A shortcut for usefulness of youtube-dl
-youtube-dl -t --write-info-json "$@"
+youtube-dl \
+  -o "%(title)s-%(id)s.%(ext)s" \
+  -f 'bestvideo[height<=1080]+bestaudio/best[height<=1080]' \
+  --add-metadata \
+  --write-info-json \
+  "$@"
 
 # --write-srt
 # -b
 # `-l` instead of `-t`?
-# `-f`? Supposedly will download highest format anyway?
+# -f "(bestvideo+bestaudio)[ext=webm][filesize<16M]"

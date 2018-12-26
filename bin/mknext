@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/bin/bash
+
+set -Eeuo pipefail
+
 subname="$1"
 cdir="$(pwd)"
-stat="$HOME/files/tmp/nstat_$(echo "$cdir"|sed 's,/,_,g')"
+stat="$HOME/files/tmp/nstat_$(echo "$cdir" | sed 's,/,_,g')"
 touch "$stat"
 num="$(cat "$stat")"
 if [ ! -n "$num" ]; then num=1; fi
