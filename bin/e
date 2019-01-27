@@ -1,6 +1,15 @@
 #!/bin/sh
-## A short-hand for "edit", let's say.
-#if which emacs; then ename="emacs"; else ename="jmacs"; fi
-#$ename "$@"
-#exec emacsclient "$@"
-exec emacs "$@"
+# #######
+# A short-hand for "edit".
+# #######
+if which emacs 2>/dev/null; then
+    # exec emacsclient "$@"
+    # exec emacs "$@"
+    exec ec "$@"
+elif which jmacs 2>/dev/null; then
+    exec jmacs "$@"
+elif which nano 2>/dev/null; then
+    exec nano "$@"
+else
+    exec vi "$@"
+fi
