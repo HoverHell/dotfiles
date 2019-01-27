@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
 import sys
 import urllib.parse
-print(urllib.parse.unquote(sys.stdin.read().rstrip('\n')))
+# Working with bytestreams to support all encodings.
+# TODO?: streamed support (read by chunks)
+# Newline is kept as-is.
+data = sys.stdin.buffer.read()
+data = urllib.parse.unquote_to_bytes(data)
+sys.stdout.buffer.write(data)
