@@ -1,5 +1,5 @@
 # apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev python3.7 python3.7-venv python3.7-dev
-# pip install -i https://pypi.yandex-team.ru/simple/ -r requirements.txt
+# pip install -U -r requirements.txt
 
 # selfupdate
 wheel
@@ -83,7 +83,8 @@ pycurl
 
 
 # dataworks
-jupyter
+jupyter[all]
+jupyterlab[all]
 # jupyter-themes
 jupyterthemes
 # git+https://github.com/dunovank/jupyter-themes.git@2d16b22933b327c3a1c9a8b3e79c1227d76377ab#egg=jupyter-themes
