@@ -96,6 +96,7 @@ numpy
 pandas
 matplotlib
 scipy
+scikit-learn
 plydata
 # statsmodels
 # plotnine
