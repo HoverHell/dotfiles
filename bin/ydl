@@ -2,11 +2,13 @@
 
 # A shortcut for usefulness of youtube-dl
 youtube-dl \
-  -o "%(title)s-%(id)s.%(ext)s" \
-  -f 'bestvideo[height<=1080]+bestaudio/best[height<=1080]' \
-  --add-metadata \
-  --write-info-json \
-  "$@"
+    --output '%(title)s-%(id)s.%(ext)s' \
+    --write-info-json \
+    --add-metadata \
+    --format 'bestvideo[height<=1080]+bestaudio/best[height<=1080]' \
+    "$@"
+
+#     --format 'bestvideo[width<2000]+bestaudio/bestvideo+bestaudio'
 
 # --write-srt
 # -b
