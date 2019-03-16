@@ -10,6 +10,7 @@ codequery codespell cppcheck-gui kdiff3 kompare meld clazy
 # build environment
 build-essential cmake pkg-config
 # some bunch of build dependencies
+libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev
 libbz2-dev libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
 # C++
 clang-7 clang-7-doc clang-7-examples
@@ -25,4 +26,4 @@ fonts-mathjax-extras fonts-stix
 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 # other often-used tools
 graphviz graphviz-doc imagemagick imagemagick-doc
-openssh-server git htop vlc screen
+openssh-server git htop vlc screen curl wget joe
