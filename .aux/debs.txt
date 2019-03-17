@@ -10,7 +10,7 @@ codequery codespell cppcheck-gui kdiff3 kompare meld clazy
 # build environment
 build-essential cmake pkg-config
 # some bunch of build dependencies
-libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev
+libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev
 libbz2-dev libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
 # C++
 clang-7 clang-7-doc clang-7-examples

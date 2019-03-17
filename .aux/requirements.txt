@@ -1,4 +1,4 @@
-# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev python3.7 python3.7-venv python3.7-dev
+# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev python3.7 python3.7-venv python3.7-dev
 # pip install -U -r requirements.txt
 
 # selfupdate
