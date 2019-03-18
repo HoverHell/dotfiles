@@ -6,6 +6,11 @@ import json
 import sys
 
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
 def colorize(text):
     from pygments import highlight
     from pygments.lexers import JsonLexer
@@ -25,12 +30,17 @@ def try_colorize(text, **kwa):
 def main(ar, indent=2):
     if ar and ar[0].isdigit():
         indent = int(ar.pop(0))
-    di = sys.stdin.read()
+    in_ = sys.stdin
+    in_ = getattr(in_, 'buffer', in_)
+    out_ = sys.stdout
+    out_ = getattr(out_, 'buffer', out_)
+
+    di = in_.read()
     try:
         dd = json.loads(di)
     except ValueError as e:
         sys.stderr.write("  -!!---- %s\n" % (e,))
-        sys.stdout.write(di)
+        out_.write(di)
         return 13
     do = json.dumps(dd, indent=indent, sort_keys=True)
 
@@ -47,8 +57,8 @@ def main(ar, indent=2):
             do)
     except Exception as e:
         pass
-    sys.stdout.write(do)
-    sys.stdout.write("\n")
+    out_.write(do)
+    out_.write(b"\n")
 
 
 if __name__ == '__main__':
