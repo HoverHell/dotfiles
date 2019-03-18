@@ -1,5 +1,5 @@
 # apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev python3.7 python3.7-venv python3.7-dev
-# pip install -U -r requirements.txt
+# pip install -U -r ./requirements.txt
 
 # selfupdate
 wheel
@@ -45,8 +45,6 @@ ruamel.yaml
 
 shortuuid
 
-aquests
-
 # Util-collections similar to pyaux
 toolz
 easydev
@@ -72,13 +70,16 @@ ipython[all]
 ipdb
 prompt-toolkit
 Pygments
+# -e ssh://git@github.com/HoverHell/parallel-ssh#egg=pssh
 -e git+https://github.com/HoverHell/parallel-ssh#egg=pssh
+# -e ssh://git@github.com/HoverHell/pyaux.git#egg=pyaux
 -e git+https://github.com/HoverHell/pyaux.git#egg=pyaux
 git+https://github.com/apenwarr/sshuttle#egg=sshuttle
 
 
 # requests
 requests
+# Might not be necessary, but more reliable:
 ndg-httpsclient
 pyasn1
 pyOpenSSL
@@ -90,6 +91,7 @@ pycurl
 # dataworks
 jupyter[all]
 jupyterlab[all]
+notebook
 # jupyter-themes
 jupyterthemes
 # git+https://github.com/dunovank/jupyter-themes.git@2d16b22933b327c3a1c9a8b3e79c1227d76377ab#egg=jupyter-themes
@@ -103,16 +105,15 @@ matplotlib
 scipy
 scikit-learn
 plydata
-# statsmodels
-# plotnine
+statsmodels
+plotnine
 altair
 # vega_datasets
-notebook
 vega
-
 
 # eventloopsuff
 
+# # Technically, it works on py3; no nearby use-cases though.
 # gevent
 # greenlet
 
@@ -120,12 +121,12 @@ tornado
 tornalet
 trequests
 
-Twisted
-Django
+twisted
+
+django
 djangorestframework
 
 # # v8
 # py-mini-racer
 
-# http/2 framework
 Quart
