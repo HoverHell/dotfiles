@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cat <<\_EOF
+# coding: utf8
+"""
+...
+"""
+
+from __future__ import division, absolute_import, print_function, unicode_literals
+
+# from builtins import *  # pylint: disable=redefined-builtin,unused-wildcard-import,wildcard-import
+
+_EOF

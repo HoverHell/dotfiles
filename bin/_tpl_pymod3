@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat <<\_EOF
+"""
+...
+"""
+
+# from __future__ import generator_stop, annotations
+
+_EOF
