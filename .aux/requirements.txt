@@ -68,7 +68,9 @@ docker-compose
 # greatest convenience
 ipython[all]
 ipdb
-prompt-toolkit
+# # At the moment it is problematic to require it explicitly because it somehow
+# # might install a version too new for jupyter / ipdb.
+# prompt-toolkit
 Pygments
 # -e ssh://git@github.com/HoverHell/parallel-ssh#egg=pssh
 -e git+https://github.com/HoverHell/parallel-ssh#egg=pssh
@@ -128,5 +130,3 @@ djangorestframework
 
 # # v8
 # py-mini-racer
-
-Quart
