@@ -51,10 +51,12 @@ easydev
 
 
 # devworks
-pylint
+pylint<1.9; python_version<'3'
+pylint; python_version>='3'
+astroid<2; python_version<'3'
+astroid; python_version>='3'
 pycodestyle
 yapf
-astroid
 pytest
 tox
 mccabe
@@ -66,7 +68,8 @@ docker-compose
 
 
 # greatest convenience
-ipython[all]
+ipython[all]<6; python_version<'3'
+ipython[all]; python_version>='3'
 ipdb
 # # At the moment it is problematic to require it explicitly because it somehow
 # # might install a version too new for jupyter / ipdb.
@@ -91,8 +94,11 @@ pycurl
 
 
 # dataworks
-jupyter[all]
-jupyterlab[all]
+jupyter
+jupyterlab<0.34; python_version<'3'
+jupyterlab; python_version>='3'
+jupyter-console<5.3; python_version<'3'
+jupyter-console; python_version>='3'
 notebook
 # jupyter-themes
 jupyterthemes
@@ -103,30 +109,45 @@ jupyterthemes
 
 numpy
 pandas
-matplotlib
+matplotlib<3; python_version<'3'
+matplotlib; python_version>='3'
 scipy
 scikit-learn
 plydata
 statsmodels
-plotnine
+plotnine<0.5; python_version<'3'
+plotnine; python_version>='3'
 altair
 # vega_datasets
 vega
 
 # eventloopsuff
 
-# # Technically, it works on py3; no nearby use-cases though.
-# gevent
-# greenlet
+# Technically, it works on py3; no nearby use-cases though.
+gevent; python_version<'3'
+greenlet; python_version<'3'
 
-tornado
+# http/2 aio framework
+Quart; python_version>='3'
+
+tornado<6; python_version<'3'
+tornado; python_version>='3'
 tornalet
 trequests
 
 twisted
 
-django
+django<2; python_version<'3'
+django; python_version>='3'
 djangorestframework
 
 # # v8
 # py-mini-racer
+
+# backports and stuff
+future; python_version<'3'
+futures; python_version<'3'
+functools32; python_version<'3'
+backports.functools-lru-cache; python_version<'3'
+backports.shutil-get-terminal-size; python_version<'3'
+backports.ssl-match-hostname; python_version<'3'
