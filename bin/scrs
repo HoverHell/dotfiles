@@ -10,4 +10,4 @@ timeout 300 \
   shutter -s -e -n -c -o "$filename" \
   || { echo "Shutter exited with $?"; exit 1; }
 
-echo "$filename" | xclipin
+echo "$filename" | tr -d '\n' | xclipin
