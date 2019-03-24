@@ -39,7 +39,7 @@ tf="$(mktemp)" && {
   git ls-tree -r --name-only HEAD > "$tf" && \
   cd "$home" && (
     cat "$tf" | while read fn; do
-      ## fn is repo-relative, curdir is home
+      # fn is repo-relative, curdir is home
       fd="$(dirname "$fn")"
       mkdir -pv "$fd"
       [ $ovw ] && {
