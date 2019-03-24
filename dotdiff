@@ -1,1 +1,11 @@
-git ls-tree -r --name-only HEAD|while read a; do colordiff -dur ~/"$a" "$a"; done
+#!/bin/sh
+
+set -Eeu
+
+repodir="$(dirname "$(readlink -e "$0")")"
+repodir="$repodir/homedir/"
+cd "$repodir"
+git ls-tree -r --name-only HEAD . \
+    | while read -r filename; do
+        colordiff -dur ~/"$filename" "$filename"
+    done

@@ -1,7 +1,12 @@
 #!/bin/sh
-tf="$(mktemp)" && {
- # Note: `-X` did not go well with a broken symlink.
- git ls-tree -r --name-only HEAD > "$tf" && \
-   rsync -v -HAax --files-from="$tf" "$@" ./ ~/
- rm -v "$tf"
-}
+
+set -Eeu
+
+repodir="$(dirname "$(readlink -e "$0")")"
+repodir="$repodir/homedir/"
+
+tempfile="$(mktemp)"
+trap 'rm "$tempfile"' EXIT
+# Note: `-X` did not go well with a broken symlink.
+it ls-tree -r --name-only HEAD > "$tempfile"
+rsync -v -HAax --files-from="$tempfile" "$@" ./ ~/

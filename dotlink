@@ -1,65 +1,73 @@
 #!/bin/sh
-####
-## Create relative symbolic links from the files in the repository in
-## the current directory to home directory.
-##
-## NOTE: repository outside of home directory is possible but not
-## supported (because not needed).
-####
+# #######
+# Create relative symbolic links from the files in the repository in
+# the current directory to home directory.
+#
+# NOTE: repository outside of home directory is possible but not
+# supported.
+# #######
 
+set -Eeu
 
 ovw=""
-[ x"$1" = x"-f" ] && {
-  echo "Force-pre-remove."
-  ovw="."
+if [ x"${1:-}" = x"-f" ]; then
+    echo "Force-pre-remove."
+    ovw="."
+fi
+
+
+unpath() {
+    # Make a "return" path for the specified filename,
+    # e.g. "a/b/c/filename" -> "../../../filename"
+
+    # cd "$1/$(unpath "$1")" -> same directory
+    filename="$1"
+    # filename="$(dirname "$1")"
+    echo "$filename" | sed -r '
+        s,/?$,/,;  # ensure terminating slash
+        s,^\./,,;  # remove leading extraneous curdir "./"
+        s,[^/]+/,../,g;  # e.g. "a/b/c/" -> "../../../"
+    '
 }
 
-
-unpath(){
-  ## cd "$1/$(unpath "$1")" -> same directory
-  fn="$1"
-  #fn="$(dirname "$1")"
-  echo "$fn" \
-    | sed -r 's,/?$,/,' \
-    | sed -r 's,^\./,,' \
-    | sed -r 's,[^/]+/,../,g'
-}
-
-## The repository is supposed to be in the current dir
-repodir="$(pwd)/"
+# The repository is supposed to be in the current dir
+repodir="$(dirname "$(readlink -e "$0")")"
+repodir="$repodir/homedir/"
 home="$HOME/"
-reporel="$(echo "$repodir" | sed -rn "s!^$home/*!! p" )" 
-[ -z "$reporel" ] && {
-  echo "repodir '$repodir' is not under home '$home'. Aborting."
-  exit 1
+reporel="$(echo "$repodir" | sed -rn "s!^$home/*!! p")"
+if [ -z "$reporel" ]; then
+    echo "repodir '$repodir' is not under home '$home'. Aborting."
+    exit 1
+fi
+echo "Assuming the repo homedir is in ~/${reporel}"
+
+list_repo_files() {
+    (
+        cd "$repodir"
+        git ls-tree -r --name-only HEAD .
+    )
 }
 
-
-tf="$(mktemp)" && {
-  git ls-tree -r --name-only HEAD > "$tf" && \
-  cd "$home" && (
-    cat "$tf" | while read fn; do
-      # fn is repo-relative, curdir is home
-      fd="$(dirname "$fn")"
-      mkdir -pv "$fd"
-      [ $ovw ] && {
-        [ -e "$fn" ] && {
-          mv "$fn" "${fn}._0dotlink.bk"
-          rm -v "$fn"
-        }
-        # 2>&1 | grep -v "No such file or directory$"
-      }
-      target="$(unpath "$fd")${reporel}${fn}"
-      ## NOTE: all (directory) paths are supposed to end in slash
-      [ -L "$fn" ] && {
-        current_target="$(readlink "$fn")"
-        [ x"$current_target" = x"$target" ] && {
-          ## Already linked where it should be
-          continue
-        }
-      }
-      ln -v -s "$target" "$fn"
-    done
-  )
-  rm -v "$tf"
-}
+cd "$home"
+list_repo_files | while read -r filename; do
+    # filename is repo-relative, curdir is home
+    filedir="$(dirname "$filename")"
+    mkdir -pv "$filedir"
+    if [ $ovw ]; then
+        if [ -e "$filename" ]; then
+            mv "$filename" "${filename}._0dotlink.bk"
+            # rm -v "$filename"
+        fi  # | 2>&1 | grep -v "No such file or directory$"
+    fi
+    target="$(unpath "$filedir")${reporel}${filename}"
+    # echo "link $filename -> $target = filedir=$filedir, unpath=$(unpath "$filedir"), reporel=$reporel, filename=$filename" >&2
+    # NOTE: all (directory) paths are supposed to end in slash
+    if [ -L "$filename" ]; then
+        current_target="$(readlink "$filename")"
+        if [ x"$current_target" = x"$target" ]; then
+            # Already linked where it should be
+            continue
+        fi
+    fi
+    ln -v -s -f "$target" "$filename"
+done
