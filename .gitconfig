@@ -47,3 +47,5 @@
 	postBuffer = 1048576000
 [commit]
 	gpgsign = true
+[tag]
+	forceSignAnnotated = true
