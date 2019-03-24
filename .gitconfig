@@ -1,6 +1,7 @@
 [user]
 name = HoverHell
 email = hoverhell@gmail.com
+	signingkey = 1E668669A51A083B2B820184D881B7CA57849CC6
 
 [core]
 excludesfile = ~/.gitignore
@@ -43,3 +44,5 @@ lg = log -p
 	default = simple
 [http]
 	postBuffer = 1048576000
+[commit]
+	gpgsign = true
