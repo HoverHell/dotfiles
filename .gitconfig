@@ -1,45 +1,46 @@
 [user]
-name = HoverHell
-email = hoverhell@gmail.com
-	signingkey = 1E668669A51A083B2B820184D881B7CA57849CC6
+	name = HoverHell
+	email = hoverhell@gmail.com
+	signingkey = hoverhell@localhost
 
 [core]
-excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
 
 [alias]
-## Mostly replaced by shellscripts 'gi*', but w/e
-st = status
-ci = commit
-br = branch
-co = checkout
-df = diff
-lg = log -p
-### http://stackoverflow.com/questions/948354/git-push-current-branch
-## Push only current branch.
-# pub = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
-## Untested:
-#pub = push
-#push = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
-## Also can do:
-##  git config --global push.default current
-##  git config --global push.default upstream
+	# Mostly replaced by shellscripts 'gi*', but w/e
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+	# # # This used to be relevant with older `git`, but not anymore.
+	# # # http://stackoverflow.com/questions/948354/git-push-current-branch
+	# # Push only current branch.
+	# pub = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
+	# # Untested:
+	# pub = push
+	# push = "!f() { git push -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
+	# # Also can do:
+	# #  git config --global push.default current
+	# #  git config --global push.default upstream
 
-### Colorful
+# ## Colorful
 [color]
-  ui = auto
+	ui = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 [push]
 	default = simple
 [http]
