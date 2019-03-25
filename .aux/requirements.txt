@@ -75,10 +75,10 @@ ipdb
 # # might install a version too new for jupyter / ipdb.
 # prompt-toolkit
 Pygments
-# -e ssh://git@github.com/HoverHell/parallel-ssh#egg=pssh
--e git+https://github.com/HoverHell/parallel-ssh#egg=pssh
-# -e ssh://git@github.com/HoverHell/pyaux.git#egg=pyaux
--e git+https://github.com/HoverHell/pyaux.git#egg=pyaux
+# -e git+ssh://git@gitlab.com/hoverhell/parallel-ssh#egg=pssh
+-e git+https://gitlab.com/hoverhell/parallel-ssh#egg=pssh
+# -e git+ssh://git@gitlab.com/hoverhell/pyaux.git#egg=pyaux
+-e git+https://gitlab.com/hoverhell/pyaux.git#egg=pyaux
 git+https://github.com/apenwarr/sshuttle#egg=sshuttle
 
 
