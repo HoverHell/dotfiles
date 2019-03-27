@@ -154,19 +154,19 @@ pushd()
 
   builtin pushd "${DIR}" > /dev/null
   # echo -n "DIRSTACK: " 1>&2
-  dirs
+  dirs >&2
 }
 pushd_builtin()
 {
   builtin pushd > /dev/null
   # echo -n "DIRSTACK: " 1>&2
-  dirs
+  dirs >&2
 }
 popd()
 {
   builtin popd > /dev/null
   # echo -n "DIRSTACK: " 1>&2
-  dirs
+  dirs >&2
 }
 alias cd='pushd'
 #alias back='popd'
