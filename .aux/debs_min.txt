@@ -12,9 +12,11 @@ aptitude
 # # local tools
 screen jq bc sqlite3 mc p7zip-full unp xclip
 # # dev-ish tools:
-devscripts moreutils rename wdiff colordiff strace time wipe
+devscripts moreutils rename wdiff colordiff strace time wipe uuid
 # # remote tools:
-git curl wget rsync socat nmap bind9-host openssh-client mosh tsocks sshfs lynx w3m youtube-dl
+git curl wget rsync socat nmap bind9-host openssh-client mosh tsocks sshfs
+lynx w3m youtube-dl
+apt-transport-https
 
 # # system monitoring:
 iproute2 iftop iotop htop lshw lsof powertop smartmontools
