@@ -69,5 +69,5 @@ list_repo_files | while read -r filename; do
             continue
         fi
     fi
-    ln -v -s "$target" "$filename"
+    ln -v -s "$target" "$filename" || true
 done
