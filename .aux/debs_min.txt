@@ -26,12 +26,16 @@ firejail
 bash bash-completion less diffutils gnupg grep
 
 # build environment
-build-essential cmake autoconf automake make shellcheck pkg-config
+build-essential cmake autoconf automake make shellcheck pkg-config llvm
 # some bunch of build dependencies
-libncursesw5-dev libgdbm-dev libc6-dev libffi-dev
-zlib1g-dev libsqlite3-dev tk-dev libssl-dev openssl
-libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev
-libbz2-dev libxml2-dev libzip-dev libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
+libc6-dev libffi-dev
+libncurses5-dev libncursesw5-dev libgdbm-dev libreadline-dev tk-dev
+libsqlite3-dev libssl-dev openssl
+libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev
+zlib1g-dev libbz2-dev libzip-dev liblzma-dev xz-utils
+libxml2-dev libxmlsec1-dev
+liblapack-dev libblas-dev
+libboost-all-dev lua5.2 liblua5.2-dev libtbb-dev
 
 # ...
 python python-dev python3 python3-dev
