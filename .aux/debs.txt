@@ -35,6 +35,7 @@ virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 
 # GUI-only, mostly.
 vlc firefox rxvt-unicode-256color
+firejail
 # geeqie i3 stalonetray xbindkeys xkbset xpra remmina
 
 # # Non-default repo

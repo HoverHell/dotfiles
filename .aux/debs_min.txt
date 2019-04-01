@@ -21,7 +21,6 @@ apt-transport-https
 # # system monitoring:
 iproute2 iftop iotop htop lshw lsof powertop smartmontools
 openssh-server etckeeper
-firejail
 # # likely to be pre-installed though
 bash bash-completion less diffutils gnupg grep
 
