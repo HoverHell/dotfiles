@@ -1,0 +1,8 @@
+#!/bin/sh
+# #######
+# Timestamp. Not quite ISO-8601, but acceptable as an identifier in many places.
+#
+# Can also be used as an unique-ish identifier.
+# #######
+
+exec date "+%Y_%m_%d_%H_%M_%S_%N" "$@"
