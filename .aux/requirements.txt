@@ -45,6 +45,8 @@ ruamel.yaml
 
 shortuuid
 
+TiMemory
+
 # Util-collections similar to pyaux
 toolz
 easydev
