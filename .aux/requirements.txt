@@ -18,7 +18,8 @@ ujson
 sh
 pytz
 python-dateutil
-
+iso8601
+ciso8601
 
 # occasionally used libraries
 redis
