@@ -12,7 +12,7 @@ aptitude
 # # local tools
 screen jq bc sqlite3 mc p7zip-full unp xclip
 # # dev-ish tools:
-devscripts moreutils rename wdiff colordiff strace time wipe uuid
+devscripts moreutils rename wdiff colordiff strace time wipe uuid gdebi-core
 # # remote tools:
 git curl wget rsync socat nmap bind9-host openssh-client mosh tsocks sshfs
 lynx w3m youtube-dl
