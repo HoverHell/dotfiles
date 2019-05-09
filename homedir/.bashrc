@@ -18,7 +18,6 @@ pathadd() {
 # The home-executables.
 pathadd "$HOME/bin"
 pathadd "$HOME/.local/bin"
-[ -f ~/.virtualenv/bin/activate ] && . ~/.virtualenv/bin/activate
 
 ## CFG and local overrides
 CFG_ps_time="."  # timestamp in PS. empty to disable
@@ -128,17 +127,17 @@ fi
 #DEFAULTCHARSET="CP1251"
 
 
-## cdargs (`cv`, `ca`, ...).
-[ -f /usr/share/doc/cdargs/examples/cdargs-bash.sh ] && {
-  source /usr/share/doc/cdargs/examples/cdargs-bash.sh; }
-[ -f /usr/share/cdargs/cdargs-bash-completion.sh ] && {
-  # cygwin
+# # cdargs (`cv`, `ca`, ...).
+if [ -f /usr/share/doc/cdargs/examples/cdargs-bash.sh ]; then
+    . /usr/share/doc/cdargs/examples/cdargs-bash.sh
+fi
+if [ -f /usr/share/cdargs/cdargs-bash-completion.sh ]; then  # cygwin
   . /usr/share/cdargs/cdargs-lib.sh
   . /usr/share/cdargs/cdargs-alias.sh
   CDARGS_BASH_ALIASES="cv cdb"
   alias cv="cdb"
   . /usr/share/cdargs/cdargs-bash-completion.sh
-}
+fi
 
 
 
@@ -201,6 +200,10 @@ set +o histexpand
 if pwd | grep -q '^(unreachable)'; then
   echo "pwd: '$(pwd)'; \`cd\`..."
   cd "$HOME"
+fi
+
+if [ -f ~/.virtualenv/bin/activate ]; then
+    . ~/.virtualenv/bin/activate
 fi
 
 true
