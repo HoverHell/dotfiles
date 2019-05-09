@@ -1,11 +1,26 @@
 #!/bin/sh
+# #######
+# A shortcut for common usefulnesses of youtube-dl.
+# #######
 
-# A shortcut for usefulness of youtube-dl
+ARGS=""
+ffcookies="$(ls -1 "$HOME/.mozilla/firefox/"*default*"/cookies.sqlite" | sed 1q || true)"
+if [ -f "$ffcookies" ]; then
+    cookietmp="$HOME/files/tmp/_cookiedump.txt"
+    touch "$cookietmp"
+    chmod go-rwx "$cookietmp"
+    "$HOME/bin/cookiedump.py" \
+        "$ffcookies" \
+        "$cookietmp"
+    ARGS="$ARGS --cookies $cookietmp"
+fi
+
 youtube-dl \
     --output '%(title)s-%(id)s.%(ext)s' \
     --write-info-json \
     --add-metadata \
     --format 'bestvideo[height<=1080]+bestaudio/best[height<=1080]' \
+    $ARGS \
     "$@"
 
 #     --format 'bestvideo[width<2000]+bestaudio/bestvideo+bestaudio'
