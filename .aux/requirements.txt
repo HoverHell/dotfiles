@@ -110,6 +110,7 @@ jupyterthemes
 # run: jupyter nbextension enable --py --sys-prefix widgetsnbextension
 # run: jt -t chesterish -f roboto -fs 12 -cellw '100%'
 
+tqdm
 numpy
 pandas
 matplotlib<3; python_version<'3'
