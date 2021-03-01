@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/sh -x
+
+set -eu
+
 if [ -z "$1" ]; then
     # exec firefox --no-remote -ProfileManager "$@"
     exit 1

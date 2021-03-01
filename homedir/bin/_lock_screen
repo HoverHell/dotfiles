@@ -6,4 +6,5 @@ if ! pgrep '^xscreensaver$'; then
    sleep 2
 fi
 # light-locker-command -l || true
+# gnome-screensaver-command -l || true
 exec xscreensaver-command -lock
