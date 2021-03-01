@@ -1,4 +1,4 @@
-# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev python3.7 python3.7-venv python3.7-dev
+# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev libssl-dev python3.7 python3.7-venv python3.7-dev
 # pip install -U -r ./requirements.txt
 
 # selfupdate
@@ -46,7 +46,7 @@ ruamel.yaml
 
 shortuuid
 
-TiMemory
+# TiMemory  # something something broken skbuild something
 
 # Util-collections similar to pyaux
 toolz
@@ -113,12 +113,14 @@ jupyterthemes
 tqdm
 numpy
 pandas
+xlrd
 matplotlib<3; python_version<'3'
 matplotlib; python_version>='3'
 scipy
 scikit-learn
 plydata
-statsmodels
+statsmodels<0.11; python_version<'3'
+statsmodels; python_version>='3'
 plotnine<0.5; python_version<'3'
 plotnine; python_version>='3'
 altair

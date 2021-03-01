@@ -31,6 +31,7 @@ else:
 
 
 c.TerminalIPythonApp.display_banner = False
+c.InteractiveShell.history_length = 10000000
 
 # try:
 #     from IPython.terminal.prompts import Prompts

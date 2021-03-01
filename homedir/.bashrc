@@ -19,6 +19,11 @@ pathadd() {
 pathadd "$HOME/bin"
 pathadd "$HOME/.local/bin"
 
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
+
+# Minor non-subprocessable conveniences.
+realcd() { cd "$(realpath "$(pwd)")"; }
+
 ## CFG and local overrides
 CFG_ps_time="."  # timestamp in PS. empty to disable
 CFG_ps_ret="."  # '$?' in PS. empty to disable
@@ -195,6 +200,8 @@ export HISTFILE="/dev/null"
 
 ### fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
 set +o histexpand
+
+bind -r '\en'
 
 # Fix for encfs/alike homedir problems.
 if pwd | grep -q '^(unreachable)'; then

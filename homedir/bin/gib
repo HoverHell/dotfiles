@@ -1,3 +1,40 @@
 #!/bin/sh
 # git branch -avv "$@" | sed '25 { s/.*/.../; q; }'
-git branch -avv --color=always "$@" | tac
+
+
+FMT="$(
+    # datestamp (also used in sorting)
+    printf '%s' '%(align:left,0,11)%(color:green)%(committerdate:short)%(end)'
+    # id
+    printf '%s' ' %(align:left,0,8)%(color:245)%(objectname:short)%(end)'
+    printf '%s' ' %(if)%(HEAD)%(then)%(color:white)%(HEAD)%(color:white 238)%(else) %(end)'
+    printf '%s' '%(if)%(upstream)%(then)'
+    printf '%s' '%(align:left,0,61)%(color:yellow)%(refname:short) %(color:245)[%(color:blue)%(upstream:short)%(color:245)]%(color:normal)%(end)'
+    printf '%s' '%(else)'
+    printf '%s' '%(align:left,0,40)%(color:green)%(refname:short)%(end)'
+    printf '%s' '%(end)'
+    # printf '%s' ' %(color:normal normal)'
+    printf '%s' ' %(color:white)%(subject)'
+    printf '%s' ' %(color:245)%(committeremail)'
+    # color reset
+    printf '%s' '%(color:normal)'
+)"
+
+if [ ! -z "${HH_GIB_DBGFMT:-}" ]; then
+    FMT='
+refname=%(refname)   objecttype=%(objecttype)   objectsize=%(objectsize)   objectname=%(objectname)   deltabase=%(deltabase)   tree=%(tree)   parent=%(parent)   numparent=%(numparent)   object=%(object)   type=%(type)   tag=%(tag)   author=%(author)   authorname=%(authorname)   authoremail=%(authoremail)   authordate=%(authordate)   committer=%(committer)   committername=%(committername)   committeremail=%(committeremail)   committerdate=%(committerdate)   tagger=%(tagger)   taggername=%(taggername)   taggeremail=%(taggeremail)   taggerdate=%(taggerdate)   creator=%(creator)   creatordate=%(creatordate)   subject=%(subject)   body=%(body)   trailers=%(trailers)   upstream=%(upstream)   push=%(push)   symref=%(symref)   flag=%(flag)   HEAD=%(HEAD)   worktreepath=%(worktreepath)   contents=%(contents)
+
+'
+fi
+
+
+
+# Remote then local
+git \
+    branch \
+    -avv \
+    --color=always \
+    --sort=committerdate --sort=upstream --sort=HEAD \
+    --format="$FMT" \
+    "$@" \
+    | cat

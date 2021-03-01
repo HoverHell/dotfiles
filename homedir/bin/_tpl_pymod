@@ -8,6 +8,6 @@ cat <<\_EOF
 
 from __future__ import division, absolute_import, print_function, unicode_literals
 
-# from builtins import *  # pylint: disable=redefined-builtin,unused-wildcard-import,wildcard-import
-
 _EOF
+
+# from builtins import *  # pylint: disable=redefined-builtin,unused-wildcard-import,wildcard-import

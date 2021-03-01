@@ -1,6 +1,7 @@
 *~
 *.pyc
 
+.ipynb_checkpoints
 
 _run*.sh
 *.tmp*
@@ -9,3 +10,5 @@ _run*.sh
 _test*
 _tst*
 tmpf*
+.tox
+.mypy_cache
