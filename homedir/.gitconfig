@@ -5,6 +5,8 @@
 
 [core]
 	excludesfile = ~/.gitignore
+[init]
+	defaultBranch = master
 
 [alias]
 	# Mostly replaced by shellscripts 'gi*', but w/e
