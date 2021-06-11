@@ -1,0 +1,75 @@
+#!/usr/bin/python3
+# ^ this should use deb-provided dbus lib, unlike:
+#!/usr/bin/env python3
+"""
+Set KDE wallpaper.
+
+Modified from
+https://github.com/pashazz/ksetwallpaper
+"""
+
+import argparse
+import urllib.parse
+
+import dbus
+
+
+FILL_MODES = {
+    # FillMode 1: 'scale, keep proportions, fit the image completely'
+    'fit': 1,
+    # FIllMode 2: 'scale, keep proportions, fill the screen completely'
+    'fill': 2,
+}
+
+J_SCRIPT_TPL = """
+var allDesktops = desktops();
+print (allDesktops);
+for (idx = 0; idx < allDesktops.length; idx++) {{
+    dsk = allDesktops[idx];
+    dsk.wallpaperPlugin = "{plugin_name}";
+    dsk.currentConfigGroup = Array("Wallpaper", "{plugin_name}", "General");
+    dsk.writeConfig("Image", "file://{url}")
+    dsk.writeConfig("FillMode", {fill_mode})
+}}
+"""
+
+
+
+class Worker:
+    j_script_tpl = J_SCRIPT_TPL
+
+    def set_wallpaper(self, filepath, plugin_name='org.kde.image', mode='fill'):
+        j_script = self.j_script_tpl.format(
+            plugin_name=plugin_name,
+            url=urllib.parse.quote(filepath.lstrip('/')),
+            fill_mode=FILL_MODES[mode],
+        )
+        bus = dbus.SessionBus()
+        plasma = dbus.Interface(
+            bus.get_object('org.kde.plasmashell', '/PlasmaShell'),
+            dbus_interface='org.kde.PlasmaShell')
+        return plasma.evaluateScript(j_script)
+
+    @classmethod
+    def main(cls):
+        parser = argparse.ArgumentParser(description='KDE Wallpaper setter')
+        parser.add_argument('file', help='Wallpaper file name')
+        parser.add_argument(
+            '--plugin', '-p',
+            help='Wallpaper plugin (default is org.kde.image)',
+            default='org.kde.image')
+        parser.add_argument(
+            '--fit',
+            help='Resize to fit the image entirely (with black bars)',
+            action='store_true', default=False)
+        args = parser.parse_args()
+        mode = 'fit' if args.fit else 'fill'
+        return cls().set_wallpaper(filepath=args.file, plugin_name=args.plugin, mode=mode)
+
+
+def main():
+    return Worker.main()
+
+
+if __name__ == '__main__':
+    main()
