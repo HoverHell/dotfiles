@@ -128,7 +128,7 @@ class Deblists:
 
     mosh  # ssh convenience in case of a bad connection
     sshfs  # ssh convenience in case of a good connection
-    dvcs-autosync
+    # dvcs-autosync
     # davfs2  # rare, currently.
 
     at  # ...
@@ -148,8 +148,9 @@ class Deblists:
     antiword
     chromium-browser firefox firejail
     dmz-cursor-theme
-    kgraphviewer
-    rxvt-unicode-256color
+    # kgraphviewer
+    rxvt-unicode
+    # rxvt-unicode-256color
     xkbset xbindkeys
     geeqie mplayer vlc
     i3 stalonetray xpra remmina
@@ -157,7 +158,7 @@ class Deblists:
 
     main_system_hw = '''
     ### Hardware-entrypoint stuff ###
-    bluedevil blueman bluez
+    # bluedevil blueman bluez
     cheese
     cups
     eject
