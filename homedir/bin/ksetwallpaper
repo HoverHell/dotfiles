@@ -9,6 +9,7 @@ https://github.com/pashazz/ksetwallpaper
 """
 
 import argparse
+import subprocess
 import urllib.parse
 
 import dbus
@@ -23,7 +24,6 @@ FILL_MODES = {
 
 J_SCRIPT_TPL = """
 var allDesktops = desktops();
-print (allDesktops);
 for (idx = 0; idx < allDesktops.length; idx++) {{
     dsk = allDesktops[idx];
     dsk.wallpaperPlugin = "{plugin_name}";
@@ -38,17 +38,32 @@ for (idx = 0; idx < allDesktops.length; idx++) {{
 class Worker:
     j_script_tpl = J_SCRIPT_TPL
 
-    def set_wallpaper(self, filepath, plugin_name='org.kde.image', mode='fill'):
+    def set_wallpaper(
+            self,
+            filepath,
+            plugin_name='org.kde.image',
+            mode='fill',
+            lockscreen=False,
+    ):
+        filepath_url = urllib.parse.quote(filepath.lstrip('/'))
         j_script = self.j_script_tpl.format(
             plugin_name=plugin_name,
-            url=urllib.parse.quote(filepath.lstrip('/')),
+            url=filepath_url,
             fill_mode=FILL_MODES[mode],
         )
         bus = dbus.SessionBus()
         plasma = dbus.Interface(
             bus.get_object('org.kde.plasmashell', '/PlasmaShell'),
             dbus_interface='org.kde.PlasmaShell')
-        return plasma.evaluateScript(j_script)
+        eval_result = plasma.evaluateScript(j_script)
+        if lockscreen:
+            cmd = (
+                'kwriteconfig5 --file kscreenlockerrc --group Greeter'.split() +
+                '--group Wallpaper --group org.kde.image --group General --key Image'.split() +
+                [f"file://{filepath_url}"]
+            )
+            subprocess.check_call(cmd)
+        return eval_result
 
     @classmethod
     def main(cls):
@@ -62,9 +77,18 @@ class Worker:
             '--fit',
             help='Resize to fit the image entirely (with black bars)',
             action='store_true', default=False)
+        parser.add_argument(
+            '--lockscreen',
+            help='Set the same image on the lockscreen',
+            action='store_true', default=False)
         args = parser.parse_args()
         mode = 'fit' if args.fit else 'fill'
-        return cls().set_wallpaper(filepath=args.file, plugin_name=args.plugin, mode=mode)
+        return cls().set_wallpaper(
+            filepath=args.file,
+            plugin_name=args.plugin,
+            mode=mode,
+            lockscreen=args.lockscreen,
+        )
 
 
 def main():
