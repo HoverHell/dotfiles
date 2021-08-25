@@ -12,3 +12,4 @@ _tst*
 tmpf*
 .tox
 .mypy_cache
+.vscode
