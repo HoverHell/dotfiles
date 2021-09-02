@@ -8,5 +8,5 @@ if [ -z "$1" ]; then
 else
     # exec firefox --no-remote -P "$@"
     mkdir -p ~/.jails/"$1"
-    exec _firejail_ff "$@"
+    exec ~/.local/bin/_firejail_ff "$@"
 fi

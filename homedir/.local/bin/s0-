@@ -1,2 +1,2 @@
 #!/bin/sh
-screen -S screenterm0 -d -X screen -t "$1" "$HOME"/bin/dmenu_scrunner "$@"
+screen -S screenterm0 -d -X screen -t "$1" "$HOME"/.local/bin/dmenu_scrunner "$@"

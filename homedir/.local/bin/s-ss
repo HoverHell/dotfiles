@@ -5,5 +5,5 @@ title="$1"
 ## Support for "r@host"
 host="$(echo "$1"|sed 's/^r@/root@/')"; shift 1
 screen -S mscreenterm -d -X screen -t "$title" \
-  "$HOME/bin/_ss" "$host" "$@"
+  "$HOME/.local/bin/_ss" "$host" "$@"
 #  ssh "$host" "$@" -X -t "bin/rescreen || screen -dR -S happs"

@@ -1,2 +1,2 @@
 #!/bin/bash
-import -quality 1 -window root "$HOME"/files/scr/scrshot-`date +%Y-%m-%d_%H-%M-%S`.png
+import -quality 1 -window root "$HOME"/.local/var/scr/scrshot-`date +%Y-%m-%d_%H-%M-%S`.png

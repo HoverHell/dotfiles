@@ -71,3 +71,6 @@ list_repo_files | while read -r filename; do
     fi
     ln -v -s "$target" "$filename" || true
 done
+
+# Empty directories that shouldn't even have a placeholder file in them:
+mkdir -p "$home/.local/tmp" "$home/.local/var/nstat" "$home/.local/var/scr"

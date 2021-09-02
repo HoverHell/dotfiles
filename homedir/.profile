@@ -12,13 +12,13 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	      . "$HOME/.bashrc"
+        . "$HOME/.bashrc"
     fi
 fi
 
 # http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
 _pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    if [ -d "$1" ] && printf "%s\n" "$PATH" | grep -Eqv "(^|:)$1(:|$)"; then
         PATH="$1:$PATH"
     fi
 }

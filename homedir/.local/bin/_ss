@@ -11,4 +11,4 @@ else
     sargs="-D -R"
 fi
 
-exec "$HOME/bin/_s" "$@"  -t "bin/rescreen $sargs || cd && screen $sargs -S happs"  # `-X` is not completely safe
+exec "$HOME/.local/bin/_s" "$@"  -t ".local/bin/rescreen $sargs || cd && screen $sargs -S happs"  # `-X` is not completely safe

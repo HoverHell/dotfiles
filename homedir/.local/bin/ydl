@@ -5,11 +5,11 @@
 
 ARGS=""
 ffcookies="$(ls -1 "$HOME/.mozilla/firefox/"*default*"/cookies.sqlite" | sed 1q || true)"
-cookietmp="$HOME/files/tmp/_cookiedump.txt"
-if [ -f "$ffcookies" -a -e "$HOME/bin/cookiedump.py" ]; then
+cookietmp="$HOME/.local/tmp/_cookiedump.txt"
+if [ -f "$ffcookies" ] && [ -e "$HOME/.local/bin/cookiedump.py" ]; then
     touch "$cookietmp"
     chmod go-rwx "$cookietmp"
-    "$HOME/bin/cookiedump.py" \
+    "$HOME/.local/bin/cookiedump.py" \
         "$ffcookies" \
         "$cookietmp"
 fi

@@ -2,7 +2,7 @@
 
 set -e
 
-filename="$HOME/files/scr/scrshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+filename="$HOME/.local/var/scr/scrshot-$(date +%Y-%m-%d_%H-%M-%S).png"
 echo "$filename"
 
 # pkill shutter

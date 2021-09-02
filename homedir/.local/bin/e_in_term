@@ -1,2 +1,2 @@
 #!/bin/sh
-exec x-terminal-emulator -e "$HOME/bin/e" "$@"
+exec x-terminal-emulator -e "$HOME/.local/bin/e" "$@"

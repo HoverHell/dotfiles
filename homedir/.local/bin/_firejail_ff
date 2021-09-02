@@ -1,0 +1,20 @@
+#!/bin/sh
+set -x
+name="$1"
+shift 1
+if [ -z "$name" ]; then
+   echo "_firejail_ff <name> <args>" >&2
+   exit 1
+fi
+exec firejail \
+    --name="$name" \
+    --private=~/.jails/"$name" \
+    --nogroups \
+    --noroot \
+    --private-bin=sh,which,bash,sed,ls,cat,firefox,id \
+    --private-etc=group,hostname,localtime,nsswitch.conf,passwd,resolv.conf,fonts,gai.conf \
+    --protocol=unix,inet,inet6 \
+    --private-dev \
+    --private-tmp \
+    --x11=xorg \
+    firefox --no-remote -P "$name" "$@"

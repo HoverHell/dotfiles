@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# . $HOME/bin/colors
+# . $HOME/.local/bin/colors
 
 nc="$(printf "\033[00m")"
 red="$(printf "\033[01;31m")"

@@ -1,18 +1,18 @@
 #!/bin/sh
 
-#urxvt -geometry 114x50 -e $HOME/bin/mrescreen
+#urxvt -geometry 114x50 -e $HOME/.local/bin/mrescreen
 
 #lxterm \
 #  -bg black -fg white \
 #  -font '-misc-fixed-medium-r-normal--20------iso10646-1' \
-#  -geom 113x43 -e $HOME/bin/mrescreen
+#  -geom 113x43 -e $HOME/.local/bin/mrescreen
 ##  -font '-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1' \
 
 #lxterm \
 #  -font '-misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1' \
-#  -geom 88x26 -e $HOME/bin/mrescreen
+#  -geom 88x26 -e $HOME/.local/bin/mrescreen
 
-#/usr/bin/gnome-terminal --geometry=114x50 -x "$HOME"/bin/rescreen
+#/usr/bin/gnome-terminal --geometry=114x50 -x "$HOME"/.local/bin/rescreen
 
 ## ~/.Xdefaults, rxvt-unicode
-urxvt -e "$HOME/bin/mrescreen"
+urxvt -e "$HOME/.local/bin/mrescreen"
