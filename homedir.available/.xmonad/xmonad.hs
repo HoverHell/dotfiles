@@ -48,7 +48,7 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8"]
 myKeymap = [
       ("M4-C-M1-l", spawn "xscreensaver-command -lock")  -- lock for safety
     , ("C-M1-l", spawn "sleep 0.5 && xset s activate")  -- turn off display (maybe)
-    , ("M4-`", spawn "/home/hell/bin/dmenu_run")  -- for the start!
+    , ("M4-`", spawn "/home/hell/bin/dmenu_run_h")  -- for the start!
     , ("C-M1-z", spawn "/home/hell/bin/scr")  -- screenshot.
     , ("M1-<Esc>", kill)  -- habitual 'close'
     , ("M4-<Tab>", goToSelected defaultGSConfig)

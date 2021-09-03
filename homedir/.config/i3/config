@@ -50,8 +50,8 @@ bindsym $mod+Escape kill
 bindsym Mod1+Escape kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-#bindsym $mod+grave exec dmenu_run
+#bindsym $mod+d exec dmenu_run_h
+#bindsym $mod+grave exec dmenu_run_h
 
 # change focus
 bindsym $mod+j focus left

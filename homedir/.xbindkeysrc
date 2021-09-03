@@ -1,6 +1,6 @@
 # For the benefit of emacs users: -*- shell-script -*-
 
-"dmenu_run"
+"dmenu_run_h"
   Mod4+grave
 
 "_lock_screen"
