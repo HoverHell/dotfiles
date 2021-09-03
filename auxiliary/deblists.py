@@ -80,6 +80,7 @@ class Deblists:
     iputils-ping
     iputils-tracepath
     mtr-tiny
+    net-tools  # `ifconfig`
     tcpdump
     dnsutils  # `dig`
     openssh-client  # ...
@@ -167,6 +168,7 @@ class Deblists:
     xkbset xbindkeys
     geeqie mplayer vlc
     i3 stalonetray xpra remmina
+    keepassxc
     '''
 
     main_system_hw = '''
