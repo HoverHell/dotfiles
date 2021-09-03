@@ -158,6 +158,7 @@ class Deblists:
     arandr
     ark
     antiword
+    barrier
     chromium-browser firefox firejail
     dmz-cursor-theme
     # kgraphviewer
