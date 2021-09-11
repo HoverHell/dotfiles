@@ -133,7 +133,7 @@ class Deblists:
     debsums  # non-deb-matching files
     borgbackup  # ...
     duff  # duplicates
-    easy-rsa
+    easy-rsa openvpn openconnect
     # Encrypted root fs:
     ecryptfs-utils  cryptsetup  cryptsetup-bin
     # ...
