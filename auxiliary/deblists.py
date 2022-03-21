@@ -95,6 +95,15 @@ class Deblists:
     host_common = '''
     autossh  # ssh proxying / centralizing
     openssh-server
+    etckeeper  # persistent /etc history
+    unattended-upgrades
+    '''
+
+    cloud_server = '''
+    cloud-init
+    docker.io
+    linux-generic
+    qemu-guest-agent
     '''
 
     build = '''
@@ -128,7 +137,6 @@ class Deblists:
     aptitude  # Best-hope for when dependencies get a little complicated.
     apt-file  # Goes as a common database for deb packages
     wipe  # not usually effective, but better than nothing.
-    etckeeper  # persistent /etc history
     cruft-ng  # non-deb-tracked files
     debsums  # non-deb-matching files
     borgbackup  # ...
