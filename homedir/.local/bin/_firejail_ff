@@ -16,5 +16,5 @@ exec firejail \
     --protocol=unix,inet,inet6 \
     --private-dev \
     --private-tmp \
-    --x11=xorg \
+    --x11=xpra \
     firefox --no-remote -P "$name" "$@"
