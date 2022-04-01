@@ -8,16 +8,16 @@
 # If not running interactively, don't do anything:
 if [ -z "$PS1" ]; then return; fi
 
+# This duplicated the `.profile` code, currently.
 # # http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
-pathadd() {
+_pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$1:$PATH"
     fi
 }
-
-# The home-executables.
-pathadd "$HOME/.local/bin"
-pathadd "$HOME/bin"
+_pathadd "$HOME/.local/bin"
+_pathadd "$HOME/.local/usr/bin"
+_pathadd "$HOME/bin"
 
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
 
