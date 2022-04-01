@@ -104,6 +104,8 @@ class Deblists:
     docker.io
     linux-generic
     qemu-guest-agent
+    emacs-nox
+    nginx-full apache2-utils squid certbot python3-certbot-nginx
     '''
 
     build = '''
