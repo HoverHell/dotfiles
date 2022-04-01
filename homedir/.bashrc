@@ -6,9 +6,9 @@
 # set -x
 
 # If not running interactively, don't do anything:
-[ -z "$PS1" ] && return
+if [ -z "$PS1" ]; then return; fi
 
-## http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
+# # http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$1:$PATH"
@@ -16,89 +16,98 @@ pathadd() {
 }
 
 # The home-executables.
-pathadd "$HOME/bin"
 pathadd "$HOME/.local/bin"
+pathadd "$HOME/bin"
 
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
 
 # Minor non-subprocessable conveniences.
 realcd() { cd "$(realpath "$(pwd)")"; }
 
-## CFG and local overrides
-CFG_ps_time="."  # timestamp in PS. empty to disable
-CFG_ps_ret="."  # '$?' in PS. empty to disable
+# # CFG and local overrides
+CFG_ps_time="1"  # timestamp in PS. empty to disable
+CFG_ps_ret="1"  # '$?' in PS. empty to disable
 CFG_ps_u="1;32"  # PS user color
 CFG_ps_h="0;33"  # PS host color
-[ -f ~/.bashrc_local ] && . ~/.bashrc_local
+if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local; fi
 
-# don't put duplicate lines in the history. See bash(1) for more options
-#export HISTCONTROL=ignoredups
+# # don't put duplicate lines in the history. See bash(1) for more options
+# export HISTCONTROL=ignoredups
 
 if [ x"$TERM_ACTUAL" == x"rxvt-256color" ]; then
   export TERM="xterm-256color"
 fi
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS
 shopt -s checkwinsize
 
-#LS_PARAMS='--time-style=long-iso'
-LS_PARAMS='--time-style=iso'
+# LS_PARAMS='--time-style=long-iso'
+LS_PARAMS="--time-style=iso"
 
-# enable color support of ls and also add handy aliases
+# Enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
+    eval "$(dircolors -b)"
     LS_PARAMS="$LS_PARAMS --color=auto"
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
 fi
 
-alias ls='ls $LS_PARAMS'
-
-# some more ls aliases
-alias ll='ls -lAF'
-#alias la='ls -A'
-#alias l='ls -CF'
-alias l='ls -CAF'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-#alias wine='LANG=ru_RU.UTF-8 wine'
+alias ls="ls \$LS_PARAMS"
+# Some more ls aliases
+alias ll="ls -lAF"
+alias l="ls -CAF"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-#case "$TERM" in
-#xterm-color)
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#    ;;
-#*)
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#    ;;
-#esac
+# # set a fancy prompt (non-color, unless we know we "want" color)
+# case "$TERM" in
+#     xterm-color)
+# 	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# 	;;
+#     *)
+# 	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+# 	;;
+# esac
 
-# Comment in the above and uncomment this below for a color prompt
-#PS1="${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033[00;37m\]@\[\033[00;32m\]\h\[\033[01;37m\]:\[\033[01;36m\]\w\[\033[01;37m\]\$ "
+# # Comment in the above and uncomment this below for a color prompt
+# PS1="${debian_chroot:+($debian_chroot)}\[\033[01;33m\]\u\[\033[00;37m\]@\[\033[00;32m\]\h\[\033[01;37m\]:\[\033[01;36m\]\w\[\033[01;37m\]\$ "
 
-## Scary scary prompt prompt
-[ $CFG_ps_time ] && PS_time='\[\033[40m\033[0m\033[01;37m\]| \D{%H%M%S} '
-[ $CFG_ps_ret ] && PS_ret='\033[00;37m\]:$?\[\033[00;37m'
-PS1="${debian_chroot:+($debian_chroot)}"\
-"${PS_time}\[\033[0${CFG_ps_u}m\]\u\[\033[00;37m\]"\
-"@\[\033[0${CFG_ps_h}m\]\h"\
-"\[\033[00;37m\]:\[\033[01;36m\]\w"\
-"\[${PS_ret}\033[00m\]\\$ "
+# Build PS1 and also have some color-sequences in variables.
+c_start='\['
+c_end='\]'
+c_reset='\033[0m'
+# "cf" as in "color, full sequence"
+cf_reset="${c_start}${c_reset}${c_end}"
+c_white_reset='\033[0;1;37m'
+cf_white_reset="${c_start}${c_white_reset}${c_end}"
+c_cyan='\033[1;36m'
+PS1=""
+PS1="${PS1}${debian_chroot:+($debian_chroot)}"
+if [ $CFG_ps_time ]; then
+    PS1="${PS1}${cf_white_reset}| \\D{%H%M%S} "
+else
+    PS1="${PS1}${cf_reset}"
+fi
+c_user="\\033[${CFG_ps_u}m"
+PS1="${PS1}${c_start}${c_user}${c_end}\\u${cf_reset}"
+c_host="\\033[${CFG_ps_h}m"
+PS1="${PS1}@${c_start}${c_host}${c_end}\\h${cf_reset}"
+PS1="${PS1}:${c_start}${c_cyan}${c_end}\\w${cf_reset}"
+if [ $CFG_ps_ret ]; then PS1="${PS1}:\$?"; fi
+PS1="${PS1}\\\$ "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+	PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+	;;
+    *)
+	;;
 esac
 
 # enable programmable completion features (you don't need to enable
@@ -107,29 +116,6 @@ esac
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-
-
-### The since-long meaningless stuff. Use C.UTF-8 already!
-#PAGER="most"
-#LANG="C"
-#export LC_CTYPE="ru_RU.CP1251"
-#export LC_NUMERIC="ru_RU.CP1251"
-#export LC_TIME="en_US"
-#export LC_COLLATE="ru_RU.CP1251"
-#export LC_MONETARY="ru_RU.CP1251"
-#export LC_PAPER="ru_RU.CP1251"
-#export LC_NAME="ru_RU.CP1251"
-#export LC_ADDRESS="ru_RU.CP1251"
-#export LC_TELEPHONE="ru_RU.CP1251"
-#export LC_MEASUREMENT="ru_RU.CP1251"
-#export LC_IDENTIFICATION="ru_RU.CP1251"
-#export LANG="en_US"
-#export LANGUAGE="en_US"
-#export LC_MESSAGES="en_US"
-#export GDK_USE_XFT=0
-#export QT_XFT=0
-#export COLUMNS=132
-#DEFAULTCHARSET="CP1251"
 
 
 # # cdargs (`cv`, `ca`, ...).
@@ -146,8 +132,8 @@ fi
 
 
 
-### History-keeping `cd`:
-## http://unix.stackexchange.com/questions/4290/
+# # History-keeping `cd`:
+# # http://unix.stackexchange.com/questions/4290/
 pushd()
 {
   if [ $# -eq 0 ]; then
@@ -157,48 +143,39 @@ pushd()
   fi
 
   builtin pushd "${DIR}" > /dev/null
-  # echo -n "DIRSTACK: " 1>&2
   dirs >&2
 }
 pushd_builtin()
 {
   builtin pushd > /dev/null
-  # echo -n "DIRSTACK: " 1>&2
   dirs >&2
 }
 popd()
 {
   builtin popd > /dev/null
-  # echo -n "DIRSTACK: " 1>&2
   dirs >&2
 }
 alias cd='pushd'
-#alias back='popd'
 alias flip='pushd_builtin'
 
 
-### ...
-#export BROWSER="/usr/bin/x-www-browser"
-#export EDITOR="jmacs"
-#alias e="jmacs"
+# export BROWSER="/usr/bin/x-www-browser"
+# export EDITOR="jmacs"
 
 
-### Extra completions
+# # Extra completions
 complete -o filenames -F _command s-  # mscreenterm run cmd
-#[ -f ~/bin/webtap.bash_completion ] && \
-#  source ~/bin/webtap.bash_completion
+# if [ -f ~/.local/bin/webtap.bash_completion ]; then . ~/.local/bin/webtap.bash_completion; fi
 
 
-### Bash-eternal-history
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
-               "$(history 1)" >> ~/.bash_eternal_history'
+# # Bash-eternal-history
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history'
+# ...
+shopt -s histappend
+export HISTTIMEFORMAT="%Y-%m-%dT%H:%M:%S%z "
+# export HISTFILE="/dev/null"
 
-### No default .bash_history
-# shopt -s histappend
-export HISTTIMEFORMAT="%s "  # ?...
-export HISTFILE="/dev/null"
-
-### fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
+# # fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
 set +o histexpand
 
 bind -r '\en'
