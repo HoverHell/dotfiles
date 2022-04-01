@@ -105,7 +105,7 @@ class Deblists:
     linux-generic
     qemu-guest-agent
     emacs-nox
-    nginx-full apache2-utils squid certbot python3-certbot-nginx
+    nginx-full apache2-utils squid certbot python3-certbot-nginx wireguard wireguard-dkms
     '''
 
     build = '''
