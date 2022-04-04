@@ -26,7 +26,7 @@ try:
 except Exception:
     pass
 else:
-    print("I: Adding Cython extension", file=sys.stderr)
+    # print("I: Adding Cython extension", file=sys.stderr)
     c.InteractiveShellApp.extensions.append('Cython')
 
 

@@ -13,3 +13,4 @@ tmpf*
 .tox
 .mypy_cache
 .vscode
+flycheck_*.py

@@ -26,7 +26,7 @@ realcd() { cd "$(realpath "$(pwd)")"; }
 
 # # CFG and local overrides
 CFG_ps_time="1"  # timestamp in PS. empty to disable
-CFG_ps_ret="1"  # '$?' in PS. empty to disable
+CFG_ps_ret="1"  # "$?" in PS. empty to disable
 CFG_ps_u="1;32"  # PS user color
 CFG_ps_h="0;33"  # PS host color
 if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local; fi
@@ -35,14 +35,14 @@ if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local; fi
 # export HISTCONTROL=ignoredups
 
 if [ x"$TERM_ACTUAL" == x"rxvt-256color" ]; then
-  export TERM="xterm-256color"
+    export TERM="xterm-256color"
 fi
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS
 shopt -s checkwinsize
 
-# LS_PARAMS='--time-style=long-iso'
+# LS_PARAMS="--time-style=long-iso"
 LS_PARAMS="--time-style=iso"
 
 # Enable color support of ls and also add handy aliases
@@ -123,40 +123,37 @@ if [ -f /usr/share/doc/cdargs/examples/cdargs-bash.sh ]; then
     . /usr/share/doc/cdargs/examples/cdargs-bash.sh
 fi
 if [ -f /usr/share/cdargs/cdargs-bash-completion.sh ]; then  # cygwin
-  . /usr/share/cdargs/cdargs-lib.sh
-  . /usr/share/cdargs/cdargs-alias.sh
-  CDARGS_BASH_ALIASES="cv cdb"
-  alias cv="cdb"
-  . /usr/share/cdargs/cdargs-bash-completion.sh
+    . /usr/share/cdargs/cdargs-lib.sh
+    . /usr/share/cdargs/cdargs-alias.sh
+    CDARGS_BASH_ALIASES="cv cdb"
+    alias cv="cdb"
+    . /usr/share/cdargs/cdargs-bash-completion.sh
 fi
 
 
 
 # # History-keeping `cd`:
 # # http://unix.stackexchange.com/questions/4290/
-pushd()
-{
-  if [ $# -eq 0 ]; then
-    DIR="${HOME}"
-  else
-    DIR="$1"
-  fi
+pushd() {
+    if [ $# -eq 0 ]; then
+      DIR="${HOME}"
+    else
+      DIR="$1"
+    fi
 
-  builtin pushd "${DIR}" > /dev/null
-  dirs >&2
+    builtin pushd "${DIR}" > /dev/null
+    dirs >&2
 }
-pushd_builtin()
-{
-  builtin pushd > /dev/null
-  dirs >&2
+pushd_builtin() {
+    builtin pushd > /dev/null
+    dirs >&2
 }
-popd()
-{
-  builtin popd > /dev/null
-  dirs >&2
+popd() {
+    builtin popd > /dev/null
+    dirs >&2
 }
-alias cd='pushd'
-alias flip='pushd_builtin'
+alias cd="pushd"
+alias flip="pushd_builtin"
 
 
 # export BROWSER="/usr/bin/x-www-browser"
@@ -182,12 +179,34 @@ bind -r '\en'
 
 # Fix for encfs/alike homedir problems.
 if pwd | grep -q '^(unreachable)'; then
-  echo "pwd: '$(pwd)'; \`cd\`..."
-  cd "$HOME"
+    echo "pwd: '$(pwd)'; \`cd\`..."
+    cd "$HOME"
 fi
 
 if [ -f ~/.virtualenv/bin/activate ]; then
     . ~/.virtualenv/bin/activate
+fi
+export PYTHONBREAKPOINT=ipdb.set_trace
+
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$("$HOME/miniconda3/bin/conda" shell.bash hook 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+
+# fnm
+if [ -f "$HOME/.fnm/fnm" ]; then
+    _pathadd "$HOME/.fnm"
+    eval "$(fnm env)"
 fi
 
 true
