@@ -1,3 +1,9 @@
+.label {
+  /* color: white; */
+  text-shadow: 2px 2px 0px black;
+  /* text-shadow: 1px 1px 0px black, 1px -1px 0px black, -1px 1px 0px black, -1px -1px 0px black; */
+}
+
 .tab.unread .label {
   font-weight: bold !important;
 }
