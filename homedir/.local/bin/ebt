@@ -1,0 +1,2 @@
+#!/bin/sh -x
+exec x-terminal-emulator -e eb "$@"
