@@ -18,3 +18,7 @@ exec firejail \
     --private-tmp \
     --x11=xpra \
     firefox --no-remote -P "$name" "$@"
+
+
+#    --x11=xorg \
+#    --x11=xpra \
