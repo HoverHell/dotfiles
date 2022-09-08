@@ -1,0 +1,12 @@
+#!/bin/sh -x
+
+set -e
+
+tempfile="$(mktemp)"
+cleanup(){
+    rm -v "$tempfile"
+}
+trap cleanup EXIT
+xclipout --md > "$tempfile"
+e "$tempfile"
+xclipin < "$tempfile"
