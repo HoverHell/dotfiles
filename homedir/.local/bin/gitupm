@@ -1,2 +1,8 @@
 #!/bin/sh
-exec gitup origin master "$@"
+git remote update
+branch="$(
+   branch --list --all --format="%(refname)" \
+     | sed -rn 's,^refs/remotes/origin/(main|master)$,\1, p' \
+     | sed 1q
+)"
+git pull --rebase origin "$branch"
