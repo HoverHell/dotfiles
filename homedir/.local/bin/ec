@@ -1,2 +1,24 @@
-#!/bin/sh
-exec emacsclient -t --alternate-editor= "$@"
+#!/bin/sh -x
+set -eu
+
+# Support the `grep`-output paths like 'some:file:123:456'
+# But don't touch the args when the 'some:file:123:456'-like path actually exists.
+filepath="${1:-""}"
+if [ -n "$filepath" ] && [ ! -e "$filepath" ]; then
+    shift 1
+    filepos_re='^(.*):([0-9]+:[0-9]+)$'
+    # 'some:file:123:456' -> '+123:456'
+    filepos_candidate="$(printf "%s" "$filepath" | sed -rn "s/${filepos_re}/+\\2/ p")"
+    filepos="+0:0"  # It's actually 1-based, but this works with less ambiguity.
+    if [ -n "$filepos" ]; then
+        filepath_new="$(printf "%s" "$filepath" | sed -rn "s/${filepos_re}/\\1/ p")"
+        # No point in specifying a position for a non-existent file, right?
+        if [ -e "$filepath_new" ]; then
+            filepath="$filepath_new"
+            filepos="$filepos_candidate"
+        fi
+    fi
+    exec emacsclient --tty --alternate-editor="" "$filepos" "$filepath" "$@"
+fi
+
+exec emacsclient --tty --alternate-editor="" "$@"
