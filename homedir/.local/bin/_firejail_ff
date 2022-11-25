@@ -6,6 +6,7 @@ if [ -z "$name" ]; then
    echo "_firejail_ff <name> <args>" >&2
    exit 1
 fi
+fjx11="${FJ_X11:-"xpra"}"  # Also available: `xorg`
 exec firejail \
     --name="$name" \
     --private=~/.jails/"$name" \
@@ -16,7 +17,7 @@ exec firejail \
     --protocol=unix,inet,inet6 \
     --private-dev \
     --private-tmp \
-    --x11=xpra \
+    --x11="$fjx11" \
     firefox --no-remote -P "$name" "$@"
 
 
