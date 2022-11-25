@@ -1,0 +1,8 @@
+#!/bin/sh
+# Not as cheap a check as I would like, but it should do.
+# Might actally prefer `command -v docker-compose` for the inverted check.
+if docker compose >/dev/null 2>&1; then
+    exec docker compose "$@"
+else
+    exec docker-compose "$@"
+fi
