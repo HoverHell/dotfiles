@@ -13,6 +13,7 @@ virtualenv
 atomicfile
 PyYAML
 msgpack-python
+cbor
 # simplejson
 ujson
 sh
@@ -31,6 +32,8 @@ python-prctl
 Jinja2
 smhasher
 psycopg2-binary
+pyotp
+pyperclip
 
 # possibly useful libraries
 
@@ -38,6 +41,7 @@ psycopg2-binary
 wrapt
 decorator
 
+markdown
 html5lib
 MarkupSafe
 cached-property

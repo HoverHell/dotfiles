@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import datetime
+import os
+
+import pyotp
+import pyperclip
+
+
+def main():
+    key = os.environ["TOTP_KEY"]
+    totp = pyotp.TOTP(key)
+    code = totp.now()
+    pyperclip.copy(code)
+
+    now_ts = datetime.datetime.now().timestamp()
+    next_ts = (now_ts // totp.interval + 1) * totp.interval
+    time_remaining = next_ts - now_ts
+    print(code)
+    print(f"{time_remaining:.2f}s")
+
+
+if __name__ == "__main__":
+    main()
