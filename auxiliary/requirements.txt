@@ -1,37 +1,27 @@
-# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev libssl-dev python3.9 python3.9-venv python3.9-dev
+# apt install build-essential libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev libpng-dev liblapack-dev libblas-dev libssl-dev python3.10 python3.10-venv python3.10-dev
 # pip install -U -r ./requirements.txt
 
 # selfupdate
-wheel
 pip
 setuptools
 virtualenv
-
+wheel
 
 # highly used libraries
-# six
 atomicfile
-PyYAML
-msgpack-python
-cbor
-# simplejson
-ujson
 sh
+coloredlogs
+
 pytz
 python-dateutil
 iso8601
 ciso8601
 
 # occasionally used libraries
-redis
 Cython
-click
-click-plugins
-click-repl
 python-prctl
 Jinja2
 smhasher
-psycopg2-binary
 pyotp
 pyperclip
 
@@ -44,11 +34,27 @@ decorator
 markdown
 html5lib
 MarkupSafe
-cached-property
-
-ruamel.yaml
 
 shortuuid
+
+# serialization
+cbor
+msgpack-python
+orjson
+PyYAML
+ruamel.yaml
+
+# CLI
+click
+click-plugins
+click-repl
+typer
+typer-cli
+
+# DB
+asyncpg
+psycopg2-binary
+redis
 
 # TiMemory  # something something broken skbuild something
 
@@ -56,56 +62,38 @@ shortuuid
 toolz
 easydev
 
-
 # devworks
-pylint<1.9; python_version<'3'
-pylint; python_version>='3'
-astroid<2; python_version<'3'
-astroid; python_version>='3'
-pycodestyle
-yapf
+pylint
+astroid
+
+black
+isort
+flake8
+mypy
 pytest
+pytest-asyncio
+pytest-cov
 tox
-mccabe
 
-# devworks, advanced
-Fabric
 cookiecutter
-docker-compose
-
 
 # greatest convenience
-ipython[all]<6; python_version<'3'
-ipython[all]; python_version>='3'
+ipython[all]
 ipdb
-# # At the moment it is problematic to require it explicitly because it somehow
-# # might install a version too new for jupyter / ipdb.
 # prompt-toolkit
 Pygments
-# -e git+ssh://git@gitlab.com/hoverhell/parallel-ssh#egg=pssh
+
 -e git+https://gitlab.com/hoverhell/parallel-ssh#egg=pssh
 # -e git+ssh://git@gitlab.com/hoverhell/pyaux.git#egg=pyaux
 -e git+https://gitlab.com/hoverhell/pyaux.git#egg=pyaux
+-e git+https://gitlab.com/hoverhell/pyauxm.git#egg=pyauxm
+
 git+https://github.com/apenwarr/sshuttle#egg=sshuttle
-
-
-# requests
-requests
-# Might not be necessary, but more reliable:
-ndg-httpsclient
-pyasn1
-pyOpenSSL
-
-# Other way
-pycurl
-
 
 # dataworks
 jupyter
-jupyterlab<0.34; python_version<'3'
-jupyterlab; python_version>='3'
-jupyter-console<5.3; python_version<'3'
-jupyter-console; python_version>='3'
+jupyterlab
+jupyter-console
 notebook
 # jupyter-themes
 jupyterthemes
@@ -118,46 +106,22 @@ tqdm
 numpy
 pandas
 xlrd
-matplotlib<3; python_version<'3'
-matplotlib; python_version>='3'
+matplotlib
 scipy
 scikit-learn
 plydata
-statsmodels<0.11; python_version<'3'
-statsmodels; python_version>='3'
-plotnine<0.5; python_version<'3'
-plotnine; python_version>='3'
+statsmodels
+plotnine
 altair
 # vega_datasets
 vega
 
-# eventloopsuff
-
-# Technically, it works on py3; no nearby use-cases though.
-gevent; python_version<'3'
-greenlet; python_version<'3'
-
-# http/2 aio framework
-Quart; python_version>='3'
-
-tornado<6; python_version<'3'
-tornado; python_version>='3'
-tornalet
-trequests
-
-twisted
-
-django<2; python_version<'3'
-django; python_version>='3'
-djangorestframework
+# HTTP stuff
+requests
+pycurl
+aiohttp
+fastapi
+uvicorn
 
 # # v8
 # py-mini-racer
-
-# backports and stuff
-future; python_version<'3'
-futures; python_version<'3'
-functools32; python_version<'3'
-backports.functools-lru-cache; python_version<'3'
-backports.shutil-get-terminal-size; python_version<'3'
-backports.ssl-match-hostname; python_version<'3'
