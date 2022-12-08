@@ -1,10 +1,23 @@
 #!/bin/sh
 
-cat <<\_EOF
-"""
-...
-"""
+cat << \_EOF
+#!/usr/bin/env python3
+"""..."""
 
-# from __future__ import generator_stop, annotations
+from __future__ import annotations
 
+import asyncio
+from typing import Any
+
+
+async def amain() -> Any:
+    pass
+
+
+def main() -> Any:
+    return asyncio.run(amain())
+
+
+if __name__ == "__main__":
+    main()
 _EOF
