@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/sh -x
 
-set -Eeu
+set -eu
 
 repodir="$(dirname "$(readlink -e "$0")")"
 repodir="$repodir/homedir/"
@@ -8,5 +8,5 @@ repodir="$repodir/homedir/"
 tempfile="$(mktemp)"
 trap 'rm "$tempfile"' EXIT
 # Note: `-X` did not go well with a broken symlink.
-it ls-tree -r --name-only HEAD > "$tempfile"
+git ls-tree -r --name-only HEAD > "$tempfile"
 rsync -v -HAax --files-from="$tempfile" "$@" ./ ~/
