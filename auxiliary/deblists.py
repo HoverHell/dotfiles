@@ -122,7 +122,7 @@ class Deblists:
 
     libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev
     libpng-dev liblapack-dev libblas-dev libssl-dev
-    python3.9 python3.9-venv python3.9-dev
+    python3.10 python3.10-venv python3.10-dev
     '''
 
     file_formats = '''
@@ -190,7 +190,8 @@ class Deblists:
     lshw
     hdparm
     powertop
-    fancontrol hddtemp i2c-tools lm-sensors
+    fancontrol i2c-tools lm-sensors
+    # hddtemp
     irqbalance
     lvm2
     '''
@@ -220,14 +221,15 @@ class Deblists:
     clang-7 clang-7-doc clang-7-examples
     clang-8 clang-8-doc clang-8-examples
     # Python
-    python3.9 python3.9-dev python3.9-venv
     pythontracer games-python3-dev eric ninja-ide
     # other additions
     fonts-mathjax-extras fonts-stix
+    # common
+    hdeps-build
     '''
 
     virtualbox_guest = '''
-    virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+    virtualbox-guest-utils virtualbox-guest-x11
     '''
 
 
