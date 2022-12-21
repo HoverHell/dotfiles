@@ -1,7 +1,4 @@
-# coding: utf8
-
 import sys
-
 
 # __into_builtin = True
 # import os
@@ -16,16 +13,17 @@ else:
     madness._olt_into_builtin()
 
 
-c = get_config()
+c = get_config()  # noqa: F821
 
 
 try:
     import Cython as __tmp
+    assert __tmp
 except Exception:
     pass
 else:
     # print("I: Adding Cython extension", file=sys.stderr)
-    c.InteractiveShellApp.extensions.append('Cython')
+    c.InteractiveShellApp.extensions.append("Cython")
 
 
 c.TerminalIPythonApp.display_banner = False

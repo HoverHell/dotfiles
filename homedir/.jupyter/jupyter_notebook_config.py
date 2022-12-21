@@ -1,9 +1,7 @@
-# coding: utf8
-
-c = get_config()
+c = get_config()  # noqa: F821
 # c.NotebookApp.profile = u'default'
 
-c.ServerApp.ip = '127.0.0.1'
+c.ServerApp.ip = "127.0.0.1"
 # c.ServerApp.ip = '*'
 c.ServerApp.port = 9880
 c.ServerApp.open_browser = False

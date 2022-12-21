@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+"""
+http://code.activestate.com/recipes/252508-file-unzip/
 
-# http://code.activestate.com/recipes/252508-file-unzip/
+---
 
-""" 
 unzip.py
 Version: 1.1
 Extract a zipfile to the directory provided
@@ -19,28 +20,29 @@ Python class:
     un.extract(r'c:\testfile.zip', r'c:\testoutput')
 
 By Doug Tolton
-"""
 
-"""
+---
+
 Hacked with stuff from
 http://unknowngenius.com/blog/archives/2011/11/04/recovering-japanese-filenames-from-zip-archives-on-os-x/
 """
 
-import sys
-import zipfile
+import getopt
 import os
 import os.path
-import getopt
 import re
+import sys
+import zipfile
+
 
 class unzip:
-    def __init__(self, verbose = False, percent = 10, encoding='sjis'):
+    def __init__(self, verbose=False, percent=10, encoding="sjis"):
         self.verbose = verbose
         self.percent = percent
         self.encoding = encoding
 
     def extract(self, file, dir):
-        if not dir.endswith(':') and not os.path.exists(dir):
+        if not dir.endswith(":") and not os.path.exists(dir):
             os.mkdir(dir)
 
         zf = zipfile.ZipFile(file)
@@ -56,56 +58,55 @@ class unzip:
         # extract files to directory structure
         for i, name_src in enumerate(zf.namelist()):
 
-            name = unicode(name_src, self.encoding)  # N: encoding.
+            name = str(name_src, self.encoding)  # N: encoding.
 
-            if self.verbose == True:
-                print "Extracting %s" % name
+            if self.verbose:
+                print(f"Extracting {name!r}")
             elif perc > 0 and (i % perc) == 0 and i > 0:
-                complete = int (i / perc) * percent
-                print "%s%% complete" % complete
+                complete = int(i / perc) * percent
+                print(f"{complete}% complete")
 
-            if not name.endswith('/'):
-                outfile = open(os.path.join(dir, name), 'wb')
+            if not name.endswith("/"):
+                outfile = open(os.path.join(dir, name), "wb")
                 outfile.write(zf.read(name_src))
                 outfile.flush()
                 outfile.close()
 
-
     def _createstructure(self, file, dir):
         self._makedirs(self._listdirs(file), dir)
 
-
     def _makedirs(self, directories, basedir):
-        """ Create any directories that don't currently exist """
+        """Create any directories that don't currently exist"""
         for dir in directories:
             curdir = os.path.join(basedir, dir)
             if not os.path.exists(curdir):
-                if self.verbose == True:
-                    print "Creating %s" % curdir
+                if self.verbose:
+                    print(f"Creating {curdir!r}")
                 os.makedirs(curdir)
 
     def _listdirs(self, file):
-        """ Grabs all the directories in the zip structure
+        """Grabs all the directories in the zip structure
         This is necessary to create the structure before trying
-        to extract the file to it. """
+        to extract the file to it."""
         zf = zipfile.ZipFile(file)
 
         dirs = []
 
         for name_src in zf.namelist():
-            name = unicode(name_src, self.encoding)  # N: encoding.
-            #if name.endswith('/'):
+            name = str(name_src, self.encoding)  # N: encoding.
+            # if name.endswith('/'):
             #    dirs.append(name)
-            ## Unfortunately, in some zip files directories are not listed
-            ## separately. So add dirname from anything with a slash.
-            if name.count('/'):
-                dirs.append(re.sub(r'/[^/]*$', '/', name))
+            # Unfortunately, in some zip files directories are not listed
+            # separately. So add dirname from anything with a slash.
+            if name.count("/"):
+                dirs.append(re.sub(r"/[^/]*$", "/", name))
 
         dirs.sort()
         return dirs
 
-def usage():
-    print """usage: unzip.py -z <zipfile> -o <targetdir>
+
+USAGE = """
+usage: unzip.py -z <zipfile> -o <targetdir>
     <zipfile> is the source zipfile to extract
     <targetdir> is the target destination
 
@@ -118,12 +119,17 @@ def usage():
     --verbose
     --percent=10
     --zipfile=<zipfile>
-    --outdir=<targetdir>"""
-    
+    --outdir=<targetdir>
+""".strip()
+
+
+def usage():
+    print(USAGE, file=sys.stderr)
+
 
 def main():
-    shortargs = 'vhp:z:o:'
-    longargs = ['verbose', 'help', 'percent=', 'zipfile=', 'outdir=']
+    shortargs = "vhp:z:o:"
+    longargs = ["verbose", "help", "percent=", "zipfile=", "outdir="]
 
     unzipper = unzip()
 
@@ -140,7 +146,7 @@ def main():
         if o in ("-v", "--verbose"):
             unzipper.verbose = True
         if o in ("-p", "--percent"):
-            if not unzipper.verbose == True:
+            if not unzipper.verbose:
                 unzipper.percent = int(a)
         if o in ("-z", "--zipfile"):
             zipsource = a
@@ -153,8 +159,9 @@ def main():
     if zipsource == "" or zipdest == "":
         usage()
         sys.exit()
-            
+
     unzipper.extract(zipsource, zipdest)
 
-if __name__ == '__main__':
-  main()
+
+if __name__ == "__main__":
+    main()
