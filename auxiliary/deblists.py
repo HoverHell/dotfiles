@@ -48,11 +48,12 @@ class Deblists:
     time  # exetuting with timing
     # uuid  # uuid generation. rare.
 
-    git  # a multi-category thing
+    git git-lfs  # a multi-category thing
     # fossil
     diffutils
     colordiff  # diff for eyes
     wdiff  # diff for eyes (too)
+    xxd
 
     lsof
     smartmontools
@@ -128,10 +129,12 @@ class Deblists:
     file_formats = '''
     sqlite3
     p7zip-full
+    lz4
     unp  # combining auto-unarchiver
     catdoc
     cuetools
     dosfstools
+    exfat-fuse
     '''
 
     main_system = '''
@@ -139,7 +142,7 @@ class Deblists:
     aptitude  # Best-hope for when dependencies get a little complicated.
     apt-file  # Goes as a common database for deb packages
     wipe  # not usually effective, but better than nothing.
-    cruft-ng  # non-deb-tracked files
+    cruft cruft-ng  # non-deb-tracked files
     debsums  # non-deb-matching files
     borgbackup  # ...
     duff  # duplicates
@@ -172,6 +175,7 @@ class Deblists:
     barrier
     chromium-browser firefox firejail
     dmz-cursor-theme
+    feh
     # kgraphviewer
     rxvt-unicode
     # rxvt-unicode-256color
@@ -179,6 +183,8 @@ class Deblists:
     geeqie mplayer vlc
     i3 stalonetray xpra remmina
     keepassxc
+    qdirstat
+    trezor
     '''
 
     main_system_hw = '''
@@ -205,11 +211,17 @@ class Deblists:
     xen-system-amd64
     '''
 
+    main_system_stuff = '''
+    fzf vagrant vagrant-sshfs virtualbox virtualbox-ext-pack zsh
+    '''
+
     main_system_all = '''
     hdeps-common hdeps-common-net hdeps-cli hdeps-cli-net
     hdeps-host-common
-    hdeps-build hdeps-file-formats
-    hdeps-main-system hdeps-main-system-x hdeps-main-system-hw hdeps-main-system-ubu
+    hdeps-file-formats
+    hdeps-main-system
+    hdeps-main-system-x hdeps-main-system-hw hdeps-main-system-ubu
+    hdeps-main-system-stuff
     '''
 
     dev_max = '''

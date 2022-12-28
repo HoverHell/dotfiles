@@ -23,4 +23,4 @@ _touchscrollspeed.sh
 ## The Terminal
 #~/bin/xmrescreen &
 xkbset nullify lock
-_uncapslock
+# _uncapslock
