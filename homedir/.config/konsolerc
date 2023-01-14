@@ -1,0 +1,33 @@
+MenuBar=Disabled
+eDP Window-Maximized 1920x1080=true
+
+[Desktop Entry]
+DefaultProfile=hhprofile1.profile
+
+[Favorite Profiles]
+Favorites=hhprofile1.profile
+
+[KonsoleWindow]
+RemoveWindowTitleBarAndFrame=true
+ShowMenuBarByDefault=false
+
+[MainWindow]
+Height 1080=1080
+MenuBar=Disabled
+Width 1920=1920
+Window-Maximized 1080x1920=true
+eDP HDMI-A-0 Window-Maximized 1920x1080=true
+eDP Height 1920x1080=1080
+eDP Width 1920x1080=1920
+eDP Window-Maximized 1920x1080=true
+eDP XPosition 1920x1080=359
+eDP YPosition 1920x1080=78
+
+[SearchSettings]
+SearchRegExpression=true
+
+[TabBar]
+CloseTabButton=None
+
+[UiSettings]
+ColorScheme=Default

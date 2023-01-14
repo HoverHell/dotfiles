@@ -1,0 +1,9 @@
+aptitude "";
+aptitude::Keep-Unused-Pattern "";
+aptitude::Delete-Unused-Pattern "";
+aptitude::UI "";
+aptitude::UI::HelpBar "false";
+aptitude::UI::Menubar-Autohide "true";
+aptitude::UI::Minibuf-Prompts "true";
+aptitude::UI::InfoAreaTabs "true";
+aptitude::UI::Advance-On-Action "true";
