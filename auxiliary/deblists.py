@@ -331,6 +331,9 @@ def build():
     os.chdir(repo_path)
     for pkg_set_name in DEBSETS:
         build_one(pkg_set_name)
+
+    # Easier to pre-check than to do `pipefail`.
+    _run("dpkg-scanpackages", "--version")  # Requires `dpkg-dev` to be installed.
     _run('sh', '-x', '-c', 'dpkg-scanpackages -m . | gzip > Packages.gz')
     with open(cfg_path, 'w') as fobj:
         fobj.write(f'deb [trusted=yes] file:{repo_path} /\n')
