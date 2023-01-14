@@ -1,4 +1,3 @@
-
 ;; NOTE: http://stackoverflow.com/questions/778716/how-can-i-make-emacs-start-up-faster/779145#779145
 ;; NOTE: see 'XXX' marks (and the NOTE marks, ofc).
 
@@ -25,7 +24,6 @@
 ;                             command nil t)))
 
 
-
 ;; NOTE: Remove line-wrap (newline) character:
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\ )
 ; M-: (set-display-table-slot standard-display-table 'wrap ?\b )
@@ -35,7 +33,7 @@
 (kill-buffer "*scratch*")
 
 ;; Directory with various extra files.
-(add-to-list 'load-path "~/.emacs.d/lib/")
+; (add-to-list 'load-path "~/.emacs.d/lib/")
 
 
 ;; Various personal keybindings.
@@ -102,8 +100,8 @@
 (define-key my-keys-minor-mode-map "\M-\r" 'hs-toggle-hiding)
 
 ;; Auto-indent possibilities:
-;(define-key global-map (kbd "RET") 'newline-and-indent)
-;(define-key global-map (kbd "C-j") 'newline)
+; (define-key global-map (kbd "RET") 'newline-and-indent)
+; (define-key global-map (kbd "C-j") 'newline)
 ;; or
 ; (defun set-newline-and-indent () (local-set-key (kbd "RET") 'newline-and-indent))
 ;; http://www.emacswiki.org/emacs/AutoIndentation
@@ -114,7 +112,6 @@
 (setq-default save-place t)                   ;; activate it for all buffers
 (require 'saveplace)                          ;; get the package
 
-
 ;; Don't show menu bar
 (menu-bar-mode 0)
 
@@ -124,6 +121,7 @@
   (interactive)
   (yank)
   (call-interactively 'indent-region))
+
 
 ;; ===== Set standard indent to 2 rather that 4 ====
 ; (setq standard-indent 2)
@@ -144,13 +142,14 @@
 ;; ========== Prevent Emacs from making backup files ==========
 ; (setq make-backup-files nil)
 
+
 ;; ========== Place Backup Files in Specific Directory ==========
 ;; Enable backup files.
 (setq make-backup-files t)
 ;; Enable versioning with default values (keep five last versions, I think!)
 (setq version-control t)
 ;; Save all backup file in this directory.
-(setq backup-directory-alist (quote ((".*" . "~/.tmp/emacs_backups/"))))
+(setq backup-directory-alist (quote ((".*" . "~/.local/tmp/emacs_backups/"))))
 (setq delete-old-versions t)
 
 
@@ -220,26 +219,9 @@
 
 
 ;;;; Format-specific stuff. 
-;;; python-mode
-(setq py-shell-name "ipython")
-;; XXX: do not start python shell on it?
-;(autoload 'python-mode "python-mode" "Python Mode." t) 
-;(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-;;; cython-mode
-(autoload 'cython-mode "cython-mode" "Mode for editing Cython source files")
-(add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
-(add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
-(add-to-list 'auto-mode-alist '("\\.pxi\\'" . cython-mode))
 ;;; lua-mode
 (autoload 'lua-mode "lua-mode" "Mode for editing LUA source files")
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
-;;; Octave/matlab
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
-;;; coffee
-(autoload 'coffee-mode "coffee-mode" "Coffee Mode." t)
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 ;;; yaml
 (autoload 'yaml-mode "yaml-mode" "YAML Mode." t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
@@ -309,12 +291,12 @@
 
 ; (a(b(c(d(e(f(g(h(i(j(k(l(m((((()))))m)l)k)j)i)h)g)f)e)d)c)b)a)
 
-(load "~/.emacs.d/lib/jhamrick_emacs.el" nil t)
+; (load "~/.emacs.d/lib/jhamrick_emacs.el" nil t)
 
 ;; enhancements for displaying flymake errors
-(require 'flymake-cursor)
+; (require 'flymake-cursor)
 
-;;(setq flymake-log-level 3)
-(setq-default flymake-no-changes-timeout '1)  ;; '3)
-;; (setq-default flymake-info-line-regexp "^([Ii]nfo|refactor)")
-;; (setq flymake-warn-line-regexp "^not [wW]arning")
+; (setq flymake-log-level 3)
+; (setq-default flymake-no-changes-timeout '1)  ;; '3)
+; ; (setq-default flymake-info-line-regexp "^([Ii]nfo|refactor)")
+; ; (setq flymake-warn-line-regexp "^not [wW]arning")

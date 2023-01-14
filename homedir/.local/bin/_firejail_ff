@@ -6,7 +6,10 @@ if [ -z "$name" ]; then
    echo "_firejail_ff <name> <args>" >&2
    exit 1
 fi
-fjx11="${FJ_X11:-"xpra"}"  # Also available: `xorg`
+# fjx11="${FJ_X11:-"xorg"}"
+fjx11="${FJ_X11:-"xpra"}"
+# fbin="${FJ_BIN:-"firefox"}"
+fbin="${FJ_BIN:-"librewolf"}"
 exec firejail \
     --name="$name" \
     --private=~/.jails/"$name" \
@@ -18,7 +21,7 @@ exec firejail \
     --private-dev \
     --private-tmp \
     --x11="$fjx11" \
-    firefox --no-remote -P "$name" "$@"
+    "$fbin" --no-remote -P "$name" "$@"
 
 
 #    --x11=xorg \
