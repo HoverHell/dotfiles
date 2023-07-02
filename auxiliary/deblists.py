@@ -117,7 +117,7 @@ class Deblists:
     phys_server = """
     hdeps-cli hdeps-cli-net hdeps-common-net hdeps-host-common hdeps-system-basics
     acpi-support dmeventd efibootmgr irqbalance usbutils
-    grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
+    # grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
     haveged
     linux-generic
     lvm2 e2fsprogs parted
