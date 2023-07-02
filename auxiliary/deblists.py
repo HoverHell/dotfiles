@@ -17,18 +17,18 @@ import tempfile
 
 class Deblists:
 
-    common = '''
+    common = """
     apt-transport-https  # extra layer for privacy, sometimes required
-    '''
+    """
 
-    common_net = '''
+    common_net = """
     # For working with other systems both interactively and non-interactively.
     curl  # commonly necessary
     wget  # commonly necessary
     rsync  # also useful for rsyncing *to* the system
-    '''
+    """
 
-    cli = '''
+    cli = """
     ### Interactive shell local system tools ###
 
     # # Shell set:
@@ -76,9 +76,9 @@ class Deblists:
     e-wrapper
     # zile
     # emacs-nox
-    '''
+    """
 
-    cli_net = '''
+    cli_net = """
     ### Interactive shell networked tools ###
 
     lynx  # HTTP/HTML processing
@@ -100,21 +100,21 @@ class Deblists:
     iftop
 
     # git-svn git-remote-hg git-remote-bzr
-    '''
+    """
 
-    host_common = '''
+    host_common = """
     autossh  # ssh proxying / centralizing
     openssh-server
     etckeeper  # persistent /etc history
     logrotate
     unattended-upgrades
-    '''
+    """
 
-    system_basics = '''
+    system_basics = """
     base-files base-passwd dash findutils gzip hostname init login
-    '''
+    """
 
-    phys_server = '''
+    phys_server = """
     hdeps-cli hdeps-cli-net hdeps-common-net hdeps-host-common hdeps-system-basics
     acpi-support dmeventd efibootmgr irqbalance usbutils
     grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
@@ -124,18 +124,18 @@ class Deblists:
     ifupdown-ng net-tools wireless-tools wpasupplicant
     # locales
     xen-hypervisor-amd64
-    '''
+    """
 
-    cloud_server = '''
+    cloud_server = """
     cloud-init
     docker.io
     linux-generic
     qemu-guest-agent
     emacs-nox
     nginx-full apache2-utils squid certbot python3-certbot-nginx wireguard wireguard-dkms
-    '''
+    """
 
-    build = '''
+    build = """
     build-essential  cmake  autoconf  automake  make
     shellcheck  pkg-config llvm
     libc6-dev  libffi-dev  libncurses5-dev  libncursesw5-dev  libgdbm-dev
@@ -150,9 +150,9 @@ class Deblists:
     libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev
     libpng-dev liblapack-dev libblas-dev libssl-dev
     python3.10 python3.10-venv python3.10-dev
-    '''
+    """
 
-    file_formats = '''
+    file_formats = """
     sqlite3
     p7zip-full
     lz4
@@ -161,9 +161,9 @@ class Deblists:
     cuetools
     dosfstools
     exfat-fuse
-    '''
+    """
 
-    main_system = '''
+    main_system = """
     # Persistent-system management
     aptitude  # Best-hope for when dependencies get a little complicated.
     apt-file  # Goes as a common database for deb packages
@@ -190,9 +190,9 @@ class Deblists:
     aspell-en
 
     docker.io
-    '''
+    """
 
-    main_system_x = '''
+    main_system_x = """
     ### Graphical-entrypoint stuff ###
     xclip
     arandr
@@ -211,9 +211,9 @@ class Deblists:
     keepassxc
     qdirstat
     trezor
-    '''
+    """
 
-    main_system_hw = '''
+    main_system_hw = """
     ### Hardware-entrypoint stuff ###
     # bluedevil blueman bluez
     cheese
@@ -226,31 +226,31 @@ class Deblists:
     # hddtemp
     irqbalance
     lvm2
-    '''
+    """
 
-    main_system_ubu = '''
+    main_system_ubu = """
     # ubuntu-desktop-minimal
     # ubuntu-desktop
     kubuntu-desktop
     kubuntu-restricted-addons
     linux-generic-hwe-20.04
     xen-system-amd64
-    '''
+    """
 
-    main_system_stuff = '''
+    main_system_stuff = """
     fzf vagrant vagrant-sshfs virtualbox virtualbox-ext-pack zsh
-    '''
+    """
 
-    main_system_all = '''
+    main_system_all = """
     hdeps-common hdeps-common-net hdeps-cli hdeps-cli-net
     hdeps-host-common
     hdeps-file-formats
     hdeps-main-system
     hdeps-main-system-x hdeps-main-system-hw hdeps-main-system-ubu
     hdeps-main-system-stuff
-    '''
+    """
 
-    dev_max = '''
+    dev_max = """
     # C++ IDEs. WIP.
     qtcreator codeblocks codeblocks-contrib codelite codelite-plugins kdevelop anjuta
     # C++ tools
@@ -264,16 +264,16 @@ class Deblists:
     fonts-mathjax-extras fonts-stix
     # common
     hdeps-build
-    '''
+    """
 
-    virtualbox_guest = '''
+    virtualbox_guest = """
     virtualbox-guest-utils virtualbox-guest-x11
-    '''
+    """
 
 
 def _parse(value):
     lines = value.strip().splitlines()
-    lines = [line.split('#', 1)[0].strip() for line in lines]
+    lines = [line.split("#", 1)[0].strip() for line in lines]
     items = [item for line in lines for item in line.split() if item]
     return set(items)
 
@@ -281,25 +281,17 @@ def _parse(value):
 DEBSETS = {
     name: _parse(value)
     for name, value in Deblists.__dict__.items()
-    if isinstance(value, str) and not name.startswith('_')
+    if isinstance(value, str) and not name.startswith("_")
 }
 
 
 def printout():
     sets = DEBSETS
     if len(sys.argv) > 1:
-        pkgs = {
-            pkg
-            for key in sys.argv[1:]
-            for pkg in sets[key]
-        }
-        print('  '.join(sorted(pkgs)))
+        pkgs = {pkg for key in sys.argv[1:] for pkg in sets[key]}
+        print("  ".join(sorted(pkgs)))
     else:
-        print('\n'.join(
-            name + ':    ' + ' '.join(sorted(pkgs)) + '\n'
-            for name, pkgs in sets.items()
-        ))
-
+        print("\n".join(name + ":    " + " ".join(sorted(pkgs)) + "\n" for name, pkgs in sets.items()))
 
 
 def _run(*args, **kwargs):
@@ -321,30 +313,30 @@ Description: h system dependencies {name_underscore}
 
 
 def build_one_i(pkg_set_name, target_dir):
-    pkg_set_name_dash = pkg_set_name.replace('_', '-')
-    pkg_name = f'hdeps-{pkg_set_name_dash}'
-    deb_dir = os.path.join(pkg_name, 'DEBIAN')
+    pkg_set_name_dash = pkg_set_name.replace("_", "-")
+    pkg_name = f"hdeps-{pkg_set_name_dash}"
+    deb_dir = os.path.join(pkg_name, "DEBIAN")
     control = CONTROL_TPL.format(
-      name_dash=pkg_set_name_dash,
-      name_underscore=pkg_set_name,
-      now=datetime.datetime.now().strftime('%Y%m%d%H%M%S'),
-      deps_comma=', '.join(DEBSETS[pkg_set_name]),
+        name_dash=pkg_set_name_dash,
+        name_underscore=pkg_set_name,
+        now=datetime.datetime.now().strftime("%Y%m%d%H%M%S"),
+        deps_comma=", ".join(DEBSETS[pkg_set_name]),
     )
 
     os.mkdir(pkg_name)
     os.mkdir(deb_dir)
-    with open(os.path.join(deb_dir, 'control'), 'w') as fobj:
+    with open(os.path.join(deb_dir, "control"), "w") as fobj:
         fobj.write(control)
-    _run('dpkg', '-b', pkg_name)
-    debfile = f'{pkg_name}.deb'
-    assert os.path.exists(debfile), 'should have been created by dpkg'
+    _run("dpkg", "-b", pkg_name)
+    debfile = f"{pkg_name}.deb"
+    assert os.path.exists(debfile), "should have been created by dpkg"
     shutil.copy(debfile, os.path.join(target_dir, debfile))
 
 
 def build_one(pkg_set_name):
-    main_dir = os.path.realpath('.')
+    main_dir = os.path.realpath(".")
     try:
-        with tempfile.TemporaryDirectory(prefix='hdfpb_') as tempdir:
+        with tempfile.TemporaryDirectory(prefix="hdfpb_") as tempdir:
             os.chdir(tempdir)
             build_one_i(pkg_set_name, target_dir=main_dir)
     finally:
@@ -352,8 +344,8 @@ def build_one(pkg_set_name):
 
 
 def build():
-    repo_path = '/usr/local/etc/hdeps'
-    cfg_path = '/etc/apt/sources.list.d/hdeps.list'
+    repo_path = "/usr/local/etc/hdeps"
+    cfg_path = "/etc/apt/sources.list.d/hdeps.list"
     os.makedirs(repo_path, exist_ok=True)
     os.chdir(repo_path)
     for pkg_set_name in DEBSETS:
@@ -361,10 +353,10 @@ def build():
 
     # Easier to pre-check than to do `pipefail`.
     _run("dpkg-scanpackages", "--version")  # Requires `dpkg-dev` to be installed.
-    _run('sh', '-x', '-c', 'dpkg-scanpackages -m . | gzip > Packages.gz')
-    with open(cfg_path, 'w') as fobj:
-        fobj.write(f'deb [trusted=yes] file:{repo_path} /\n')
-    _run('apt', 'update')
+    _run("sh", "-x", "-c", "dpkg-scanpackages -m . | gzip > Packages.gz")
+    with open(cfg_path, "w") as fobj:
+        fobj.write(f"deb [trusted=yes] file:{repo_path} /\n")
+    _run("apt", "update")
 
 
 def main():
@@ -372,5 +364,5 @@ def main():
     printout()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
