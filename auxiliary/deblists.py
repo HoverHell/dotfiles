@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Usage:
+
+    sudo apt install -y --no-install-recommends dpkg-dev
+    sudo ./deblists.py
+    sudo apt install -y hdeps-...
+"""
 
 import datetime
 import os
@@ -55,6 +62,7 @@ class Deblists:
     wdiff  # diff for eyes (too)
     xxd
 
+    psmisc
     lsof
     smartmontools
 
@@ -65,6 +73,7 @@ class Deblists:
     less
     nano
     joe-jupp
+    e-wrapper
     # zile
     # emacs-nox
     '''
@@ -97,7 +106,24 @@ class Deblists:
     autossh  # ssh proxying / centralizing
     openssh-server
     etckeeper  # persistent /etc history
+    logrotate
     unattended-upgrades
+    '''
+
+    system_basics = '''
+    base-files base-passwd dash findutils gzip hostname init login
+    '''
+
+    phys_server = '''
+    hdeps-cli hdeps-cli-net hdeps-common-net hdeps-host-common hdeps-system-basics
+    acpi-support dmeventd efibootmgr irqbalance usbutils
+    grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
+    haveged
+    linux-generic
+    lvm2 e2fsprogs parted
+    ifupdown-ng net-tools wireless-tools wpasupplicant
+    # locales
+    xen-hypervisor-amd64
     '''
 
     cloud_server = '''
@@ -148,7 +174,7 @@ class Deblists:
     duff  # duplicates
     easy-rsa openvpn openconnect
     # Encrypted root fs:
-    ecryptfs-utils  cryptsetup  cryptsetup-bin
+    ecryptfs-utils  cryptsetup  cryptsetup-bin  cryptsetup-initramfs
     # ...
     encfs
 
@@ -287,6 +313,7 @@ Architecture: all
 Maintainer: hoverhell <hoverhell@localhost>
 Depends: {deps_comma}
 Priority: optional
+Section: metapackages
 Description: h system dependencies {name_underscore}
  This package depends on all of the packages
  listed as '{name_underscore}'
