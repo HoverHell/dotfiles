@@ -4,7 +4,7 @@ if [ x"$DISPLAY" = x"" ]; then echo "W: default display" >&2; DISPLAY=":0.0"; ex
 
 if [ "$1" = "--md" ] && xclip -o -selection clipboard -t TARGETS | grep -q '^text/html$'; then
     xclip -o -selection clipboard -t text/html \
-	| python -c '
+	| python3 -c '
 import sys, markdownify
 data = sys.stdin.read()
 data = markdownify.markdownify(data)
