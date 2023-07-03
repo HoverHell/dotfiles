@@ -123,7 +123,7 @@ class Deblists:
     lvm2 e2fsprogs parted
     ifupdown-ng net-tools wireless-tools wpasupplicant
     # locales
-    xen-hypervisor-amd64
+    # xen-hypervisor-amd64
     """
 
     cloud_server = """
