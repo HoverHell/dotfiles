@@ -120,8 +120,10 @@ class Deblists:
     # grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
     haveged
     linux-generic
-    lvm2 e2fsprogs parted
-    ifupdown-ng net-tools wireless-tools wpasupplicant
+    e2fsprogs lvm2 parted fdisk gdisk kpartx btrfs-progs mdadm
+    multipath-tools
+    ifupdown-ng net-tools ethtool wireless-tools wpasupplicant
+    lshw
     # locales
     # xen-hypervisor-amd64
     """
