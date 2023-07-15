@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -eu
+
+if [ -n "${1:-}" ]; then
+    fmt="$1"
+    shift 1
+else
+    fmt=""
+fi
+
+printf "%s" "$(date "-I${fmt}" "$@")"
