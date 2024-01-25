@@ -177,6 +177,16 @@ set +o histexpand
 
 bind -r '\en'
 
+# Ensure the prompt starts from the beginning of a line (with a bit of disambiguation).
+ensure_newline(){
+    IFS=';' read -sdR -p $'\E[6n' ROW COL
+    if [ "$COL" != 1 ]; then
+        printf "\n<<< "
+    fi
+}
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'ensure_newline'
+
+
 # Fix for encfs/alike homedir problems.
 if pwd | grep -q '^(unreachable)'; then
     echo "pwd: '$(pwd)'; \`cd\`..."
