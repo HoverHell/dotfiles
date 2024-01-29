@@ -178,13 +178,16 @@ set +o histexpand
 bind -r '\en'
 
 # Ensure the prompt starts from the beginning of a line (with a bit of disambiguation).
+# But not under `mc` (as it seems to break somehow).
 ensure_newline(){
     IFS=';' read -sdR -p $'\E[6n' ROW COL
     if [ "$COL" != 1 ]; then
         printf "\n<<< "
     fi
 }
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'ensure_newline'
+if [ -z "$MC_SID" ]; then
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'ensure_newline'
+fi
 
 
 # Fix for encfs/alike homedir problems.
