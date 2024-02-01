@@ -114,27 +114,30 @@ class Deblists:
     base-files base-passwd dash findutils gzip hostname init login
     """
 
+    phys_server_basics = """
+    ethtool usbutils
+    """
+
     phys_server = """
     hdeps-cli hdeps-cli-net hdeps-common-net hdeps-host-common hdeps-system-basics
-    acpi-support dmeventd efibootmgr irqbalance usbutils
+    hdeps-phys-server-basics
+    acpi-support dmeventd efibootmgr irqbalance
     # grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
     haveged
     linux-generic
     e2fsprogs lvm2 parted fdisk gdisk kpartx btrfs-progs mdadm
     multipath-tools
-    ifupdown-ng net-tools ethtool wireless-tools wpasupplicant
+    ifupdown-ng net-tools wireless-tools wpasupplicant
     lshw
     # locales
     # xen-hypervisor-amd64
     """
 
     cloud_server = """
-    cloud-init
-    docker.io
+    docker.io docker-compose
     linux-generic
-    qemu-guest-agent
     emacs-nox
-    nginx-full apache2-utils squid certbot python3-certbot-nginx wireguard wireguard-dkms
+    nginx-full apache2-utils certbot python3-certbot-nginx
     """
 
     build = """
@@ -176,7 +179,7 @@ class Deblists:
     duff  # duplicates
     easy-rsa openvpn openconnect
     # Encrypted root fs:
-    ecryptfs-utils  cryptsetup  cryptsetup-bin  cryptsetup-initramfs
+    # ecryptfs-utils  cryptsetup  cryptsetup-bin  cryptsetup-initramfs  # deprecated
     # ...
     encfs
 
@@ -185,13 +188,13 @@ class Deblists:
     # dvcs-autosync
     # davfs2  # rare, currently.
 
-    at  # ...
+    # at  # not that better than `sleep && ...`
 
     # ...
     aspell
     aspell-en
 
-    docker.io
+    docker.io docker-compose
     """
 
     main_system_x = """
@@ -201,24 +204,26 @@ class Deblists:
     ark
     antiword
     barrier
-    chromium-browser firefox firejail
-    dmz-cursor-theme
+    # chromium-browser firefox firejail
+    # dmz-cursor-theme
     feh
     # kgraphviewer
     rxvt-unicode
     # rxvt-unicode-256color
     xkbset xbindkeys
     geeqie mplayer vlc
-    i3 stalonetray xpra remmina
+    # i3 stalonetray
+    xpra remmina
     keepassxc
     qdirstat
     trezor
+    suckless-tools
     """
 
     main_system_hw = """
     ### Hardware-entrypoint stuff ###
     # bluedevil blueman bluez
-    cheese
+    # cheese  # `vlc v4l2:///dev/video0`
     cups
     eject
     lshw
@@ -240,7 +245,9 @@ class Deblists:
     """
 
     main_system_stuff = """
-    fzf vagrant vagrant-sshfs virtualbox virtualbox-ext-pack zsh
+    fzf vagrant vagrant-sshfs
+    # virtualbox virtualbox-ext-pack  # TODO
+    zsh
     """
 
     main_system_all = """
