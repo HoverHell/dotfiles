@@ -1,0 +1,14 @@
+#!/bin/bash -x
+# Cannot `set -eu` because profile might not be so clean,
+# and because have to catch status.
+
+cd "$HOME"
+. ~/.profile
+
+## ...
+ao "$@"
+status=$?
+if [ "$status" -ne 0 ]; then
+    echo " ------- exit ${status}"
+    read -r _
+fi

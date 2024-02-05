@@ -26,4 +26,4 @@ _pathadd "$HOME/.local/bin"
 _pathadd "$HOME/.local/usr/bin"
 _pathadd "$HOME/bin"
 
-export EDITOR=jmacs
+# export EDITOR=e

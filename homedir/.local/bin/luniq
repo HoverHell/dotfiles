@@ -1,1 +1,5 @@
+#!/bin/sh
+# Drop duplicates keep first.
+set -eu
+# See also: `awk '!visited[$0]++'`
 perl -e 'while ($line=<STDIN>) { next if (defined $lines{$line}); print $line; $lines{$line}=1; }'

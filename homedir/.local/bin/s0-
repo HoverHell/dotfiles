@@ -1,2 +1,3 @@
 #!/bin/sh
+# Deprecating in favor of `_mst_t0_run_cmd`
 screen -S screenterm0 -d -X screen -t "$1" "$HOME"/.local/bin/dmenu_scrunner "$@"

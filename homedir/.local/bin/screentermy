@@ -1,17 +1,11 @@
 #!/bin/sh
-#if [ x"$TERM_ACTUAL" = x"rxvt-256color" ]; then
-#  export TERM="xterm-256color"
-#fi
+# Deprecating in favor of `TMUX="" tmux new-session -A -s "$name"`
 
-## Actually, huh? '-RR'? Should it be '-d -RR'?
-
+# Actually, huh? '-RR'? Should it be '-d -RR'?
 if [ $# -eq 1 ]; then
     screen -RR -S "$1" -c $HOME/.screenrc.mtermy
 else
     screen -RR -S screentermy -c $HOME/.screenrc.mtermy
 fi
 
-#screen -RR -S screentermy -c $HOME/.screenrc.mtermy
-
-## No idea.
 # screen -ls|sed -nr 's/^[\t ]*([0-9]+)\.screentermy.*\(Detached\).*/\1/ p'

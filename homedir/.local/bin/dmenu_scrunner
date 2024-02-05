@@ -1,4 +1,5 @@
 #!/bin/bash
+# Deprecating in favor of `_mst_t0_run_handler`
 cd "$HOME"
 . ~/.profile
 

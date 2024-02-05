@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+printf '\
+#[align=centre]\
+#{P:\
+  #{?pane_active,\
+    #[reverse],\
+  }\
+  #{pane_index}\
+  [#{pane_width}x#{pane_height}]\
+  #[default] \
+}\
+' | \
+sed -r 's| *//.*||g' | \
+sed -r -z 's/\\\n *//g'

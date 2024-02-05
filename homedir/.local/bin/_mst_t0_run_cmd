@@ -1,0 +1,4 @@
+#!/bin/sh -x
+set -eu
+name="$1"
+exec tmux -L mst_t0 new-window -n:"$name" "_mst_t0_run_handler" "$@"

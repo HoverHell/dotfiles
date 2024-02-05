@@ -1,0 +1,3 @@
+#!/bin/sh -x
+set -eu
+exec tmux -f ~/.config/tmux/tmux_mst.conf -L mst new-session -A -s mst "$@"

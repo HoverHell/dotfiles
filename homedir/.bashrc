@@ -34,7 +34,7 @@ if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local; fi
 # # don't put duplicate lines in the history. See bash(1) for more options
 # export HISTCONTROL=ignoredups
 
-if [ x"$TERM_ACTUAL" == x"rxvt-256color" ]; then
+if [ x"${TERM_ACTUAL:-""}" == x"rxvt-256color" ]; then
     export TERM="xterm-256color"
 fi
 
@@ -60,7 +60,7 @@ alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+if [ -z "${debian_chroot:-""}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -157,7 +157,7 @@ alias flip="pushd_builtin"
 
 
 # export BROWSER="/usr/bin/x-www-browser"
-export EDITOR="jmacs"
+# export EDITOR="jmacs"
 
 
 # # Extra completions
@@ -175,11 +175,11 @@ export HISTTIMEFORMAT="%Y-%m-%dT%H:%M:%S%z "
 # # fixes 'echo "!"' problem.  Use interactive hotkeys for run-from-history.
 set +o histexpand
 
-bind -r '\en'
+# bind -r '\en'  # removes the binding for escape-n, but the reason if forgotten
 
 # Ensure the prompt starts from the beginning of a line (with a bit of disambiguation).
 # But not under `mc` (as it seems to break somehow).
-ensure_newline(){
+ensure_newline() {
     IFS=';' read -sdR -p $'\E[6n' ROW COL
     if [ "$COL" != 1 ]; then
         printf "\n<<< "
