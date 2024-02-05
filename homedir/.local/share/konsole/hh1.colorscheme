@@ -44,10 +44,10 @@ Color=101,94,0
 Color=255,255,84
 
 [Color4]
-Color=24,24,178
+Color=28,28,207
 
 [Color4Faint]
-Color=0,0,101
+Color=0,0,144
 
 [Color4Intense]
 Color=84,84,255
@@ -89,8 +89,12 @@ Color=101,101,101
 Color=255,255,255
 
 [General]
+Anchor=0.5,0.5
 Blur=false
 ColorRandomization=false
 Description=hhtheme1
+FillStyle=Tile
 Opacity=0.75
 Wallpaper=
+WallpaperFlipType=NoFlip
+WallpaperOpacity=1
