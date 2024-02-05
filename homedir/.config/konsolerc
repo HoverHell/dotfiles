@@ -7,13 +7,24 @@ DefaultProfile=hhprofile1.profile
 [Favorite Profiles]
 Favorites=hhprofile1.profile
 
+[General]
+ConfigVersion=1
+
 [KonsoleWindow]
 RemoveWindowTitleBarAndFrame=true
 ShowMenuBarByDefault=false
 
 [MainWindow]
+2 screens: Height=693
+2 screens: Width=1223
+2 screens: XPosition=348
+2 screens: YPosition=193
+HDMI-A-0 eDP=HDMI-A-0
 Height 1080=1080
 MenuBar=Disabled
+RestorePositionForNextInstance=false
+State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAcAFMAUwBIAE0AYQBuAGEAZwBlAHIARABvAGMAawAAAAAA/////wAAASkBAAAD+wAAACIAUQB1AGkAYwBrAEMAbwBtAG0AYQBuAGQAcwBEAG8AYwBrAAAAAAD/////AAABjAEAAAMAAATHAAACtQAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIAAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAAAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
 Width 1920=1920
 Window-Maximized 1080x1920=true
 eDP HDMI-A-0 Window-Maximized 1920x1080=true
@@ -30,4 +41,4 @@ SearchRegExpression=true
 CloseTabButton=None
 
 [UiSettings]
-ColorScheme=Default
+ColorScheme=
