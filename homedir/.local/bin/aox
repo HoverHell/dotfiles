@@ -1,0 +1,82 @@
+#!/bin/sh
+# ###
+# Somewhat imprved version of `annotate-output`
+# ###
+set -eu
+
+DATEFMT="%Y-%m-%dT%H:%M:%S"
+INFOPREFIX="I: "
+OUTPREFIX="O: "
+ERRPREFIX="E: "
+
+while [ -n "${1:-""}" ]; do
+    case "$1" in
+        --)
+            shift
+            break
+            ;;
+        -f | --datefmt)
+            shift
+            DATEFMT="$1"
+            ;;
+        --infoprefix)
+            shift
+            INFOPREFIX="$1"
+            ;;
+        --outprefix)
+            shift
+            OUTPREFIX="$1"
+            ;;
+        --errprefix)
+            shift
+            ERRPREFIX="$1"
+            ;;
+        --*)
+            echo "Unknown option: '$1'" >&2
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+    shift
+done
+
+
+TMP_TPL="/tmp/annotate.aox.XXXXXX"
+OUT="$(mktemp "$TMP_TPL")"
+ERR="$(mktemp "$TMP_TPL")"
+cleanup() {
+    rm "$OUT" "$ERR"
+}
+trap cleanup EXIT
+
+# Using `mktemp` just to generate names.
+rm "$OUT" "$ERR"
+mkfifo --mode=0700 "$OUT" "$ERR"
+
+
+ts() {
+    date "+${DATEFMT}"
+}
+
+
+outhandler() {
+    prefix="$1"
+    while read -r line; do
+	printf "%s%s%s\n" "$(ts)" "$prefix" "$line"
+    done
+}
+
+
+# Subprocesses for unblocked handling of stdout and stderr FIFOs
+# (ideally these would be threads)
+outhandler "${OUTPREFIX}" < "$OUT" &
+outhandler "${ERRPREFIX}" < "$ERR" &
+printf "%s%sRunning: %s\n" "$(ts)" "$INFOPREFIX" "$*"
+set +e
+"$@" > "$OUT" 2>"$ERR"
+status="$?"
+set -e
+wait
+printf "%s%sStatus: %s\n" "$(ts)" "$INFOPREFIX" "$status"

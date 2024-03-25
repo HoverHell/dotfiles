@@ -1,0 +1,120 @@
+#!/bin/sh
+# ###
+# A simple script similar to `watch` that logs all changes to the output.
+# ###
+set -eu
+
+INTERVAL="1"
+DATEFMT="%Y-%m-%dT%H:%M:%S"
+INFOPREFIX="I: "
+OUTPREFIX="O: "
+ERRPREFIX="E: "
+ADD_DIFF=""
+SKIP_OUTPUT=""
+if command -v colordiff >/dev/null; then
+    DIFF_CMD="colordiff -du"
+else
+    DIFF_CMD="diff -du"
+fi
+
+
+while [ -n "${1:-""}" ]; do
+    case "$1" in
+        --)
+            shift
+            break
+            ;;
+        -n | --interval)
+            shift
+            INTERVAL="$1"
+            ;;
+        -f | --datefmt)
+            shift
+            DATEFMT="$1"
+            ;;
+        --infoprefix)
+            shift
+            INFOPREFIX="$1"
+            ;;
+        --outprefix)
+            shift
+            OUTPREFIX="$1"
+            ;;
+        --errprefix)
+            shift
+            ERRPREFIX="$1"
+            ;;
+        --diff)
+            ADD_DIFF=1
+            ;;
+        --diff-cmd)
+            shift
+            DIFF_CMD="$1"
+            ;;
+        --skip-output)
+            SKIP_OUTPUT=1
+            ;;
+        --*)
+            echo "Unknown option: '$1'" >&2
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+    shift
+done
+
+# Record separator (between timestamp and data)
+RS="$(printf "\036")"
+
+
+if [ "$ADD_DIFF" ]; then
+    LAST_OUTPUT_DUMP="$(mktemp)"
+    NEW_OUTPUT_DUMP="$(mktemp)"
+    cleanup() {
+        rm "$LAST_OUTPUT_DUMP" "$NEW_OUTPUT_DUMP"
+    }
+    trap cleanup EXIT
+fi
+
+
+last_output=""
+echo "Watching: $*"
+while true; do
+    set +e
+    output="$(
+        aox \
+            --datefmt "${DATEFMT}${RS}" \
+            --infoprefix "$INFOPREFIX" \
+            --outprefix "$OUTPREFIX" \
+            --errprefix "$ERRPREFIX" \
+            -- \
+            "$@"
+    )"
+    set -e
+    # Output without timestamps, for comparison.
+    output_cmp="$(printf "%s" "$output" | cut --delimiter="$RS" --fields="2-")"
+
+    if [ "$output_cmp" != "$last_output" ]; then
+        if [ "$ADD_DIFF" ]; then
+            printf "%s" "$last_output" > "$LAST_OUTPUT_DUMP"
+            printf "%s" "$output_cmp" > "$NEW_OUTPUT_DUMP"
+            set +e
+            $DIFF_CMD "$LAST_OUTPUT_DUMP" "$NEW_OUTPUT_DUMP"
+            diff_status="$?"
+            set -e
+            printf "\n"
+            # `man diff`: "Exit status is 0 if inputs are the same, 1 if different, 2 if trouble."
+            if [ "$diff_status" != 0 ] && [ "$diff_status" != 1 ]; then
+                exit "$diff_status"
+            fi
+        fi
+        if [ ! "$SKIP_OUTPUT" ]; then
+            printf "%s\n" "$output" | tr "${RS}" " "
+        fi
+        last_output="$output_cmp"
+    fi
+
+    sleep "$INTERVAL"
+done

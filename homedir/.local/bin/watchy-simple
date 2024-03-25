@@ -1,0 +1,20 @@
+#!/bin/sh
+# ###
+# A simple script similar to `watch` that logs all changes to the output.
+# ###
+set -eu
+
+last_output=""
+
+echo "Watching: $*"
+while true; do
+    ts="$(date "+%Y-%m-%dT%H:%M:%S") "
+    output="$("$@")"
+
+    if [ "$output" != "$last_output" ]; then
+        printf "%s\n" "$output" | sed "s/^/$ts/"
+        last_output="$output"
+    fi
+
+    sleep 1
+done
