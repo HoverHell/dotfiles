@@ -18,12 +18,10 @@ fi
 
 # http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
 _pathadd() {
-    if [ -d "$1" ] && printf "%s\n" "$PATH" | grep -Eqv "(^|:)$1(:|$)"; then
+    if [ -e "$1" ] && printf "%s\n" "$PATH" | grep -Eqv "(^|:)$1(:|$)"; then
         PATH="$1:$PATH"
     fi
 }
 _pathadd "$HOME/.local/bin"
 _pathadd "$HOME/.local/usr/bin"
 _pathadd "$HOME/bin"
-
-# export EDITOR=e

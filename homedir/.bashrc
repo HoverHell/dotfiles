@@ -217,10 +217,17 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 # unset __conda_setup
 # # <<< conda initialize <<<
 
-# fnm
+# fnm (nodejs version manager)
 if [ -f "$HOME/.fnm/fnm" ]; then
     _pathadd "$HOME/.fnm"
     eval "$(fnm env)"
 fi
+
+# nix package manager
+if [ -e /home/hell/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/hell/.nix-profile/etc/profile.d/nix.sh
+    _pathadd "$HOME/.nix-profile/bin"
+fi
+
 
 true

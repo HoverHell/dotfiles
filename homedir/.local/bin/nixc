@@ -1,0 +1,4 @@
+#!/bin/sh -x
+set -eu
+# https://nixos.wiki/wiki/Nix_Installation_Guide#nix-user-chroot
+exec nix-user-chroot ~/.nix bash "$@"
