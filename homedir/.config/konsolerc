@@ -15,8 +15,14 @@ RemoveWindowTitleBarAndFrame=true
 ShowMenuBarByDefault=false
 
 [MainWindow]
+1920x1080 screen: Height=646
+1920x1080 screen: Width=1223
+1920x1080 screen: Window-Maximized=true
+1920x1080 screen: XPosition=348
+1920x1080 screen: YPosition=205
 2 screens: Height=693
 2 screens: Width=1223
+2 screens: Window-Maximized=true
 2 screens: XPosition=348
 2 screens: YPosition=193
 HDMI-A-0 eDP=HDMI-A-0
@@ -27,6 +33,7 @@ State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAcAFMAUwBIAE0AYQBuAGEAZwBlAH
 ToolBarsMovable=Disabled
 Width 1920=1920
 Window-Maximized 1080x1920=true
+eDP=eDP
 eDP HDMI-A-0 Window-Maximized 1920x1080=true
 eDP Height 1920x1080=1080
 eDP Width 1920x1080=1920

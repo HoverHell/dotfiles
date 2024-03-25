@@ -180,6 +180,7 @@ set +o histexpand
 # Ensure the prompt starts from the beginning of a line (with a bit of disambiguation).
 # But not under `mc` (as it seems to break somehow).
 ensure_newline() {
+    # TODO: read and somehow re-queue the pending input before doing this.
     IFS=';' read -sdR -p $'\E[6n' ROW COL
     if [ "$COL" != 1 ]; then
         printf "\n<<< "
