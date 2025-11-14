@@ -5,7 +5,7 @@
 mapxkb
 
 ## Configs
-xrdb -merge "$HOME/.Xdefaults"
+# xrdb -merge "$HOME/.Xdefaults"
 
 # # synclient RTCornerButton=0 RBCornerButton=0 LTCornerButton=0 LBCornerButton=0 TapButton1=0 TapButton2=0 TapButton3=2
 # killall syndaemon >/dev/null 2>&1 || true

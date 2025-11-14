@@ -10,25 +10,27 @@ Favorites=hhprofile1.profile
 [General]
 ConfigVersion=1
 
+[KFileDialog Settings]
+detailViewIconSize=16
+
 [KonsoleWindow]
 RemoveWindowTitleBarAndFrame=true
 ShowMenuBarByDefault=false
 
 [MainWindow]
-1920x1080 screen: Height=646
-1920x1080 screen: Width=1223
+1920x1080 screen: Height=1056
+1920x1080 screen: Width=1920
 1920x1080 screen: Window-Maximized=true
 1920x1080 screen: XPosition=348
 1920x1080 screen: YPosition=205
-2 screens: Height=693
-2 screens: Width=1223
+2 screens: Height=1080
+2 screens: Width=960
 2 screens: Window-Maximized=true
-2 screens: XPosition=348
-2 screens: YPosition=193
+2 screens: XPosition=0
+2 screens: YPosition=0
 HDMI-A-0 eDP=HDMI-A-0
 Height 1080=1080
 MenuBar=Disabled
-RestorePositionForNextInstance=false
 State=AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAcAFMAUwBIAE0AYQBuAGEAZwBlAHIARABvAGMAawAAAAAA/////wAAASkBAAAD+wAAACIAUQB1AGkAYwBrAEMAbwBtAG0AYQBuAGQAcwBEAG8AYwBrAAAAAAD/////AAABjAEAAAMAAATHAAACtQAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIAAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAAAAAAD/////AAAAAAAAAAA=
 ToolBarsMovable=Disabled
 Width 1920=1920
