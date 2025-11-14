@@ -5,9 +5,10 @@ shift 1
 
 # "root@host" -> "host_root"
 dirname="$(echo "$host" | sed -r 's/(.*)@(.*)/\2_\1/')"
-cd "$HOME"/mnt/ssh  # TODO: `~/.mnt`
-mkdir -p "$dirname"
+target_dir="${HOME}/.local/mnt/ssh/${dirname}"
+mkdir -p "$target_dir"
 sshfs \
-    "$host":/ "$dirname" \
+    "${host}:/" \
+    "$target_dir" \
     "$@" \
     -o idmap=user,workaround=rename,reconnect,transform_symlinks,allow_root

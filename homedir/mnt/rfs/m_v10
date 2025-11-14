@@ -1,1 +1,0 @@
-rfs v10:/ "$HOME/mnt/rfs/v10" -o username=hell,password="$HOME/files/stuff/hw_rfs_hell",transform_symlinks
