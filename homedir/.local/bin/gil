@@ -1,2 +1,4 @@
 #!/bin/sh
-git log --graph --show-signature "$@"
+set -eu
+
+exec git log --graph --show-signature "$@"

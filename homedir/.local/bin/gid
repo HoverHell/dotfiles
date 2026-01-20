@@ -1,2 +1,4 @@
 #!/bin/sh
-git diff "$@"
+set -eu
+
+exec git diff "$@"

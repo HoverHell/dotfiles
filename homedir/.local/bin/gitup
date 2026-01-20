@@ -1,3 +1,5 @@
 #!/bin/sh
+set -eu
+
 git remote update
-git pull --rebase "$@"
+exec git pull --rebase "$@"

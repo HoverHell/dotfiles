@@ -2,6 +2,7 @@
 # ###
 # 'rn' for git
 # ###
+set -eu
 
 export RN_CMD="git mv"
 export RN_RM_CMD="git rm"

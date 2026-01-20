@@ -1,6 +1,7 @@
 #!/bin/sh
-# git branch -avv "$@" | sed '25 { s/.*/.../; q; }'
+set -eu
 
+# git branch -avv "$@" | sed '25 { s/.*/.../; q; }'
 
 FMT="$(
     # datestamp (also used in sorting)
@@ -27,14 +28,14 @@ refname=%(refname)   objecttype=%(objecttype)   objectsize=%(objectsize)   objec
 '
 fi
 
-
-
 # Remote then local
-git \
-    branch \
-    -avv \
-    --color=always \
-    --sort=committerdate --sort=upstream --sort=HEAD \
-    --format="$FMT" \
-    "$@" \
+exec git \
+        branch \
+        -avv \
+        --color=always \
+        --sort=committerdate \
+        --sort=upstream \
+        --sort=HEAD \
+        --format="$FMT" \
+        "$@" \
     | cat

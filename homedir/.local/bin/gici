@@ -1,2 +1,4 @@
 #!/bin/sh
-git commit "$@"
+set -eu
+
+exec git commit "$@"

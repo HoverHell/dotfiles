@@ -1,2 +1,4 @@
 #!/bin/sh
-git checkout "$@"
+set -eu
+
+exec git checkout "$@"

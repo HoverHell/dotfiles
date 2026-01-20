@@ -1,4 +1,6 @@
 #!/bin/sh
-## 'branch-update': update local branch against reomte master
+## 'branch-update': update local branch against remote master
+set -eu
+
 git remote update
-git rebase origin/master
+exec git rebase origin/master "$@"

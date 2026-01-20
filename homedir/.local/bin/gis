@@ -1,2 +1,4 @@
 #!/bin/sh
-git status "$@"
+set -eu
+
+exec git status "$@"

@@ -1,0 +1,4 @@
+#!/bin/sh -x
+set -eu
+
+exec git submodule update --init --recursive "$@"

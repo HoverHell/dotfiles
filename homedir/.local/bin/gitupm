@@ -1,8 +1,10 @@
 #!/bin/sh
+set -eu
+
 git remote update
 branch="$(
    git branch --list --all --format="%(refname)" \
      | sed -rn 's,^refs/remotes/origin/(main|master)$,\1, p' \
      | sed 1q
 )"
-git pull --rebase origin "$branch"
+exec git pull --rebase origin "$branch"

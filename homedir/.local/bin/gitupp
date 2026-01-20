@@ -1,5 +1,6 @@
 #!/bin/sh
-set -e
+set -eu
+
 git remote update
 git stash
 ## XXX: Either of these two might require a merge:
