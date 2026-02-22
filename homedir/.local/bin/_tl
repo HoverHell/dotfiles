@@ -4,24 +4,41 @@ from __future__ import annotations
 
 import contextlib
 import datetime
+import select
 import sys
 import time
 
 
-def get_state(prev_mts: float) -> tuple[float, str]:
+def _td_fmt(td_sec: float) -> str:
+    return f"{td_sec:8.3f} sec  ({td_sec / 60:5.1f} min)"
+
+
+def _get_state(prev_mts: float, start_mts: float) -> tuple[float, str]:
     now = time.monotonic()
     now_s = datetime.datetime.now(datetime.UTC).isoformat()
     td = now - prev_mts
-    return now, f"{now_s}   {td:7.3f} sec    ({td / 60:3.1f} min)"
+    td_total = now - start_mts
+    return now, f"{now_s}   {_td_fmt(td_total)}  | {_td_fmt(td)}"
 
 
-def main() -> None:
-    prev_mts, _ = get_state(0)
+def main(tick_time_sec: float = 1.0) -> None:
+    prev_mts, _ = _get_state(prev_mts=0, start_mts=0)
+    start_mts = prev_mts
+    next_tick_mts = start_mts  # not adding tick time, for immediate first echo
+    stdin_fd  = sys.stdin.fileno()
+
     with contextlib.suppress(KeyboardInterrupt):
         while True:
-            sys.stdin.readline()
-            prev_mts, state = get_state(prev_mts)
-            sys.stdout.write(f"{state}\n")
+            tick_time_remaining_sec = max(next_tick_mts - time.monotonic(), 0.0001)
+            ready, _, _ = select.select([stdin_fd], [], [], tick_time_remaining_sec)
+            if ready:
+                sys.stdin.readline()
+                prev_mts, state = _get_state(prev_mts, start_mts=start_mts)
+                sys.stdout.write(f"{state}\n")
+            else:
+                next_tick_mts += tick_time_sec
+                _, state = _get_state(prev_mts, start_mts=start_mts)
+                sys.stdout.write(f"\r{state}")
 
 
 if __name__ == "__main__":
