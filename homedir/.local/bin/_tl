@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+"""Time Logger"""
+from __future__ import annotations
+
+import contextlib
+import datetime
+import sys
+import time
+
+
+def get_state(prev_mts: float) -> tuple[float, str]:
+    now = time.monotonic()
+    now_s = datetime.datetime.now(datetime.UTC).isoformat()
+    td = now - prev_mts
+    return now, f"{now_s}   {td:7.3f} sec    ({td / 60:3.1f} min)"
+
+
+def main() -> None:
+    prev_mts, _ = get_state(0)
+    with contextlib.suppress(KeyboardInterrupt):
+        while True:
+            sys.stdin.readline()
+            prev_mts, state = get_state(prev_mts)
+            sys.stdout.write(f"{state}\n")
+
+
+if __name__ == "__main__":
+    main()
