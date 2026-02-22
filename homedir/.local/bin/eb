@@ -7,6 +7,7 @@ cleanup(){
     rm -v "$tempfile"
 }
 trap cleanup EXIT
-xclipout --md > "$tempfile"
+# xclipout --md > "$tempfile"
+xclipout > "$tempfile"
 e "$tempfile"
 xclipin < "$tempfile"

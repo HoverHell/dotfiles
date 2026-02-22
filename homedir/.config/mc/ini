@@ -100,6 +100,15 @@ ignore_ftp_chattr_errors=true
 
 horizontal_split=0
 
+safe_overwrite=false
+editor_drop_selection_on_copy=true
+editor_cursor_after_inserted_block=false
+editor_state_full_filename=true
+editor_ask_filename_before_edit=false
+shadows=true
+editor_filesize_threshold=64M
+editor_stop_format_chars=-+*\\,.;:&>
+
 [Layout]
 message_visible=0
 keybar_visible=0
@@ -171,6 +180,8 @@ autodetect_codeset=
 clipboard_store=
 clipboard_paste=
 
+spell_language=en
+
 [HotlistConfig]
 expanded_view_of_groups=0
 
@@ -180,6 +191,8 @@ xterm-256color=
 color_terminals=
 
 rxvt-unicode-256color=
+
+tmux-256color=
 
 [Panels]
 show_mini_info=true
@@ -201,6 +214,9 @@ torben_fj_mode=false
 quick_search_mode=2
 
 simple_swap=false
+
+panel_scroll_center=false
+select_flags=6
 
 [Panelize]
 Find *.orig after patching=find . -name \\*.orig -print

@@ -35,6 +35,8 @@ def main(tick_time_sec: float = 1.0) -> None:
                 sys.stdin.readline()
                 prev_mts, state = _get_state(prev_mts, start_mts=start_mts)
                 sys.stdout.write(f"{state}\n")
+                # attempt to tick at round time intervals
+                next_tick_mts = prev_mts + tick_time_sec
             else:
                 next_tick_mts += tick_time_sec
                 _, state = _get_state(prev_mts, start_mts=start_mts)
