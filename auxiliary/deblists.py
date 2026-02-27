@@ -85,8 +85,7 @@ class Deblists:
     socat  # TCP/UDP debug/tooling
     nmap  # goes as network debug too
     bind9-host  # DNS debug
-    iputils-ping
-    iputils-tracepath
+    iputils-ping iputils-tracepath
     mtr-tiny
     net-tools  # `ifconfig`
     tcpdump
@@ -95,6 +94,7 @@ class Deblists:
     netcat-openbsd  # ...
     # bing  # network bandwidth testing
     iproute2  # `ip ...`
+    wireless-tools  # `iwconfig`
     iftop
     iperf3
 
