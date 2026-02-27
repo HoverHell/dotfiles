@@ -68,12 +68,10 @@ class Deblists:
 
     # # TUIs:
     mc  # file management
-    screen  # terminal multiplexer, backgrounder
+    tmux  screen  # terminal multiplexer, backgrounder
     htop iotop
     less
-    nano
-    joe-jupp
-    e-wrapper
+    nano  joe-jupp  e-wrapper
     # zile
     # emacs-nox
     """
@@ -95,9 +93,10 @@ class Deblists:
     dnsutils  # `dig`
     openssh-client  # ...
     netcat-openbsd  # ...
-    bing  # network bandwidth testing
+    # bing  # network bandwidth testing
     iproute2  # `ip ...`
     iftop
+    iperf3
 
     # git-svn git-remote-hg git-remote-bzr
     """
@@ -159,9 +158,7 @@ class Deblists:
 
     file_formats = """
     sqlite3
-    p7zip-full
-    lz4
-    unp  # combining auto-unarchiver
+    p7zip-full  lz4  unp
     catdoc
     cuetools
     dosfstools
@@ -173,28 +170,26 @@ class Deblists:
     aptitude  # Best-hope for when dependencies get a little complicated.
     apt-file  # Goes as a common database for deb packages
     wipe  # not usually effective, but better than nothing.
-    cruft cruft-ng  # non-deb-tracked files
-    debsums  # non-deb-matching files
+    cruft cruft-ng  debsums  # non-deb-tracked files, non-deb-matching files
     borgbackup  # ...
     duff  # duplicates
-    easy-rsa openvpn openconnect
+    easy-rsa bridge-utils
+    # openvpn openconnect
     # Encrypted root fs:
-    # ecryptfs-utils  cryptsetup  cryptsetup-bin  cryptsetup-initramfs  # deprecated
+    # ecryptfs-utils
+    cryptsetup  cryptsetup-bin  cryptsetup-initramfs
     # ...
-    encfs
-
-    mosh  # ssh convenience in case of a bad connection
-    sshfs  # ssh convenience in case of a good connection
+    encfs  zulucrypt-cli  zulumount-cli  oathtool  qrencode
+    mosh  sshfs  sshuttle  # ssh conveniences
+    syncthing
     # dvcs-autosync
     # davfs2  # rare, currently.
-
     # at  # not that better than `sleep && ...`
-
     # ...
-    aspell
-    aspell-en
-
-    docker.io docker-compose
+    aspell  aspell-en
+    # docker.io docker-compose
+    podman  podman-compose  runsc
+    emacs-nox elpa-dockerfile-mode elpa-lua-mode elpa-markdown-mode elpa-rainbow-delimiters elpa-yaml-mode 
     """
 
     main_system_x = """
@@ -205,19 +200,22 @@ class Deblists:
     antiword
     barrier
     # chromium-browser firefox firejail
+    chromium firefox-esr
     # dmz-cursor-theme
     feh
     # kgraphviewer
     rxvt-unicode
     # rxvt-unicode-256color
-    xkbset xbindkeys
+    # xkbset xbindkeys
     geeqie mplayer vlc
     # i3 stalonetray
-    xpra remmina
+    # xpra
+    remmina mumble
     keepassxc
     qdirstat
     trezor
     suckless-tools
+    kitty
     """
 
     main_system_hw = """
@@ -227,27 +225,29 @@ class Deblists:
     cups
     eject
     lshw
-    hdparm
+    hdparm nvme-cli  fancontrol i2c-tools lm-sensors
     powertop
-    fancontrol i2c-tools lm-sensors
     # hddtemp
     irqbalance
     lvm2
+    amd64-microcode
     """
 
     main_system_ubu = """
     # ubuntu-desktop-minimal
     # ubuntu-desktop
     kubuntu-desktop
-    kubuntu-restricted-addons
-    linux-generic-hwe-20.04
-    xen-system-amd64
+    # kubuntu-restricted-addons
+    # linux-generic-hwe-20.04
+    # xen-system-amd64
     """
 
     main_system_stuff = """
     fzf vagrant vagrant-sshfs
     # virtualbox virtualbox-ext-pack  # TODO
     zsh
+    # file_formats, sort-of
+    ffmpeg  gimp  inkscape  libreoffice-writer  libreoffice-calc
     """
 
     main_system_all = """
@@ -272,7 +272,7 @@ class Deblists:
     # other additions
     fonts-mathjax-extras fonts-stix
     # common
-    hdeps-build
+    hdeps-build  shellcheck
     """
 
     virtualbox_guest = """
