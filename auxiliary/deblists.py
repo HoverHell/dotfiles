@@ -123,7 +123,7 @@ class Deblists:
     acpi-support dmeventd efibootmgr irqbalance
     # grub-common grub-efi-amd64-bin grub-efi-amd64-signed grub-pc shim-signed
     haveged
-    linux-generic
+    # linux-generic
     e2fsprogs lvm2 parted fdisk gdisk kpartx btrfs-progs mdadm
     multipath-tools
     ifupdown-ng net-tools wireless-tools wpasupplicant
