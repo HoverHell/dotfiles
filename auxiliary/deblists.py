@@ -199,9 +199,9 @@ class Deblists:
     arandr
     ark
     antiword
-    barrier
+    barrier|deskflow
     # chromium-browser firefox firejail
-    chromium firefox-esr
+    chromium|chromium-browser firefox-esr|firefox
     # dmz-cursor-theme
     feh
     # kgraphviewer
