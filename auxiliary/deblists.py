@@ -179,7 +179,8 @@ class Deblists:
     # ecryptfs-utils
     cryptsetup  cryptsetup-bin  cryptsetup-initramfs
     # ...
-    encfs  zulucrypt-cli  zulumount-cli  oathtool  qrencode
+    encfs  oathtool  qrencode
+    # zulucrypt-cli  zulumount-cli
     mosh  sshfs  sshuttle  # ssh conveniences
     syncthing
     # dvcs-autosync
