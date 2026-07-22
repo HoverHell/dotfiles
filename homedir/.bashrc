@@ -229,5 +229,7 @@ if [ -e /home/hell/.nix-profile/etc/profile.d/nix.sh ]; then
     _pathadd "$HOME/.nix-profile/bin"
 fi
 
+# Transition compat for broken debian packages' bash completion
+if ! command -v _split_longopt; then _split_longopt() { _comp__split_longopt "$@"; }; fi
 
 true
