@@ -1,0 +1,65 @@
+#!/bin/sh
+# #######
+# Clean known deprecated paths that were previously linked into this repository.
+# #######
+
+set -eu
+
+# The repository is supposed to be in the current dir
+repodir_root="$(dirname "$(readlink -e "$0")")"
+repodir="${repodir_root}/homedir/"
+home="${HOME}/"
+reporel="$(echo "$repodir" | sed -rn "s!^$home/*!! p")"
+if [ -z "$reporel" ]; then
+    echo "repodir '$repodir' is not under home '$home'. Aborting."
+    exit 1
+fi
+echo "Assuming the repo homedir is in ~/${reporel}"
+
+_parents() {
+    path="$1"
+    parent="$(dirname -- "$path")"
+    if [ "$parent" = "." ]; then return; fi;
+    printf "%s\n" "$parent"
+    if [ "$parent" != "$path" ]; then _parents "$parent"; fi
+}
+
+_clean_deprecated_files() {
+    # shellcheck disable=SC2002  # readability would suffer
+    cat "${repodir_root}/auxiliary/deprecated.lst" \
+        | while read -r relpath; do
+            fln="${HOME}/${relpath}"
+            lnk="$(readlink -em "$fln")"
+            # Skip the links that don't point inside this repository
+            case "$lnk" in
+                "$repodir"*)
+                    ;;
+                *)
+                    continue
+                    ;;
+            esac
+            if [ ! -e "$lnk" ]; then
+                rm -v "$fln"
+            fi
+        done
+}
+
+_clean_deprecated_dirs() {
+    # shellcheck disable=SC2002  # readability would suffer
+    cat "${repodir_root}/auxiliary/deprecated.lst" \
+        | while read -r fln; do _parents "$fln"; done \
+        | sort -ur \
+        | while read -r dirname; do
+            if [ -d "$dirname" ]; then
+                rmdir --verbose --ignore-fail-on-non-empty -- "${HOME}/${dirname}"
+            fi
+        done
+}
+
+_main() {
+    _clean_deprecated_files
+    _clean_deprecated_dirs
+    echo "Done"
+}
+
+_main

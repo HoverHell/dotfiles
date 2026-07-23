@@ -52,24 +52,6 @@ _create_extra_dirs() {
     mkdir -p "$home/.local/tmp" "$home/.local/var/nstat" "$home/.local/var/log"
 }
 
-_clean_deprecated() {
-    cat "${repodir_root}/auxiliary/deprecated.lst" | while read -r relpath; do
-        fln="${HOME}/${relpath}"
-        lnk="$(readlink -em "$fln")"
-        # Skip the links that don't point inside this repository
-        case "$lnk" in
-            "$repodir"*)
-                ;;
-            *)
-                continue
-                ;;
-        esac
-        if [ ! -e "$lnk" ]; then
-            rm -v "$fln"
-        fi
-    done
-}
-
 _main() {
     cd "$home"
 
@@ -97,7 +79,6 @@ _main() {
     done
 
     _create_extra_dirs
-    _clean_deprecated
 }
 
 _main

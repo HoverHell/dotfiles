@@ -6,7 +6,9 @@
 .local/bin/_firejail_ff
 .local/bin/_screensaver_mplayer_dir
 .local/bin/_screensaver_mplayer_filelist
+.local/bin/_share_https
 .local/bin/_ss
+.local/bin/_tpl_pymod
 .local/bin/_tpl_pymod3
 .local/bin/ds
 .local/bin/helld_vnc
@@ -37,6 +39,8 @@
 .local/bin/s-sx
 .local/bin/s0-
 .local/bin/udpkg
+.local/bin/urldecode
+.local/bin/urlencode
 .local/bin/webtap
 .local/bin/webtap.bash_completion
 .local/share/mc/skins/modarcon16-defbg.ini
@@ -55,4 +59,6 @@
 .screenrc.mtermy
 .screenrc.mtermy.0
 .screenrc.nul
+.screenrc.t2
 .xinitrc.ex
+mnt/ssh/m_
