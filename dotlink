@@ -15,7 +15,6 @@ if [ x"${1:-}" = x"-f" ]; then
     ovw="."
 fi
 
-
 unpath() {
     # Make a "return" path for the specified filename,
     # e.g. "a/b/c/filename" -> "../../../filename"
@@ -31,9 +30,9 @@ unpath() {
 }
 
 # The repository is supposed to be in the current dir
-repodir="$(dirname "$(readlink -e "$0")")"
-repodir="$repodir/homedir/"
-home="$HOME/"
+repodir_root="$(dirname "$(readlink -e "$0")")"
+repodir="${repodir_root}/homedir/"
+home="${HOME}/"
 reporel="$(echo "$repodir" | sed -rn "s!^$home/*!! p")"
 if [ -z "$reporel" ]; then
     echo "repodir '$repodir' is not under home '$home'. Aborting."
@@ -48,29 +47,57 @@ list_repo_files() {
     )
 }
 
-cd "$home"
-list_repo_files | while read -r filename; do
-    # filename is repo-relative, curdir is home
-    filedir="$(dirname "$filename")"
-    mkdir -pv "$filedir"
-    if [ $ovw ]; then
-        if [ -e "$filename" ]; then
-            mv "$filename" "${filename}._0dotlink.bk"
-            # rm -v "$filename"
-        fi  # | 2>&1 | grep -v "No such file or directory$"
-    fi
-    target="$(unpath "$filedir")${reporel}${filename}"
-    # echo "link $filename -> $target = filedir=$filedir, unpath=$(unpath "$filedir"), reporel=$reporel, filename=$filename" >&2
-    # NOTE: all (directory) paths are supposed to end in slash
-    if [ -L "$filename" ]; then
-        current_target="$(readlink "$filename")"
-        if [ x"$current_target" = x"$target" ]; then
-            # Already linked where it should be
-            continue
-        fi
-    fi
-    ln -v -s "$target" "$filename" || true
-done
+_create_extra_dirs() {
+    # Empty directories that shouldn't even have a placeholder file in them:
+    mkdir -p "$home/.local/tmp" "$home/.local/var/nstat" "$home/.local/var/log"
+}
 
-# Empty directories that shouldn't even have a placeholder file in them:
-mkdir -p "$home/.local/tmp" "$home/.local/var/nstat" "$home/.local/var/scr" "$home/.local/var/log"
+_clean_deprecated() {
+    cat "${repodir_root}/auxiliary/deprecated.lst" | while read -r relpath; do
+        fln="${HOME}/${relpath}"
+        lnk="$(readlink -em "$fln")"
+        # Skip the links that don't point inside this repository
+        case "$lnk" in
+            "$repodir"*)
+                ;;
+            *)
+                continue
+                ;;
+        esac
+        if [ ! -e "$lnk" ]; then
+            rm -v "$fln"
+        fi
+    done
+}
+
+_main() {
+    cd "$home"
+
+    list_repo_files | while read -r filename; do
+        # filename is repo-relative, curdir is home
+        filedir="$(dirname "$filename")"
+        mkdir -pv "$filedir"
+        if [ $ovw ]; then
+            if [ -e "$filename" ]; then
+                mv "$filename" "${filename}._0dotlink.bk"
+                # rm -v "$filename"
+            fi  # | 2>&1 | grep -v "No such file or directory$"
+        fi
+        target="$(unpath "$filedir")${reporel}${filename}"
+        # echo "link $filename -> $target = filedir=$filedir, unpath=$(unpath "$filedir"), reporel=$reporel, filename=$filename" >&2
+        # NOTE: all (directory) paths are supposed to end in slash
+        if [ -L "$filename" ]; then
+            current_target="$(readlink "$filename")"
+            if [ x"$current_target" = x"$target" ]; then
+                # Already linked where it should be
+                continue
+            fi
+        fi
+        ln -v -s "$target" "$filename" || true
+    done
+
+    _create_extra_dirs
+    _clean_deprecated
+}
+
+_main

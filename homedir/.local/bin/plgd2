@@ -1,2 +1,0 @@
-#!/bin/sh
-LINT="pylint4" exec plgd "$@"

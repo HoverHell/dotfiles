@@ -1,2 +1,7 @@
-#!/bin/bash
-import -quality 1 -window root "$HOME"/.local/var/scr/scrshot-`date +%Y-%m-%d_%H-%M-%S`.png
+#!/bin/sh -x
+set -eu
+exec \
+    import \
+    -quality 1 \
+    -window root \
+    "$HOME/Pictures/Screenshots/Screenshot_$(date "+%Y_%m_%d_%H_%M_%S").png"

@@ -1,8 +1,11 @@
 #!/bin/sh
-## Moves all the arguments to the target - first argument, preserving their
-## relative location (useful for moving away files; similar to tar && rm).
-target="$1"  # should always be.
+# Move all the arguments to the target - first argument, preserving their
+# relative location (useful for moving away files; similar to tar && rm).
+set -eu
+
+target="$1"  # required
 shift 1
+
 for fn in "$@"; do
    dir="$target/$(dirname "$fn")/"
    mkdir -pv "$dir"

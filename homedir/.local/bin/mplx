@@ -1,3 +1,0 @@
-#!/bin/sh
-# mpl0 + '-fstype none' (for xmonad).
-mpl0 -fstype none "$@"

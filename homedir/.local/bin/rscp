@@ -1,3 +1,4 @@
 #!/bin/sh
-rsync -P --no-whole-file --append --stats -v "$@"
-## Not sure about --append / --inplace
+# Run rsync with scp-like semantics (with some potential for continuing)
+exec rsync -P --no-whole-file --append --stats -v "$@"
+# Not sure about --append / --inplace

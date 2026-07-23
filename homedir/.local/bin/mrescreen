@@ -1,6 +1,0 @@
-#!/bin/bash
-# Deprecating in favor of `_mst`
-screen -x mscreenterm || {
-    . "$HOME/.bashrc"  # Make sure the environment (e.g. $PATH) is correct
-    screen -d -RR -c ~/.screenrc.mterm -S mscreenterm
-}

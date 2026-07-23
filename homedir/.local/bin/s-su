@@ -1,1 +1,0 @@
-screen -S mscreenterm -d -X screen -t su sudo -i /root/.local/bin/rescreen

@@ -1,3 +1,0 @@
-#!/bin/sh
-## mpl + hugecache
-~/bin/mpl -cache 120000 -cache-min 1 -cache-seek-min 99 "$@"

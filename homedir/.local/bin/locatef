@@ -1,1 +1,5 @@
-find / -mount 2>/dev/null|grep "$@"
+#!/bin/sh
+set -eu
+
+find ./ -mount 2>/dev/null \
+    | grep "$@"

@@ -7,10 +7,13 @@ import sys
 import shutil
 import pandas as pd
 
-termsize = shutil.get_terminal_size((80, 20))
+def main() -> None:
+    termsize = shutil.get_terminal_size((80, 20))
 
-df = pd.read_json(sys.stdin, lines=True)
-dfs = df.to_string(
-    line_width=termsize.columns,
-)
-print(dfs)
+    df = pd.read_json(sys.stdin, lines=True)
+    dfs = df.to_string(line_width=termsize.columns)
+    print(dfs)
+
+
+if __name__ == "__main__":
+    main()

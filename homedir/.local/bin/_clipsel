@@ -1,5 +1,5 @@
-#!/bin/sh
-
+#!/bin/sh -x
+set -eu
 if [ x"$DISPLAY" = x"" ]; then echo "W: default display" >&2; DISPLAY=":0.0"; export DISPLAY; fi
 
 xclip -o -selection clipboard | xclip -i -selection primary

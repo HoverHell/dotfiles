@@ -31,7 +31,6 @@ ShowMenuBarByDefault=false
 HDMI-A-0 eDP=HDMI-A-0
 Height 1080=1080
 MenuBar=Disabled
-ToolBarsMovable=Disabled
 Width 1920=1920
 Window-Maximized 1080x1920=true
 eDP=eDP
