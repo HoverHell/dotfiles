@@ -179,15 +179,31 @@ set +o histexpand
 
 # Ensure the prompt starts from the beginning of a line (with a bit of disambiguation).
 # But not under `mc` (as it seems to break somehow).
-ensure_newline() {
-    # TODO: read and somehow re-queue the pending input before doing this.
-    IFS=';' read -sdR -p $'\E[6n' ROW COL
-    if [ "$COL" != 1 ]; then
-        printf "\n<<< "
-    fi
+__ensure_newline() {
+    local _row _prefix column read_status tty_settings
+
+    if [[ ! -t 0 ]]; then return; fi  # only if stdin is tty
+    if [[ ! -t 1 ]]; then return; fi  # only if stdout is tty
+
+    # Canonical mode hides an unsubmitted keystroke from read's readiness check.
+    tty_settings=$(stty --save) || return
+    # "enable special characters: erase, kill, werase, rprnt"
+    # "set 0 characters minimum for a completed read"
+    stty -icanon min 0 time 0 || return
+    IFS="" read -t 0
+    read_status=$?
+    # Restore the settings.
+    stty "$tty_settings"
+    # Input pending. Ensure PS1 starts from a new line.
+    if (( read_status == 0 )); then printf '\n'; return; fi
+
+    # Read the cursor position.
+    # `-r`aw, `-s`ilent, `-d`elimiter `-t`imeout `-p`rompt
+    IFS='[;' read -r -s -d R -t 0.25 -p $'\e[6n' _prefix _row column || return
+    if [[ $column != 1 ]]; then printf '\n%s\n' "${BASHRC_TTY_MARKER:-<<<}"; fi
 }
 if [ -z "$MC_SID" ]; then
-    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'ensure_newline'
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'__ensure_newline'
 fi
 
 
