@@ -186,16 +186,18 @@ __ensure_newline() {
     if [[ ! -t 1 ]]; then return; fi  # only if stdout is tty
 
     # Canonical mode hides an unsubmitted keystroke from read's readiness check.
-    tty_settings=$(stty --save) || return
-    # "enable special characters: erase, kill, werase, rprnt"
+    # `-g` as in `--save` as in "dump the settings".
+    tty_settings=$(stty -g) || return
+    # disable canonical input processing "special characters: erase, kill, werase, rprnt"
     # "set 0 characters minimum for a completed read"
     stty -icanon min 0 time 0 || return
     IFS="" read -t 0
+    # NOTE: input arriving after this command will not be handled.
     read_status=$?
     # Restore the settings.
     stty "$tty_settings"
     # Input pending. Ensure PS1 starts from a new line.
-    if (( read_status == 0 )); then printf '\n'; return; fi
+    if (( read_status == 0 )); then printf '\n%s\n' "${BASHRC_TTY_MARKER:-<<<}"; return; fi
 
     # Read the cursor position.
     # `-r`aw, `-s`ilent, `-d`elimiter `-t`imeout `-p`rompt
