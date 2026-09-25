@@ -153,7 +153,7 @@ class Deblists:
 
     libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev
     libpng-dev liblapack-dev libblas-dev libssl-dev
-    python3.10 python3.10-venv python3.10-dev
+    python3.13 python3.13-venv python3.13-dev
     """
 
     file_formats = """
