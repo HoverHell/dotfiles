@@ -151,7 +151,7 @@ class Deblists:
     lua5.2  liblua5.2-dev
     libtbb-dev
 
-    libcap-dev libcurl4-nss-dev libpq-dev libfreetype6-dev
+    libcap-dev libcurl4-gnutls-dev libpq-dev libfreetype6-dev
     libpng-dev liblapack-dev libblas-dev libssl-dev
     python3.13 python3.13-venv python3.13-dev
     """
