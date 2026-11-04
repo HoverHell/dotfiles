@@ -3,8 +3,6 @@
 	email = hoverhell@gmail.com
 	signingkey = hoverhell@localhost
 
-[core]
-	excludesfile = ~/.gitignore
 [init]
 	defaultBranch = master
 

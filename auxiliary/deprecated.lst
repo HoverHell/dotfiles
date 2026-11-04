@@ -62,3 +62,5 @@
 .screenrc.t2
 .xinitrc.ex
 mnt/ssh/m_
+.gitconfig
+.gitignore
