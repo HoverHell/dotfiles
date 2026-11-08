@@ -134,7 +134,7 @@ class Deblists:
 
     cloud_server = """
     docker.io docker-compose
-    linux-generic
+    # linux-generic
     emacs-nox
     nginx-full apache2-utils certbot python3-certbot-nginx
     """
