@@ -8,7 +8,12 @@
 # If not running interactively, don't do anything:
 if [ -z "$PS1" ]; then return; fi
 
-# This duplicated the `.profile` code, currently.
+# `nix-user-chroot`.
+# Added before the `_pathadd`s to make sure user-bin is prioritized over nix-bin
+if [ -e ~/.local/state/nix/profile/etc/profile.d/nix.sh ]; then . ~/.local/state/nix/profile/etc/profile.d/nix.sh; fi
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
+
+# This duplicates the `.profile` code, currently.
 # # http://superuser.com/questions/39751/add-directory-to-path-if-its-not-already-there
 _pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -18,8 +23,6 @@ _pathadd() {
 _pathadd "$HOME/.local/bin"
 _pathadd "$HOME/.local/usr/bin"
 _pathadd "$HOME/bin"
-
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi
 
 # Minor non-subprocessable conveniences.
 realcd() { cd "$(realpath "$(pwd)")"; }
@@ -239,12 +242,6 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 if [ -f "$HOME/.fnm/fnm" ]; then
     _pathadd "$HOME/.fnm"
     eval "$(fnm env)"
-fi
-
-# nix package manager
-if [ -e /home/hell/.nix-profile/etc/profile.d/nix.sh ]; then
-    . /home/hell/.nix-profile/etc/profile.d/nix.sh
-    _pathadd "$HOME/.nix-profile/bin"
 fi
 
 # Transition compat for broken debian packages' bash completion
