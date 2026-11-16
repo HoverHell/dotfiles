@@ -30,9 +30,22 @@ realcd() { cd "$(realpath "$(pwd)")"; }
 # # CFG and local overrides
 CFG_ps_time="1"  # timestamp in PS. empty to disable
 CFG_ps_ret="1"  # "$?" in PS. empty to disable
-CFG_ps_u="1;32"  # PS user color
-CFG_ps_h="0;33"  # PS host color
+CFG_ps_u=""  # PS user color
+CFG_ps_h=""  # PS host color
 if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local; fi
+if [ -z "$CFG_ps_u" ]; then
+    case "${USER:-$(id -un)}" in
+        root)   CFG_ps_u="1;38;5;196" ;;  # PS user color: bold red
+        hell)   CFG_ps_u="38;5;46" ;;     # PS user color: green
+        *)      CFG_ps_u="38;5;250" ;;    # PS user color: light grey
+    esac
+fi
+if [ -z "$CFG_ps_h" ]; then
+    _p=(141 75 114 179 168 110 180 147)    # Unlisted hosts: a stable color picked from a hash of the name
+    CFG_ps_h="38;5;${_p[$(( $(printf %s "${HOSTNAME:-$(hostname)}" | cksum | cut -d" " -f1) % ${#_p[@]} ))]}"
+    unset _p
+fi
+
 
 # # don't put duplicate lines in the history. See bash(1) for more options
 # export HISTCONTROL=ignoredups
