@@ -64,3 +64,4 @@
 mnt/ssh/m_
 .gitconfig
 .gitignore
+.config/git/.gitignore
